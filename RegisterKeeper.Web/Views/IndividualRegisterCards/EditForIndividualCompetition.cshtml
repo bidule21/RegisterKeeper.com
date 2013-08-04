@@ -1,0 +1,65 @@
+﻿@model RegisterKeeper.Web.Models.IndividualRegisterCard
+
+@{
+    ViewBag.Title = "Edit";
+
+    ViewBag.FormAction = "EditForIndividualCompetition";
+    ViewBag.SubmitButtonText = "Save";
+}
+
+@Html.Partial("_CreateEditForIndividualCompetition", Model)
+
+@*@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>IndividualRegisterCard</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CompetitorName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CompetitorName)
+            @Html.ValidationMessageFor(model => model.CompetitorName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CompetitorIndexNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CompetitorIndexNumber)
+            @Html.ValidationMessageFor(model => model.CompetitorIndexNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CompetitorClass)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CompetitorClass)
+            @Html.ValidationMessageFor(model => model.CompetitorClass)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CompetitorClub)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CompetitorClub)
+            @Html.ValidationMessageFor(model => model.CompetitorClub)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,167 @@
+﻿@using RegisterKeeper.Web.Models
+@using RegisterKeeper.Web;
+@model RegisterKeeper.Web.ViewModels.Home.IndexViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+@*@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                To learn more about ASP.NET MVC visit
+                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
+                If you have any questions about ASP.NET MVC visit
+                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+            </p>
+        </div>
+    </section>
+}*@
+@*<h3>We suggest the following:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Getting Started</h5>
+        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+        enables a clean separation of concerns and that gives you full control over markup
+        for enjoyable, agile development. ASP.NET MVC includes many features that enable
+        fast, TDD-friendly development for creating sophisticated applications that use
+        the latest web standards.
+        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
+    </li>
+
+    <li class="two">
+        <h5>Add NuGet packages and jump-start your coding</h5>
+        NuGet makes it easy to install and update free libraries and tools.
+        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
+    </li>
+
+    <li class="three">
+        <h5>Find Web Hosting</h5>
+        You can easily find a web hosting company that offers the right mix of features
+        and price for your applications.
+        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
+    </li>
+</ol>*@
+<style type="text/css">
+    
+</style>
+
+
+<div class="jumbotron">
+    <h1>RegisterKeeper.com</h1>
+    <p>Live and historical scores for individual and team target rifle shooting competitions.</p>
+    @*<a class="btn btn-large btn-success" href="#">Sign up today</a>*@
+</div>
+
+@if (Model.LiveCompetitions.Count > 0)
+{
+    <text>
+
+    <div class="row">
+        <div class="span12">
+            <p>Live competitions:</p>
+        </div>
+        @foreach (var competition in Model.LiveCompetitions)
+        {
+            var competitionAction = "#";
+
+            if (competition is IndividualCompetition)
+            {
+                competitionAction = "/IndividualCompetition/Details/" + competition.Id;
+            }
+            else if (competition is TeamCompetition)
+            {
+                competitionAction = "/TeamCompetitions/Details/" + competition.Id;
+            }
+
+            <div class="span6">
+                <a href="@competitionAction" class="rounded-corners">
+                    <h4>@competition.Name</h4>
+                    <i>@competition.Location</i>
+                </a>
+            </div>
+        }
+    </div>
+    </text>
+}
+
+<div class="row">
+    <div class="span12">
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="column-divider"></div>
+    <div class="span8">
+        <p>Completed competitions:</p>
+
+        @foreach (var competition in Model.CompletedCompetitions)
+        {
+
+            var competitionAction = "#";
+
+            if (competition is IndividualCompetition)
+            {
+                competitionAction = "/IndividualCompetition/Details/" + competition.Id;
+            }
+            else if (competition is TeamCompetition)
+            {
+                competitionAction = "/TeamCompetitions/Details/" + competition.Id;
+            }
+            
+            <a href="@competitionAction" class="rounded-corners">
+                <h4>@competition.Name</h4>
+                @(competition.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
+                <i>@competition.NumberOfSightingShots&amp;@competition.NumberOfScoringShots @@ @Html.DisplayFor(competition.Distances), @competition.Location</i>
+
+                @{ var individualCompetition = competition as IndividualCompetition; }
+                @if (individualCompetition != null && individualCompetition.IndividualRegisterCards != null && individualCompetition.IndividualRegisterCards.Count > 0)
+                {
+                    <text>
+                    <div class="summary-results">
+                        <table class="table table-condensed">
+                            @* <thead>
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                            </thead>*@
+
+                            @{ int place = 1; }
+                            @foreach (var registerCard in individualCompetition.IndividualRegisterCards.OrderByDescending(c => c.TotalScore.Points).Take(3))
+                            {
+                                <tr>
+                                    <td>@place</td>
+                                    <td>@registerCard.CompetitorName</td>
+                                    <td>@registerCard.CompetitorClass</td>
+                                    <td>@registerCard.CompetitorClub</td>
+                                    <td>@registerCard.TotalScore</td>
+                                </tr>
+                            
+                                place += 1;
+                            }
+                        </table>
+                    </div>
+                    </text>
+                }
+            </a>
+        }
+
+    </div>
+    <div class="span4">
+        <p>Upcoming competitions:</p>
+        @foreach (var competition in Model.UpcomingCompetitions)
+        {
+            <a href="#" class="rounded-corners">
+                <h4>@competition.Name</h4>
+                @(competition.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
+                <i>@competition.Location</i>
+            </a>
+        }
+    </div>
+</div>

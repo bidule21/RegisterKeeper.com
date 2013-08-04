@@ -1,0 +1,17 @@
+﻿@model RegisterKeeper.Web.Models.IndividualCompetition
+
+@{
+    ViewBag.Title = "Create";
+
+    ViewBag.ActionName = "Create";
+    ViewBag.SubmitButtonText = "Create";
+}
+
+
+@Html.Partial("_CreateEdit", Model)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Html.Partial("_DateTimePickerJs")
+}

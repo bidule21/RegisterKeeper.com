@@ -1,0 +1,43 @@
+﻿@model RegisterKeeper.Web.Models.SightingShot
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SightingShot</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Converted)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Converted)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShotNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShotNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScoreHacker)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScoreHacker)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShootId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShootId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,157 @@
+﻿@using RegisterKeeper.Web.Models
+@model IndividualRegisterCard
+
+<style type="text/css">
+    .shoot-form > label
+    {
+        font-weight: bold;
+    }
+
+    .shoot-form .controls label
+    {
+        display: inline;
+    }
+
+    .shoot-form .controls input.shot
+    {
+        width: 1.3em;
+        margin: 5px 5px 0 0;
+    }
+</style>
+
+@using (Html.BeginForm((string)ViewBag.FormAction, "IndividualRegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.Hidden("IndividualCompetitionId", (int)ViewBag.CompetitionId)
+
+    <fieldset>
+        <legend>Add register card for <i>@ViewBag.CompetitionName</i></legend>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.CompetitorName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.CompetitorName)
+                @Html.ValidationMessageFor(model => model.CompetitorName)
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.CompetitorIndexNumber, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.CompetitorIndexNumber)
+                @Html.ValidationMessageFor(model => model.CompetitorIndexNumber)
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.CompetitorClass, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.CompetitorClass)
+                @Html.ValidationMessageFor(model => model.CompetitorClass)
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.CompetitorClub, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.CompetitorClub)
+                @Html.ValidationMessageFor(model => model.CompetitorClub)
+            </div>
+        </div>
+
+        @foreach (int distanceIndex in Enumerable.Range(0, ViewBag.Distances.Count))
+        {
+            Shoot shoot = null;
+            if (Model != null && Model.Shoots != null)
+            {
+                shoot = Model.Shoots[distanceIndex];
+            }
+
+            if (shoot != null)
+            {
+            @Html.Hidden("Shoots[" + distanceIndex + "].Id", shoot.Id)
+            }
+
+            @Html.Hidden("Shoots[" + distanceIndex + "].Distance", (int)ViewBag.Distances[distanceIndex])
+            
+            <div class="control-group shoot-form">
+                <label class="control-label">@(((Distance)ViewBag.Distances[distanceIndex]).DisplayValue())</label>
+                <div class="controls">
+
+                    @foreach (int sightingShotIndex in Enumerable.Range(0, ViewBag.NumberOfSightingShots))
+                    {
+                        var shotNumber = sightingShotIndex + 1;
+                        string score = null;
+                        var converted = false;
+                        if (shoot != null)
+                        {
+
+                        @Html.Hidden("Shoots[" + distanceIndex + "].Sighters[" + sightingShotIndex + "].ShootId", shoot.Id)
+                            
+                            var sighter = shoot.Sighters.SingleOrDefault(s => s.ShotNumber == shotNumber);
+                            if (sighter != null)
+                            {
+                                score = sighter.ScoreHacker;
+                                converted = sighter.Converted;
+
+                        @Html.Hidden("Shoots[" + distanceIndex + "].Sighters[" + sightingShotIndex + "].Id", sighter.Id)
+
+                            }
+                        }
+
+                        <input type="hidden" id="Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ShotNumber" 
+                               name="Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ShotNumber" 
+                               value="@shotNumber" />
+                        <input type="text" id="Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ScoreHacker"
+                               name="Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ScoreHacker"
+                               placeholder="S@(shotNumber)" class="shot"
+                            value="@score" />
+                        <input data-val="true" data-val-required="The Converted field is required." 
+                               id="Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__Converted" 
+                               name="Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].Converted" 
+                               type="checkbox" value="true" 
+                            checked="@converted" />
+                        <input name="Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].Converted" type="hidden" value="false" />
+                        <label for="Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].Converted">Converted</label>
+                        <br />
+                    }
+                    <br />
+                    @foreach (int scoringShotIndex in Enumerable.Range(0, ViewBag.NumberOfScoringShots))
+                    {
+                        var shotNumber = scoringShotIndex + 1;
+                        string score = null;
+                        if (shoot != null)
+                        {
+
+                        @Html.Hidden("Shoots[" + distanceIndex + "].ScoringShots[" + scoringShotIndex + "].ShootId", shoot.Id)
+                            
+                            var shot = shoot.ScoringShots.SingleOrDefault(s => s.ShotNumber == shotNumber);
+                            if (shot != null)
+                            {
+                                score = shot.ScoreHacker;
+
+                        @Html.Hidden("Shoots[" + distanceIndex + "].ScoringShots[" + scoringShotIndex + "].Id", shot.Id)
+
+                            }
+                        }
+                        <input type="hidden" id="Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ShotNumber" 
+                               name="Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ShotNumber" 
+                               value="@shotNumber" />
+                        <input type="text" id="Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ScoreHacker"
+                               name="Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ScoreHacker"
+                               placeholder="@(shotNumber)" class="shot"
+                            value="@score" />
+                    }
+
+                </div>
+            </div>
+        }
+
+        <div class="form-actions">
+            <input type="submit" value="@ViewBag.SubmitButtonText" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetition", new { Id = (int)ViewBag.CompetitionId }, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

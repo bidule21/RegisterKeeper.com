@@ -1,0 +1,99 @@
+﻿@using RegisterKeeper.Web.Models
+@model TeamRegisterCard
+
+<table>
+    <tr>
+        <th>@*Competitor Name*@</th>
+        <th>@*Distance*@</th>
+        @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfSightingShots))
+        {
+            <th class="@(i == 1 ? "border-left" : null)">S@(i)</th>
+        }
+        @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfScoringShots))
+        {
+            <th class="@(i == 1 ? "border-left" : null)">@i</th>
+        }
+
+        @{ var firstDistance = true; }
+        @foreach (Distance distance in ViewBag.DistanceList)
+        {
+            <th class="@(firstDistance ? "border-left" : null)">@(distance.DisplayValue())</th>
+            firstDistance = false;
+        }
+        <th class="border-left total-column">Total</th>
+    </tr>
+
+    @foreach (var registerCard in Model.IndividualRegisterCards)
+    {
+
+        firstDistance = true;
+        foreach (Distance distance in ViewBag.DistanceList)
+        {
+        <tr>
+            @if (firstDistance)
+            {
+                <td class="competitor-name" rowspan="@(ViewBag.DistanceList.Count)">@registerCard.CompetitorName</td>
+            }
+            @{ var shoot = registerCard.Shoots.SingleOrDefault(s => s.Distance == distance); }
+            <td class="border-left distance">@distance.DisplayValue()</td>
+            @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfSightingShots))
+            {
+                <td class="@(i == 1 ? "border-left" : null)">
+                    @if (shoot != null)
+                    {
+                        var shot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
+                        if (shot != null)
+                        {
+                        <text>@(shot.Score.DisplayValue())</text>
+                        }
+                    }
+                </td>
+            }
+            @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfScoringShots))
+            {
+                <td class="@(i == 1 ? "border-left" : null)">
+                    @if (shoot != null)
+                    {
+                        var shot = shoot.ScoringShots.SingleOrDefault(ss => ss.ShotNumber == i);
+                        if (shot != null)
+                        {
+                        <text>@shot.Score.DisplayValue()</text>
+                        }
+                    }
+                </td>
+            }
+
+            @{ var totalsFirstDistance = true; }
+            @foreach (Distance totalsDistance in ViewBag.DistanceList)
+            {
+                <td class="@(totalsFirstDistance ? "border-left" : null)">
+                    @if (shoot != null && distance == totalsDistance)
+                    {
+                        <text>@shoot.TotalScore.ToString()</text>
+                    }
+                </td>                
+                    totalsFirstDistance = false;
+            }
+
+            @if (firstDistance)
+            {
+                <td class="border-left total" rowspan="@(ViewBag.DistanceList.Count)">@registerCard.TotalScore</td>
+            }
+        </tr>
+            firstDistance = false;
+        }
+    }
+    <tr>
+        <td colspan="@(2 + ViewBag.NumberOfSightingShots + ViewBag.NumberOfScoringShots)" style="text-align: left">Totals</td>
+
+        @{ var grandTotalsFirstDistance = true; }
+        @foreach (Distance distance in ViewBag.DistanceList)
+        {
+            <td class="@(grandTotalsFirstDistance ? "border-left" : null)">@(Model.TotalAt(distance))</td>
+            grandTotalsFirstDistance = false;
+        }
+        <td class="border-left total-column register-card-grand-total">
+            <div class="register-card-grand-total-value">@(Model.TotalScore)</div>
+        </td>
+    </tr>
+</table>

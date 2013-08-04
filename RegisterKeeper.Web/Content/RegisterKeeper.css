@@ -1,0 +1,292 @@
+﻿body
+{
+	padding-top: 20px;
+}
+
+.jumbotron
+{
+	margin: 50px 0 50px;
+	text-align: center;
+}
+
+	.jumbotron p
+	{
+		font-style: italic;
+	}
+
+.rounded-corners
+{
+	display: block;
+	color: #333333;
+	border-radius: 10px;
+	border: 1px solid #D4D4D4;
+	padding: 0 10px 10px 10px;
+	margin-bottom: 10px;
+}
+
+	.rounded-corners:hover,
+	.rounded-corners:focus
+	{
+		color: #08C;
+		text-decoration: none;
+	}
+
+.summary-results
+{
+	margin: 10px 10px 0 10px;
+}
+
+	.summary-results table
+	{
+		margin-bottom: 0;
+	}
+
+hr
+{
+	margin: 10px 0;
+}
+
+.row
+{
+	position: relative;
+}
+
+.column-divider
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 650px;
+	border-right: 1px solid #EEEEEE;
+	z-index: -1;
+}
+
+@media (min-width: 1200px)
+{
+	.column-divider
+	{
+		width: 815px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px)
+{
+	.column-divider
+	{
+		width: 506px;
+	}
+}
+
+@media (max-width: 767px)
+{
+	.column-divider
+	{
+		display: none;
+	}
+}
+
+
+/* Jiggery pokery to get the check boxes and labels produced by the 
+	CheckBoxesForEnumFlagsFor helper to line up on the same 
+	horizontal line */
+
+.controls > input[type="checkbox"] + label
+{
+	display: inline-block;
+	margin-top: 0;
+	padding-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.controls > input[type="checkbox"]
+{
+	margin-top: 0;
+	padding-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	position: relative;
+	top: -1px;
+}
+
+/* 
+	Styles for competition details screen
+*/
+
+/* Button on top right */
+.btn-add-register-card
+{
+	float: right;
+	margin-top: 10px;
+}
+
+#Grid
+{
+	margin: 20px 0 20px 0;
+	text-align: center;
+}
+
+	#Grid .mix
+	{
+		opacity: 0;
+		display: none;
+		width: 100%;
+	}
+
+.register-card-container
+{
+	border: 1px solid #dddddd;
+	padding: 10px;
+	margin-bottom: 10px;
+	display: inline-block;
+	border-radius: 10px;
+	position: relative;
+}
+
+
+	.register-card-container .position-wrapper-outer
+	{
+		position: absolute;
+		top: 0;
+		left: -80px;
+		height: 100%;
+		width: 65px;
+	}
+
+	.register-card-container .position-wrapper-inner
+	{
+		display: table;
+		height: 100%;
+		width: 100%;
+		text-align: right;
+	}
+
+	.register-card-container .position
+	{
+		height: 100px;
+		display: table-cell;
+		vertical-align: top;
+		padding-top: 10px;
+		color: #DDDDDD;
+		font-size: 45px;
+		line-height: 45px;
+		font-weight: bold;
+	}
+
+.register-card-detail
+{
+	display: table-cell;
+	padding-right: 1em;
+}
+
+	.register-card-detail .header
+	{
+		margin: 0;
+		float: left;
+	}
+
+	.register-card-detail .competitor-index-number
+	{
+		color: #778899;
+	}
+
+	.register-card-detail .competitor-details
+	{
+		font-size: 75%;
+		font-weight: normal;
+		font-style: italic;
+		padding-left: 10px;
+	}
+
+.register-card-container table
+{
+	padding-top: 5px;
+	display: table-cell;
+}
+
+.register-card-container th
+{
+	font-weight: normal;
+	text-align: center;
+	font-size: 75%;
+	padding: 0 0.5em 0 0.5em;
+}
+
+.register-card-container td
+{
+	border-top: 1px solid #dddddd;
+	padding: 0 0.5em 0 0.5em;
+	text-align: center;
+	min-width: 1em;
+}
+
+	.register-card-container td.distance
+	{
+		text-align: right;
+	}
+
+	.register-card-container td.competitor-name {
+		text-align: left;
+	}
+
+.register-card-container .total
+{
+	font-size: 120%;
+	padding: 5px;
+}
+
+.register-card-container .total-column
+{
+	min-width: 5em;
+}
+
+table .border-left
+{
+	border-left: 1px solid #dddddd;
+}
+
+/*.register-card-brought-forward
+    {
+        border: 0 solid #c0c0c0;
+        padding: 0 2px 0 2px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .register-card-points-off
+    {
+        border: 1px solid #dddddd;
+        padding: 0 2px 0 2px;
+        font-weight: bold;
+    }*/
+
+.register-card-grand-total
+{
+	padding-left: 10px;
+	vertical-align: bottom;
+	display: table-cell;
+}
+
+.register-card-grand-total-value
+{
+	font-size: 150%;
+	text-align: center;
+	margin: 5px 0 0 0;
+	padding: 10px;
+	border: 1px solid #EEEEEE;
+	width: 90px;
+}
+
+.register-card-controls
+{
+	display: table-cell;
+	vertical-align: bottom;
+	padding-left: 1em;
+	border-left: 1px solid #dddddd;
+}
+
+	.register-card-controls a
+	{
+		display: block;
+		margin: 0.5em 0;
+	}

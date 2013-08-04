@@ -1,0 +1,15 @@
+﻿@using RegisterKeeper.Web.Models
+@model IndividualRegisterCard
+
+@{
+    ViewBag.Title = "CreateForIndividualCompetition";
+
+    ViewBag.FormAction = "CreateForIndividualCompetition";
+    ViewBag.SubmitButtonText = "Create";
+}
+
+@Html.Partial("_CreateEditForIndividualCompetition", Model)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

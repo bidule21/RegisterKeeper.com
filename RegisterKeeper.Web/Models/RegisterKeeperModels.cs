@@ -175,6 +175,7 @@ namespace RegisterKeeper.Web.Models
 				switch (value)
 				{
 					case "V":
+					case "v":
 						Score = Score.V;
 						break;
 					case "5":

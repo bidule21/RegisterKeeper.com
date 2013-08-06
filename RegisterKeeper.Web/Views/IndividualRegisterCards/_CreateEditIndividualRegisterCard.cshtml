@@ -1,0 +1,21 @@
+﻿@using RegisterKeeper.Web.Models
+@model IndividualRegisterCard
+
+@using (Html.BeginForm((string)ViewBag.FormAction, ViewContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.Hidden("IndividualCompetitionId", (int)ViewBag.CompetitionId)
+
+    <fieldset>
+        <legend>Add register card for <i>@ViewBag.CompetitionName</i></legend>
+
+        @Html.Partial("_CreateEditIndividualRegisterCardFields")
+
+        <div class="form-actions">
+            <input type="submit" value="@ViewBag.SubmitButtonText" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetition", new { Id = (int)ViewBag.CompetitionId }, new { @class = "btn" })
+        </div>
+    </fieldset>
+}

@@ -1,14 +1,14 @@
 ﻿@model RegisterKeeper.Web.Models.IndividualCompetition
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Individual Competition";
 
     ViewBag.ActionName = "Create";
     ViewBag.SubmitButtonText = "Create";
 }
 
 
-@Html.Partial("_CreateEdit", Model)
+@Html.Partial("_CreateEditCompetition", Model)
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

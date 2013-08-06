@@ -1,0 +1,17 @@
+﻿@model RegisterKeeper.Web.Models.TeamRegisterCard
+
+<div class="control-group">
+    @Html.LabelFor(model => model.TeamName, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.TeamName)
+        @Html.ValidationMessageFor(model => model.TeamName)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.TeamCaptain, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.TeamCaptain)
+        @Html.ValidationMessageFor(model => model.TeamCaptain)
+    </div>
+</div>

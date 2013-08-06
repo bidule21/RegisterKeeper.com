@@ -18,6 +18,8 @@ namespace RegisterKeeper.Web.Models
 		public DbSet<SightingShot> SightingShots { get; set; }
 
 		public DbSet<TeamCompetition> TeamCompetitions { get; set; }
+
+		public DbSet<TeamRegisterCard> TeamRegisterCards { get; set; }
 	}
 
 	public class RegisterKeeperDbInitialiser : DropCreateDatabaseAlways<RegisterKeeperDb>

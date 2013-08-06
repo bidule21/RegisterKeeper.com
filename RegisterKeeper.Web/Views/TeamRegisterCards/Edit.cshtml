@@ -1,0 +1,52 @@
+﻿<style type="text/css">
+    .fieldset-sublegend
+    {
+        border-top: 1px solid #e5e5e5;
+        line-height: 40px;
+        font-weight: normal;
+    }
+</style>
+@model RegisterKeeper.Web.Models.TeamRegisterCard
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "TeamRegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Edit Team Register Card</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.TeamCompetitionId)
+
+        @Html.Partial("_CreateEditTeamRegisterCardFields")
+
+        <h4 class="fieldset-sublegend">Shooters</h4>
+
+        @{ var i = 0; }
+        @foreach (var individualRegisterCard in Model.IndividualRegisterCards)
+        {
+            ViewBag.FormFieldsPrefix = "IndividualRegisterCards[" + i + "].";
+            i += 1;
+
+            @Html.Hidden((string)ViewBag.FormFieldsPrefix + "Id", individualRegisterCard.Id)
+            @Html.Hidden((string)ViewBag.FormFieldsPrefix + "TeamRegisterCardId", Model.Id)
+
+            @Html.Partial("_CreateEditIndividualRegisterCardFields", individualRegisterCard)
+            <hr />
+        }
+
+        <div class="form-actions">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Details", "TeamCompetitions", new { id = Model.TeamCompetitionId }, new { @class = "btn" })
+        </div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

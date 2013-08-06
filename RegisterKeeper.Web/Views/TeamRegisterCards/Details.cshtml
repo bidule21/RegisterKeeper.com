@@ -1,0 +1,36 @@
+﻿@model RegisterKeeper.Web.Models.TeamRegisterCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TeamRegisterCard</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TeamName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TeamName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TeamCaptain)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TeamCaptain)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SortOrder)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SortOrder)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

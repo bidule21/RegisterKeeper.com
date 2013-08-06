@@ -193,6 +193,7 @@
     <Compile Include="Controllers\IndividualRegisterCardsController.cs" />
     <Compile Include="Controllers\SightingShotsController.cs" />
     <Compile Include="Controllers\TeamCompetitionsController.cs" />
+    <Compile Include="Controllers\TeamRegisterCardsController.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="External\MvcEnumFlags\CheckBoxesForEnumFlagsModelHtmlHelper.cs" />
     <Compile Include="External\MvcEnumFlags\EnumFlagsModelBinder.cs" />
@@ -336,7 +337,7 @@
     <Content Include="Views\IndividualCompetition\Create.cshtml" />
     <Content Include="Views\IndividualCompetition\Edit.cshtml" />
     <Content Include="Views\IndividualCompetition\Delete.cshtml" />
-    <Content Include="Views\IndividualCompetition\_CreateEdit.cshtml" />
+    <Content Include="Views\Shared\_CreateEditCompetition.cshtml" />
     <Content Include="Views\Shared\_DateTimePickerJs.cshtml" />
     <Content Include="Views\IndividualRegisterCards\Index.cshtml" />
     <Content Include="Views\IndividualRegisterCards\Details.cshtml" />
@@ -350,13 +351,21 @@
     <Content Include="Views\SightingShots\Create.cshtml" />
     <Content Include="Views\SightingShots\Edit.cshtml" />
     <Content Include="Views\SightingShots\Delete.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\_CreateEditForIndividualCompetition.cshtml" />
+    <Content Include="Views\IndividualRegisterCards\_CreateEditIndividualRegisterCard.cshtml" />
     <Content Include="Views\TeamCompetitions\Index.cshtml" />
     <Content Include="Views\TeamCompetitions\Create.cshtml" />
     <Content Include="Views\TeamCompetitions\Edit.cshtml" />
     <Content Include="Views\TeamCompetitions\Delete.cshtml" />
     <Content Include="Views\TeamCompetitions\Details.cshtml" />
     <Content Include="Views\TeamCompetitions\_TeamRegisterCardTable.cshtml" />
+    <Content Include="Views\TeamRegisterCards\Index.cshtml" />
+    <Content Include="Views\TeamRegisterCards\Details.cshtml" />
+    <Content Include="Views\TeamRegisterCards\Create.cshtml" />
+    <Content Include="Views\TeamRegisterCards\Edit.cshtml" />
+    <Content Include="Views\TeamRegisterCards\Delete.cshtml" />
+    <Content Include="Views\TeamRegisterCards\AddShooter.cshtml" />
+    <Content Include="Views\Shared\_CreateEditIndividualRegisterCardFields.cshtml" />
+    <Content Include="Views\TeamRegisterCards\_CreateEditTeamRegisterCardFields.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

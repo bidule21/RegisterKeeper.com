@@ -1,0 +1,28 @@
+﻿@model RegisterKeeper.Web.Models.TeamRegisterCard
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "TeamRegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Add Team Register Card</legend>
+        
+        @Html.Hidden("TeamCompetitionId", (int)ViewBag.TeamCompetitionId)
+        @Html.Partial("_CreateEditTeamRegisterCardFields")
+
+        <div class="form-actions">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+        </div>
+
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

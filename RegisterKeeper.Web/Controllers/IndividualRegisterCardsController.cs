@@ -39,18 +39,9 @@ namespace RegisterKeeper.Web.Controllers
 
 		public ActionResult CreateForIndividualCompetition(int individualCompetitionId)
 		{
-			AddCompetitionDetailsToViewBag(individualCompetitionId);
-			return View();
-		}
-
-		private void AddCompetitionDetailsToViewBag(int individualCompetitionId)
-		{
 			var competition = _db.Competitions.Find(individualCompetitionId);
-			ViewBag.CompetitionId = competition.Id;
-			ViewBag.CompetitionName = competition.Name;
-			ViewBag.Distances = competition.Distances.ToList();
-			ViewBag.NumberOfSightingShots = competition.NumberOfSightingShots;
-			ViewBag.NumberOfScoringShots = competition.NumberOfScoringShots;
+			AddCompetitionDetailsToViewBag(competition, ViewBag);
+			return View();
 		}
 
 		//
@@ -66,8 +57,13 @@ namespace RegisterKeeper.Web.Controllers
 				_db.SaveChanges();
 				return RedirectToAction("Details", "IndividualCompetition", new { id = individualregistercard.IndividualCompetitionId });
 			}
+
 			if (individualregistercard.IndividualCompetitionId != null)
-				AddCompetitionDetailsToViewBag(individualregistercard.IndividualCompetitionId.Value);
+			{
+				var competition = _db.Competitions.Find(individualregistercard.IndividualCompetitionId.Value);
+				AddCompetitionDetailsToViewBag(competition, ViewBag);
+			}
+
 			return View();
 		}
 
@@ -81,8 +77,13 @@ namespace RegisterKeeper.Web.Controllers
 			{
 				return HttpNotFound();
 			}
+
 			if (individualregistercard.IndividualCompetitionId != null)
-				AddCompetitionDetailsToViewBag(individualregistercard.IndividualCompetitionId.Value);
+			{
+				var competition = _db.Competitions.Find(individualregistercard.IndividualCompetitionId.Value);
+				AddCompetitionDetailsToViewBag(competition, ViewBag);
+			}
+
 			return View(individualregistercard);
 		}
 
@@ -95,17 +96,48 @@ namespace RegisterKeeper.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				// Add any new child entities..
+				//// Add any new child entities..
+				//foreach (var shoot in individualregistercard.Shoots)
+				//{
+				//	foreach (var sightingShot in shoot.Sighters.Where(s => s.Id == default(int)))
+				//	{
+				//		_db.Entry(sightingShot).State = EntityState.Added;
+				//		_db.SaveChanges();
+				//	}
+				//	foreach (var scoringShot in shoot.ScoringShots.Where(s => s.Id == default(int)))
+				//	{
+				//		_db.Entry(scoringShot).State = EntityState.Added;
+				//		_db.SaveChanges();
+				//	}
+				//}
+
+				//// Update entity
+				//_db.Entry(individualregistercard).State = EntityState.Modified;
+
+				//foreach (var shoot in individualregistercard.Shoots)
+				//{
+				//	_db.Entry(shoot).State = EntityState.Modified;
+				//	foreach (var sightingShot in shoot.Sighters)
+				//	{
+				//		_db.Entry(sightingShot).State = sightingShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
+				//	}
+				//	foreach (var scoringShot in shoot.ScoringShots)
+				//	{
+				//		_db.Entry(scoringShot).State = scoringShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
+				//	}
+				//}
+
+				// Add any new child entities (it seems adding more than one new child object at a time causes a duplicate key exception..)
 				foreach (var shoot in individualregistercard.Shoots)
 				{
-					foreach (var sightingShot in shoot.Sighters.Where(s => s.Id == default(int)))
+					foreach (var sightingShot in shoot.Sighters)
 					{
-						_db.Entry(sightingShot).State = EntityState.Added;
+						_db.Entry(sightingShot).State = sightingShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
 						_db.SaveChanges();
 					}
-					foreach (var scoringShot in shoot.ScoringShots.Where(s => s.Id == default(int)))
+					foreach (var scoringShot in shoot.ScoringShots)
 					{
-						_db.Entry(scoringShot).State = EntityState.Added;
+						_db.Entry(scoringShot).State = scoringShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
 						_db.SaveChanges();
 					}
 				}
@@ -115,15 +147,7 @@ namespace RegisterKeeper.Web.Controllers
 
 				foreach (var shoot in individualregistercard.Shoots)
 				{
-					_db.Entry(shoot).State = EntityState.Modified;
-					foreach (var sightingShot in shoot.Sighters)
-					{
-						_db.Entry(sightingShot).State = sightingShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
-					}
-					foreach (var scoringShot in shoot.ScoringShots)
-					{
-						_db.Entry(scoringShot).State = scoringShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
-					}
+					_db.Entry(shoot).State = shoot.Id == default(int) ? EntityState.Added : EntityState.Modified;
 				}
 
 				_db.SaveChanges();
@@ -156,6 +180,15 @@ namespace RegisterKeeper.Web.Controllers
 			_db.IndividualRegisterCards.Remove(individualregistercard);
 			_db.SaveChanges();
 			return RedirectToAction("Index");
+		}
+
+		internal static void AddCompetitionDetailsToViewBag(Competition competition, dynamic viewBag)
+		{
+			viewBag.CompetitionId = competition.Id;
+			viewBag.CompetitionName = competition.Name;
+			viewBag.Distances = competition.Distances.ToList();
+			viewBag.NumberOfSightingShots = competition.NumberOfSightingShots;
+			viewBag.NumberOfScoringShots = competition.NumberOfScoringShots;
 		}
 
 		protected override void Dispose(bool disposing)

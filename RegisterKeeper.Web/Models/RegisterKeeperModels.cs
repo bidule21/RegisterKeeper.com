@@ -59,6 +59,8 @@ namespace RegisterKeeper.Web.Models
 
 		//public virtual IndividualCompetition IndividualCompetition { get; set; }
 
+		public int? TeamRegisterCardId { get; set; }
+
 		public virtual List<Shoot> Shoots { get; set; }
 
 		public TotalScore TotalScore
@@ -87,8 +89,16 @@ namespace RegisterKeeper.Web.Models
 	public class TeamRegisterCard
 	{
 		public int Id { get; set; }
+
+		[Required]
+		[Display(Name = "Team Name")]
 		public string TeamName { get; set; }
+
+		[Display(Name = "Team Captain")]
 		public string TeamCaptain { get; set; }
+
+		public int TeamCompetitionId { get; set; }
+		public virtual TeamCompetition TeamCompetition { get; set; }
 
 		public virtual List<IndividualRegisterCard> IndividualRegisterCards { get; set; }
 

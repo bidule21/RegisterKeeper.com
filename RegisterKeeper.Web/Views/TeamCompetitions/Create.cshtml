@@ -1,76 +1,17 @@
 ﻿@model RegisterKeeper.Web.Models.TeamCompetition
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Team Competition";
+
+    ViewBag.ActionName = "Create";
+    ViewBag.SubmitButtonText = "Create";
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>TeamCompetition</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StartDateTime)
-            @Html.ValidationMessageFor(model => model.StartDateTime)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EndDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EndDateTime)
-            @Html.ValidationMessageFor(model => model.EndDateTime)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Location)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Location)
-            @Html.ValidationMessageFor(model => model.Location)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NumberOfSightingShots)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NumberOfSightingShots)
-            @Html.ValidationMessageFor(model => model.NumberOfSightingShots)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NumberOfScoringShots)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NumberOfScoringShots)
-            @Html.ValidationMessageFor(model => model.NumberOfScoringShots)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@Html.Partial("_CreateEditCompetition", Model)
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    @Html.Partial("_DateTimePickerJs")
 }

@@ -2,13 +2,13 @@
 @model IndividualRegisterCard
 
 @{
-    ViewBag.Title = "CreateForIndividualCompetition";
+    ViewBag.Title = "Add register card";
 
     ViewBag.FormAction = "CreateForIndividualCompetition";
     ViewBag.SubmitButtonText = "Create";
 }
 
-@Html.Partial("_CreateEditForIndividualCompetition", Model)
+@Html.Partial("_CreateEditIndividualRegisterCard", Model)
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

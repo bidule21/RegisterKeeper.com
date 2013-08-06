@@ -41,11 +41,6 @@
 		margin-bottom: 0;
 	}
 
-hr
-{
-	margin: 10px 0;
-}
-
 .row
 {
 	position: relative;
@@ -176,7 +171,7 @@ hr
 .register-card-detail
 {
 	display: table-cell;
-	padding-right: 1em;
+	/*padding-right: 1em;*/
 }
 
 	.register-card-detail .header
@@ -225,7 +220,8 @@ hr
 		text-align: right;
 	}
 
-	.register-card-container td.competitor-name {
+	.register-card-container td.competitor-name
+	{
 		text-align: left;
 	}
 
@@ -281,6 +277,7 @@ table .border-left
 {
 	display: table-cell;
 	vertical-align: bottom;
+	margin-left: 1em;
 	padding-left: 1em;
 	border-left: 1px solid #dddddd;
 }
@@ -290,3 +287,35 @@ table .border-left
 		display: block;
 		margin: 0.5em 0;
 	}
+
+.team-register-card-controls
+{
+	text-align: right;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid #dddddd;
+}
+
+/* Datetime picker override */
+.form_datetime input[readonly]
+{
+	cursor: pointer;
+	background-color: #ffffff;
+}
+
+
+.shoot-form > label
+{
+	font-weight: bold;
+}
+
+.shoot-form .controls label
+{
+	display: inline;
+}
+
+.shoot-form .controls input.shot
+{
+	width: 1.3em;
+	margin: 5px 5px 0 0;
+}

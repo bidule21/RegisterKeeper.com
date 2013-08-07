@@ -24,7 +24,7 @@
         </div>
         @foreach (var competition in Model.LiveCompetitions)
         {
-            var competitionAction = "#";
+@*var competitionAction = "#";
 
             if (competition is IndividualCompetition)
             {
@@ -33,13 +33,15 @@
             else if (competition is TeamCompetition)
             {
                 competitionAction = "/TeamCompetitions/Details/" + competition.Id;
-            }
+            }*@
 
             <div class="span6">
-                <a href="@competitionAction" class="rounded-corners">
+                @*<a href="@competitionAction" class="rounded-corners">
                     <h4>@competition.Name</h4>
                     <i>@competition.Location</i>
-                </a>
+                </a>*@
+
+                @Html.Partial("_CompetitionPanel", competition)
             </div>
         }
     </div>
@@ -58,53 +60,7 @@
 
         @foreach (var competition in Model.CompletedCompetitions)
         {
-
-            var competitionAction = "#";
-
-            if (competition is IndividualCompetition)
-            {
-                competitionAction = "/IndividualCompetition/Details/" + competition.Id;
-            }
-            else if (competition is TeamCompetition)
-            {
-                competitionAction = "/TeamCompetitions/Details/" + competition.Id;
-            }
-            
-            <a href="@competitionAction" class="rounded-corners">
-                <h4>@competition.Name</h4>
-                @(competition.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
-                <i>@competition.NumberOfSightingShots&amp;@competition.NumberOfScoringShots @@ @Html.DisplayFor(competition.Distances), @competition.Location</i>
-
-                @{ var individualCompetition = competition as IndividualCompetition; }
-                @if (individualCompetition != null && individualCompetition.IndividualRegisterCards != null && individualCompetition.IndividualRegisterCards.Count > 0)
-                {
-                    <text>
-                    <div class="summary-results">
-                        <table class="table table-condensed">
-                            @* <thead>
-                                <tr>
-                                    <th>#</th>
-                                </tr>
-                            </thead>*@
-
-                            @{ int place = 1; }
-                            @foreach (var registerCard in individualCompetition.IndividualRegisterCards.OrderByDescending(c => c.TotalScore.Points).Take(3))
-                            {
-                                <tr>
-                                    <td>@place</td>
-                                    <td>@registerCard.CompetitorName</td>
-                                    <td>@registerCard.CompetitorClass</td>
-                                    <td>@registerCard.CompetitorClub</td>
-                                    <td>@registerCard.TotalScore</td>
-                                </tr>
-                            
-                                place += 1;
-                            }
-                        </table>
-                    </div>
-                    </text>
-                }
-            </a>
+            @Html.Partial("_CompetitionPanel", competition)
         }
 
     </div>

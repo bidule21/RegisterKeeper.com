@@ -46,7 +46,89 @@ namespace RegisterKeeper.Web.Models
 							Location = "Stickledown Range, Bisley",
 							Distances = Distance.x900yds,
 							NumberOfSightingShots = 2,
-							NumberOfScoringShots = 10
+							NumberOfScoringShots = 10,
+							IndividualRegisterCards = new List<IndividualRegisterCard>
+								{
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Dr AJ Pilgrim",
+											CompetitorClass = "X",
+											CompetitorClub = "NLRC",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x900yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V }
+																}
+														}
+												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr TA Ringer",
+											CompetitorClass = "X",
+											CompetitorClub = "Uppingham Veterans RC",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x900yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V }
+																}
+														}
+												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr CTS Belk",
+											CompetitorClass = "X",
+											CompetitorClub = "OCRA",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x900yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V }
+																}
+														}
+												}
+										},
+									
+								}
 						},
 					new IndividualCompetition
 						{
@@ -346,6 +428,61 @@ namespace RegisterKeeper.Web.Models
 														},
 													
 												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr S Osmond",
+											CompetitorClass = "A",
+											CompetitorClub = "LMRA",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x300yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ShotNumber = 1, Score = Score.Five},
+																	new ScoringShot{ShotNumber = 2, Score = Score.V},
+																	new ScoringShot{ShotNumber = 3, Score = Score.V},
+																	new ScoringShot{ShotNumber = 4, Score = Score.V},
+																	new ScoringShot{ShotNumber = 5, Score = Score.V},
+																	new ScoringShot{ShotNumber = 6, Score = Score.V},
+																	new ScoringShot{ShotNumber = 7, Score = Score.V}
+
+																}
+														},
+													new Shoot
+														{
+															Distance = Distance.x500yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ShotNumber = 1, Score = Score.Five},
+																	new ScoringShot{ShotNumber = 2, Score = Score.V},
+																	new ScoringShot{ShotNumber = 3, Score = Score.V},
+																	new ScoringShot{ShotNumber = 4, Score = Score.V},
+																	new ScoringShot{ShotNumber = 5, Score = Score.V},
+																	new ScoringShot{ShotNumber = 6, Score = Score.V},
+																	new ScoringShot{ShotNumber = 7, Score = Score.V}
+
+																}
+														},
+													new Shoot
+														{
+															Distance = Distance.x600yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ShotNumber = 1, Score = Score.V},
+																	new ScoringShot{ShotNumber = 2, Score = Score.V},
+																	new ScoringShot{ShotNumber = 3, Score = Score.V},
+																	new ScoringShot{ShotNumber = 4, Score = Score.V},
+																	new ScoringShot{ShotNumber = 5, Score = Score.V},
+																	new ScoringShot{ShotNumber = 6, Score = Score.V},
+																	new ScoringShot{ShotNumber = 7, Score = Score.V}
+
+																}
+														},
+													
+												}
 										}
 								}
 						},
@@ -357,7 +494,104 @@ namespace RegisterKeeper.Web.Models
 							Location = "Century Range, Bisley",
 							Distances = Distance.x300yds,
 							NumberOfSightingShots = 2,
-							NumberOfScoringShots = 15
+							NumberOfScoringShots = 15,
+							IndividualRegisterCards = new List<IndividualRegisterCard>
+								{
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr JG Du Toit",
+											CompetitorClass = "X",
+											CompetitorClub = "Witwatersrand",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x300yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 11, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 12, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 13, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 14, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 15, Score = Score.V }
+																}
+														}
+												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr DGP Vamplew",
+											CompetitorClass = "X",
+											CompetitorClub = "DCRA",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x300yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 11, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 12, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 13, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 14, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 15, Score = Score.V }
+																}
+														}
+												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr PJ Chapman-Sheath",
+											CompetitorClass = "X",
+											CompetitorClub = "NLRC",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x300yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 11, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 12, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 13, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 14, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 15, Score = Score.V }
+																}
+														}
+												}
+										},
+									
+								}
 						},
 					new IndividualCompetition
 						{
@@ -377,7 +611,89 @@ namespace RegisterKeeper.Web.Models
 							Location = "Century Range, Bisley",
 							Distances = Distance.x600yds,
 							NumberOfSightingShots = 2,
-							NumberOfScoringShots = 10
+							NumberOfScoringShots = 10,
+							IndividualRegisterCards = new List<IndividualRegisterCard>
+								{
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr RA Jobson",
+											CompetitorClass = "O",
+											CompetitorClub = "Cornwall RC",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x600yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V }
+																}
+														}
+												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Mr D Rose",
+											CompetitorClass = "X",
+											CompetitorClub = "Old Epsomian RC",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x600yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V }
+																}
+														}
+												}
+										},
+									new IndividualRegisterCard
+										{
+											CompetitorName = "Cadet OS Marshall",
+											CompetitorClass = "A",
+											CompetitorClub = "Victoria College",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x600yds,
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.Five },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 4, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 5, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 6, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 7, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 8, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 9, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 10, Score = Score.V }
+																}
+														}
+												}
+										},
+									
+								}
 						},
 
 					

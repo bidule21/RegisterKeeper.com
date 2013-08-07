@@ -1,0 +1,76 @@
+﻿@using RegisterKeeper.Web.Models
+@model Competition
+
+@{
+    var competitionAction = "#";
+    var iconSrc = String.Empty;
+    var iconTitle = String.Empty;
+
+    if (Model is IndividualCompetition)
+    {
+        competitionAction = "/IndividualCompetition/Details/" + Model.Id;
+        iconSrc = "Individual.png";
+        iconTitle = "Individual Competition";
+
+    }
+    else if (Model is TeamCompetition)
+    {
+        competitionAction = "/TeamCompetitions/Details/" + Model.Id;
+        iconSrc = "Team.png";
+        iconTitle = "Team Competition";
+    }
+}
+<a href="@competitionAction" class="rounded-corners">
+    <span style="float: right; margin-top: 10px;"><img src="~/Content/images/@(iconSrc)" title="@iconTitle"/></span>
+    <h4>@Model.Name</h4>
+    @Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt") - @(Model.EndDateTime.Date == Model.StartDateTime.Date ? Model.EndDateTime.ToString("h.mmtt") : Model.EndDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
+    <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
+
+    @{ var individualCompetition = Model as IndividualCompetition; }
+    @if (individualCompetition != null && individualCompetition.IndividualRegisterCards != null && individualCompetition.IndividualRegisterCards.Count > 0)
+    {
+        <text>
+            <div class="summary-results">
+                <table class="table table-condensed">
+                
+                    @{ var place = 1; }
+                    @foreach (var registerCard in individualCompetition.IndividualRegisterCards.OrderByDescending(c => c.TotalScore.Points).Take(3))
+                    {
+                        <tr>
+                            <td>@place</td>
+                            <td>@registerCard.CompetitorName</td>
+                            <td>@registerCard.CompetitorClass</td>
+                            <td>@registerCard.CompetitorClub</td>
+                            <td>@registerCard.TotalScore</td>
+                        </tr>
+                            
+                        place += 1;
+                    }
+                </table>
+            </div>
+        </text>
+    }
+    
+    @{ var teamCompetition = Model as TeamCompetition; }
+    @if (teamCompetition != null && teamCompetition.TeamRegisterCards != null && teamCompetition.TeamRegisterCards.Count > 0)
+    {
+        <text>
+            <div class="summary-results">
+                <table class="table table-condensed">
+                
+                    @{ var place = 1; }
+                    @foreach (var registerCard in teamCompetition.TeamRegisterCards.OrderByDescending(c => c.TotalScore.Points).Take(3))
+                    {
+                        <tr>
+                            <td>@place</td>
+                            <td>@registerCard.TeamName</td>
+                            <td>@registerCard.TotalScore</td>
+                        </tr>
+                            
+                        place += 1;
+                    }
+                </table>
+            </div>
+        </text>
+    }
+</a>

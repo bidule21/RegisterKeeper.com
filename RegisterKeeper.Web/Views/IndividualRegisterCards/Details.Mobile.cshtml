@@ -1,0 +1,29 @@
+﻿@model RegisterKeeper.Web.Models.IndividualRegisterCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>@Model.CompetitorName</h1>
+
+<table>
+    <tr>
+        <th scope="row">Index No</th>
+        <td>@Model.CompetitorIndexNumber</td>
+    </tr>
+    <tr>
+        <th scope="row">Class</th>
+        <td>@Model.CompetitorClass</td>
+    </tr>
+    <tr>
+        <th scope="row">Club</th>
+        <td>@Model.CompetitorClub</td>
+    </tr>
+</table>
+
+<ul data-role="listview" data-inset="true" data-ajax="false">
+    @foreach (var distance in Model.IndividualCompetition.Distances.ToList())
+    {
+        <li>@Html.ActionLink(distance.DisplayValue(), "Edit", "Shoots", new { individualRegisterCardId = Model.Id, distance }, null)</li>        
+    }
+</ul>

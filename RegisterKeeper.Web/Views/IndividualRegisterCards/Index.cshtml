@@ -6,10 +6,10 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+@*<p>
+    @Html.ActionLink("Create New", "CreateForIndividualCompetition")
+</p>*@
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CompetitorName)
@@ -22,9 +22,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CompetitorClub)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SortOrder)
         </th>
         <th></th>
     </tr>
@@ -44,10 +41,7 @@
             @Html.DisplayFor(modelItem => item.CompetitorClub)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SortOrder)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "EditForIndividualCompetition", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>

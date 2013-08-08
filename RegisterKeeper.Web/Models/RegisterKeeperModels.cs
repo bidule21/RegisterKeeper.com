@@ -56,8 +56,7 @@ namespace RegisterKeeper.Web.Models
 		public string CompetitorClub { get; set; }
 
 		public int? IndividualCompetitionId { get; set; }
-
-		//public virtual IndividualCompetition IndividualCompetition { get; set; }
+		public virtual IndividualCompetition IndividualCompetition { get; set; }
 
 		public int? TeamRegisterCardId { get; set; }
 

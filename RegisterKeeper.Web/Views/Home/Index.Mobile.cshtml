@@ -1,0 +1,43 @@
+﻿@model RegisterKeeper.Web.ViewModels.Home.IndexViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+@if (Model.LiveCompetitions.Count > 0)
+{
+    <h2>Live competitions</h2>
+    
+    <ul data-role="listview" data-inset="true">
+        @foreach (var competition in Model.LiveCompetitions)
+        {
+            @Html.Partial("_CompetitionPanel.Mobile", competition)
+        }
+    </ul>
+}
+
+
+<h2>Completed competitions:</h2>
+
+<ul data-role="listview" data-inset="true">
+
+    @foreach (var competition in Model.CompletedCompetitions.OrderByDescending(c => c.EndDateTime).Take(5))
+    {
+        @Html.Partial("_CompetitionPanel.Mobile", competition)
+    }
+
+</ul>
+
+
+<h2>Upcoming competitions:</h2>
+
+<ul data-role="listview" data-inset="true">
+    @foreach (var competition in Model.UpcomingCompetitions)
+    {
+        <li>
+            <h4>@competition.Name</h4>
+            <p>@(competition.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))</p>
+            <p><i>@competition.Location</i></p>
+        </li>
+    }
+</ul>

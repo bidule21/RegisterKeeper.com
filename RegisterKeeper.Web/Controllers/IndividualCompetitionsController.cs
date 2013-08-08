@@ -9,7 +9,7 @@ using RegisterKeeper.Web.Models;
 
 namespace RegisterKeeper.Web.Controllers
 {
-    public class IndividualCompetitionController : Controller
+    public class IndividualCompetitionsController : Controller
     {
         private RegisterKeeperDb db = new RegisterKeeperDb();
 

@@ -30,6 +30,8 @@ namespace RegisterKeeper.Web
 			Database.SetInitializer(new RegisterKeeperDbInitialiser());
 
 			ModelBinders.Binders.Add(typeof(Distance), new EnumFlagsModelBinder());
+			
+			BundleMobileConfig.RegisterBundles(BundleTable.Bundles);
 		}
 	}
 }

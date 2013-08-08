@@ -1,0 +1,17 @@
+﻿@using RegisterKeeper.Web.Models
+@model Competition
+
+<li>
+    @{
+        string controllerName = null;
+        if (Model is IndividualCompetition)
+        {
+            controllerName = "IndividualCompetitions";
+        }
+        else if (Model is TeamCompetition)
+        {
+            controllerName = "TeamCompetitions";
+        }
+    }
+    @Html.ActionLink(Model.Name, "Details", controllerName, new { id = Model.Id }, null)
+</li>

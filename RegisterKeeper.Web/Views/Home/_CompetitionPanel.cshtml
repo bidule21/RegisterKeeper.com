@@ -8,7 +8,7 @@
 
     if (Model is IndividualCompetition)
     {
-        competitionAction = "/IndividualCompetition/Details/" + Model.Id;
+        competitionAction = "/IndividualCompetitions/Details/" + Model.Id;
         iconSrc = "Individual.png";
         iconTitle = "Individual Competition";
 
@@ -21,7 +21,7 @@
     }
 }
 <a href="@competitionAction" class="rounded-corners">
-    <span style="float: right; margin-top: 10px;"><img src="~/Content/images/@(iconSrc)" title="@iconTitle"/></span>
+    <span style="float: right; margin-top: 10px;"><img src="~/Content/images/@(iconSrc)" title="@iconTitle" alt="@iconTitle"/></span>
     <h4>@Model.Name</h4>
     @Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt") - @(Model.EndDateTime.Date == Model.StartDateTime.Date ? Model.EndDateTime.ToString("h.mmtt") : Model.EndDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>

@@ -1,0 +1,24 @@
+﻿@model RegisterKeeper.Web.Models.IndividualCompetition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+<p>@(Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
+    <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
+</p>
+
+<h3>Register Cards</h3>
+<ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..">
+    @foreach (var registerCard in Model.IndividualRegisterCards)
+    {
+        <li>
+            @Html.ActionLink(registerCard.CompetitorName, "Details", "IndividualRegisterCards", new { id = registerCard.Id }, null)
+        </li>
+    }
+</ol>
+
+@Html.ActionLink("Add Register Card", "CreateForIndividualCompetition", "IndividualRegisterCards", new { individualCompetitionId = Model.Id },
+new { data_role = "button", data_inline = "true", data_icon = "plus" })
+@*data_mini = "true", *@

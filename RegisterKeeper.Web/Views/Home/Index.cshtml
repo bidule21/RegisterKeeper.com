@@ -1,15 +1,8 @@
-﻿@using RegisterKeeper.Web.Models
-@using RegisterKeeper.Web;
-@model RegisterKeeper.Web.ViewModels.Home.IndexViewModel
+﻿@model RegisterKeeper.Web.ViewModels.Home.IndexViewModel
 
 @{
     ViewBag.Title = "Home";
 }
-
-<style type="text/css">
-    
-</style>
-
 
 <div class="jumbotron">
     <h1>RegisterKeeper.com</h1>
@@ -24,23 +17,7 @@
         </div>
         @foreach (var competition in Model.LiveCompetitions)
         {
-@*var competitionAction = "#";
-
-            if (competition is IndividualCompetition)
-            {
-                competitionAction = "/IndividualCompetition/Details/" + competition.Id;
-            }
-            else if (competition is TeamCompetition)
-            {
-                competitionAction = "/TeamCompetitions/Details/" + competition.Id;
-            }*@
-
             <div class="span6">
-                @*<a href="@competitionAction" class="rounded-corners">
-                    <h4>@competition.Name</h4>
-                    <i>@competition.Location</i>
-                </a>*@
-
                 @Html.Partial("_CompetitionPanel", competition)
             </div>
         }

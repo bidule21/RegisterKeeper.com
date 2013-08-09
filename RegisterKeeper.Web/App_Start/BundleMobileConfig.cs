@@ -10,7 +10,7 @@ namespace RegisterKeeper.Web {
             bundles.Add(new StyleBundle("~/Content/Mobile/css")
                 .Include("~/Content/Site.Mobile.css"));
 
-			bundles.Add(new StyleBundle("~/Content/jquery.mobile.css")
+			bundles.Add(new StyleBundle("~/Content/jquery-mobile-css")
                 .Include("~/Content/jquery.mobile-{version}.css"));
         }
     }

@@ -1,4 +1,4 @@
-﻿@model RegisterKeeper.Web.Models.IndividualRegisterCard
+﻿@model RegisterKeeper.Web.Models.RegisterCard
 
 @{
     ViewBag.Title = "Details";
@@ -24,6 +24,9 @@
 <ul data-role="listview" data-inset="true" data-ajax="false">
     @foreach (var distance in Model.IndividualCompetition.Distances.ToList())
     {
-        <li>@Html.ActionLink(distance.DisplayValue(), "Edit", "Shoots", new { individualRegisterCardId = Model.Id, distance }, null)</li>        
+        var shoot = Model.Shoots.Single(s => s.Distance == distance);
+        var firstSighterShotId = shoot.Sighters.Single(s => s.ShotNumber == 1).Id;
+
+        <li>@Html.ActionLink(distance.DisplayValue(), "Scorer", "Shots", new { shotId = firstSighterShotId }, null)</li>
     }
 </ul>

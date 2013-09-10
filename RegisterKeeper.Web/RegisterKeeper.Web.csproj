@@ -191,8 +191,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndividualCompetitionsController.cs" />
-    <Compile Include="Controllers\IndividualRegisterCardsController.cs" />
+    <Compile Include="Controllers\RegisterCardsController.cs" />
     <Compile Include="Controllers\ShootsController.cs" />
+    <Compile Include="Controllers\ShotsController.cs" />
     <Compile Include="Controllers\SightingShotsController.cs" />
     <Compile Include="Controllers\TeamCompetitionsController.cs" />
     <Compile Include="Controllers\TeamRegisterCardsController.cs" />
@@ -206,10 +207,13 @@
     </Compile>
     <Compile Include="HtmlHelpers.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\RegisterKeeperModels2.cs" />
     <Compile Include="Models\RegisterKeeperDb.cs" />
     <Compile Include="Models\RegisterKeeperModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Shots\ScorerViewModel.cs" />
+    <Compile Include="ViewModels\Shots\SighterConversionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -360,11 +364,11 @@
     <Content Include="Views\IndividualCompetitions\Delete.cshtml" />
     <Content Include="Views\Shared\_CreateEditCompetition.cshtml" />
     <Content Include="Views\Shared\_DateTimePickerJs.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\Index.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\Details.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\EditForIndividualCompetition.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\Delete.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\CreateForIndividualCompetition.cshtml" />
+    <Content Include="Views\RegisterCards\Index.cshtml" />
+    <Content Include="Views\RegisterCards\Details.cshtml" />
+    <Content Include="Views\RegisterCards\Edit.cshtml" />
+    <Content Include="Views\RegisterCards\Delete.cshtml" />
+    <Content Include="Views\RegisterCards\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Shoot.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SightingShot.cshtml" />
     <Content Include="Views\SightingShots\Index.cshtml" />
@@ -372,7 +376,7 @@
     <Content Include="Views\SightingShots\Create.cshtml" />
     <Content Include="Views\SightingShots\Edit.cshtml" />
     <Content Include="Views\SightingShots\Delete.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\_CreateEditIndividualRegisterCard.cshtml" />
+    <Content Include="Views\RegisterCards\_CreateEdit.cshtml" />
     <Content Include="Views\TeamCompetitions\Index.cshtml" />
     <Content Include="Views\TeamCompetitions\Create.cshtml" />
     <Content Include="Views\TeamCompetitions\Edit.cshtml" />
@@ -385,7 +389,7 @@
     <Content Include="Views\TeamRegisterCards\Edit.cshtml" />
     <Content Include="Views\TeamRegisterCards\Delete.cshtml" />
     <Content Include="Views\TeamRegisterCards\AddShooter.cshtml" />
-    <Content Include="Views\Shared\_CreateEditIndividualRegisterCardFields.cshtml" />
+    <Content Include="Views\Shared\_CreateEditRegisterCardFields.cshtml" />
     <Content Include="Views\TeamRegisterCards\_CreateEditTeamRegisterCardFields.cshtml" />
     <Content Include="Views\Home\_CompetitionPanel.cshtml" />
     <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
@@ -394,11 +398,14 @@
     <Content Include="Views\Home\_CompetitionPanel.Mobile.cshtml" />
     <Content Include="Views\TeamCompetitions\Details.Mobile.cshtml" />
     <Content Include="Views\IndividualCompetitions\Details.Mobile.cshtml" />
-    <Content Include="Views\IndividualRegisterCards\Details.Mobile.cshtml" />
-    <Content Include="Views\Shoots\Edit.cshtml" />
+    <Content Include="Views\RegisterCards\Details.Mobile.cshtml" />
+    <Content Include="Views\RegisterCards\Create.Mobile.cshtml" />
+    <Content Include="Views\Shots\Scorer.Mobile.cshtml" />
+    <Content Include="Views\Shots\SighterConversion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shoots\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

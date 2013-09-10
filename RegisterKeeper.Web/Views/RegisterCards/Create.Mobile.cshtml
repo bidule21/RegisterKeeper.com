@@ -1,0 +1,48 @@
+﻿@model RegisterKeeper.Web.Models.RegisterCard
+
+@{
+    ViewBag.Title = "Add register card";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Add register card for <i>@ViewBag.CompetitionName</i></legend>
+
+        <div data-role="fieldcontain">
+            @Html.LabelFor(model => model.CompetitorName)
+            @Html.EditorFor(model => model.CompetitorName)
+            @Html.ValidationMessageFor(model => model.CompetitorName)
+        </div>
+
+        <div data-role="fieldcontain">
+            @Html.LabelFor(model => model.CompetitorIndexNumber)
+            @Html.EditorFor(model => model.CompetitorIndexNumber)
+            @Html.ValidationMessageFor(model => model.CompetitorIndexNumber)
+        </div>
+
+        <div data-role="fieldcontain">
+            @Html.LabelFor(model => model.CompetitorClass)
+            @Html.EditorFor(model => model.CompetitorClass)
+            @Html.ValidationMessageFor(model => model.CompetitorClass)
+        </div>
+
+        <div data-role="fieldcontain">
+            @Html.LabelFor(model => model.CompetitorClub)
+            @Html.EditorFor(model => model.CompetitorClub)
+            @Html.ValidationMessageFor(model => model.CompetitorClub)
+        </div>
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <input type="submit" value="Add" data-theme="b" />
+            </div>
+            <div class="ui-block-b">
+                @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { id = ViewBag.CompetitionId }, new { data_role = "button" })
+            </div>
+        </div>
+    </fieldset>
+}

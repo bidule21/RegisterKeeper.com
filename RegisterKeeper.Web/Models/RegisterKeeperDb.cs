@@ -12,14 +12,13 @@ namespace RegisterKeeper.Web.Models
 
 		public DbSet<Competition> Competitions { get; set; }
 		public DbSet<IndividualCompetition> IndividualCompetitions { get; set; }
-
-		public DbSet<IndividualRegisterCard> IndividualRegisterCards { get; set; }
-
-		public DbSet<SightingShot> SightingShots { get; set; }
-
+		public DbSet<RegisterCard> RegisterCards { get; set; }
 		public DbSet<TeamCompetition> TeamCompetitions { get; set; }
-
 		public DbSet<TeamRegisterCard> TeamRegisterCards { get; set; }
+		public DbSet<TeamCompetitor> TeamCompetitors { get; set; }
+		public DbSet<Shoot> Shoots { get; set; }
+		public DbSet<Shot> Shots { get; set; }
+		public DbSet<SightingShot> SightingShots { get; set; }
 	}
 
 	public class RegisterKeeperDbInitialiser : DropCreateDatabaseAlways<RegisterKeeperDb>
@@ -47,9 +46,9 @@ namespace RegisterKeeper.Web.Models
 							Distances = Distance.x900yds,
 							NumberOfSightingShots = 2,
 							NumberOfScoringShots = 10,
-							IndividualRegisterCards = new List<IndividualRegisterCard>
+							RegisterCards = new List<RegisterCard>
 								{
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Dr AJ Pilgrim",
 											CompetitorClass = "X",
@@ -75,7 +74,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr TA Ringer",
 											CompetitorClass = "X",
@@ -101,7 +100,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr CTS Belk",
 											CompetitorClass = "X",
@@ -149,7 +148,7 @@ namespace RegisterKeeper.Web.Models
 							Distances = Distance.x500yds,
 							NumberOfSightingShots = 2,
 							NumberOfScoringShots = 15,
-							IndividualRegisterCards = new List<IndividualRegisterCard>()
+							RegisterCards = new List<RegisterCard>()
 						},
 					new IndividualCompetition
 						{
@@ -160,9 +159,9 @@ namespace RegisterKeeper.Web.Models
 							Distances = Distance.x500yds,
 							NumberOfSightingShots = 2,
 							NumberOfScoringShots = 15,
-							IndividualRegisterCards = new List<IndividualRegisterCard>
+							RegisterCards = new List<RegisterCard>
 								{
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr GE Morris",
 											CompetitorClass = "X",
@@ -193,7 +192,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr JA Haward",
 											CompetitorClass = "X",
@@ -224,7 +223,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr R Birtwistle",
 											CompetitorClass = "X",
@@ -255,7 +254,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr BJ Wood",
 											CompetitorClass = "O",
@@ -317,9 +316,9 @@ namespace RegisterKeeper.Web.Models
 							Distances = Distance.x300yds | Distance.x500yds | Distance.x600yds,
 							NumberOfSightingShots = 2,
 							NumberOfScoringShots = 7,
-							IndividualRegisterCards = new List<IndividualRegisterCard>
+							RegisterCards = new List<RegisterCard>
 								{
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr P Patel",
 											CompetitorClass = "X",
@@ -374,7 +373,7 @@ namespace RegisterKeeper.Web.Models
 													
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr GE Morris",
 											CompetitorClass = "X",
@@ -429,7 +428,7 @@ namespace RegisterKeeper.Web.Models
 													
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr S Osmond",
 											CompetitorClass = "A",
@@ -495,9 +494,9 @@ namespace RegisterKeeper.Web.Models
 							Distances = Distance.x300yds,
 							NumberOfSightingShots = 2,
 							NumberOfScoringShots = 15,
-							IndividualRegisterCards = new List<IndividualRegisterCard>
+							RegisterCards = new List<RegisterCard>
 								{
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr JG Du Toit",
 											CompetitorClass = "X",
@@ -528,7 +527,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr DGP Vamplew",
 											CompetitorClass = "X",
@@ -559,7 +558,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr PJ Chapman-Sheath",
 											CompetitorClass = "X",
@@ -612,9 +611,9 @@ namespace RegisterKeeper.Web.Models
 							Distances = Distance.x600yds,
 							NumberOfSightingShots = 2,
 							NumberOfScoringShots = 10,
-							IndividualRegisterCards = new List<IndividualRegisterCard>
+							RegisterCards = new List<RegisterCard>
 								{
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr RA Jobson",
 											CompetitorClass = "O",
@@ -640,7 +639,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Mr D Rose",
 											CompetitorClass = "X",
@@ -666,7 +665,7 @@ namespace RegisterKeeper.Web.Models
 														}
 												}
 										},
-									new IndividualRegisterCard
+									new RegisterCard
 										{
 											CompetitorName = "Cadet OS Marshall",
 											CompetitorClass = "A",
@@ -707,7 +706,86 @@ namespace RegisterKeeper.Web.Models
 							Location = "Test Location",
 							Distances = Distance.x300yds | Distance.x500yds | Distance.x600yds,
 							NumberOfSightingShots = 2,
-							NumberOfScoringShots = 10
+							NumberOfScoringShots = 10,
+							RegisterCards = new List<RegisterCard>
+								{
+									new RegisterCard
+										{
+											CompetitorName = "Test Competitor",
+											CompetitorIndexNumber = 123,
+											CompetitorClass = "X",
+											CompetitorClub = "Test Club",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x300yds,
+															Sighters = new List<SightingShot>
+																{
+																	new SightingShot{ ShotNumber = 1 },
+																	new SightingShot{ ShotNumber = 2 }
+																},
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1 },
+																	new ScoringShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 3 },
+																	new ScoringShot{ ShotNumber = 4 },
+																	new ScoringShot{ ShotNumber = 5 },
+																	new ScoringShot{ ShotNumber = 6 },
+																	new ScoringShot{ ShotNumber = 7 },
+																	new ScoringShot{ ShotNumber = 8 },
+																	new ScoringShot{ ShotNumber = 9 },
+																	new ScoringShot{ ShotNumber = 10 }
+																}
+														},
+													new Shoot
+														{
+															Distance = Distance.x500yds,
+															Sighters = new List<SightingShot>
+																{
+																	new SightingShot{ ShotNumber = 1 },
+																	new SightingShot{ ShotNumber = 2 }
+																},
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1 },
+																	new ScoringShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 3 },
+																	new ScoringShot{ ShotNumber = 4 },
+																	new ScoringShot{ ShotNumber = 5 },
+																	new ScoringShot{ ShotNumber = 6 },
+																	new ScoringShot{ ShotNumber = 7 },
+																	new ScoringShot{ ShotNumber = 8 },
+																	new ScoringShot{ ShotNumber = 9 },
+																	new ScoringShot{ ShotNumber = 10 }
+																}
+														},
+													new Shoot
+														{
+															Distance = Distance.x600yds,
+															Sighters = new List<SightingShot>
+																{
+																	new SightingShot{ ShotNumber = 1 },
+																	new SightingShot{ ShotNumber = 2 }
+																},
+															ScoringShots = new List<ScoringShot>
+																{
+																	new ScoringShot{ ShotNumber = 1 },
+																	new ScoringShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 3 },
+																	new ScoringShot{ ShotNumber = 4 },
+																	new ScoringShot{ ShotNumber = 5 },
+																	new ScoringShot{ ShotNumber = 6 },
+																	new ScoringShot{ ShotNumber = 7 },
+																	new ScoringShot{ ShotNumber = 8 },
+																	new ScoringShot{ ShotNumber = 9 },
+																	new ScoringShot{ ShotNumber = 10 }
+																}
+														}
+												}
+										}
+								}
 						},
 					new TeamCompetition
 						{
@@ -746,9 +824,9 @@ namespace RegisterKeeper.Web.Models
 										{
 											TeamName = "Great Britain",
 											TeamCaptain = "Dr JD Warburton",
-											IndividualRegisterCards = new List<IndividualRegisterCard>
+											Firers = new List<TeamCompetitor>
 												{
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr JA Watson",
 															Shoots = new List<Shoot>
@@ -806,7 +884,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr GE Morris",
 															Shoots = new List<Shoot>
@@ -864,7 +942,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Dr GCD Barnett",
 															Shoots = new List<Shoot>
@@ -922,7 +1000,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr SA Thomas",
 															Shoots = new List<Shoot>
@@ -980,7 +1058,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr TJD Raincock",
 															Shoots = new List<Shoot>
@@ -1038,7 +1116,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr DC Luckman",
 															Shoots = new List<Shoot>
@@ -1096,7 +1174,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr P Patel",
 															Shoots = new List<Shoot>
@@ -1154,7 +1232,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Miss JM Rankin",
 															Shoots = new List<Shoot>
@@ -1219,9 +1297,9 @@ namespace RegisterKeeper.Web.Models
 										{
 											TeamName = "Australia",
 											TeamCaptain = "Mr GE Grosskreutz",
-											IndividualRegisterCards = new List<IndividualRegisterCard>
+											Firers = new List<TeamCompetitor>
 												{
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr JP Bailey",
 															Shoots = new List<Shoot>
@@ -1279,7 +1357,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr J Corbett",
 															Shoots = new List<Shoot>
@@ -1337,7 +1415,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr MI Buchanan",
 															Shoots = new List<Shoot>
@@ -1395,7 +1473,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr RA Bale",
 															Shoots = new List<Shoot>
@@ -1453,7 +1531,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr DR Cadden",
 															Shoots = new List<Shoot>
@@ -1511,7 +1589,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Lt RK Whalen",
 															Shoots = new List<Shoot>
@@ -1569,7 +1647,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Miss JL Bale",
 															Shoots = new List<Shoot>
@@ -1627,7 +1705,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr SM Negus",
 															Shoots = new List<Shoot>
@@ -1707,9 +1785,9 @@ namespace RegisterKeeper.Web.Models
 										{
 											TeamName = "Australia",
 											TeamCaptain = "Mr GE Grosskreutz",
-											IndividualRegisterCards = new List<IndividualRegisterCard>
+											Firers = new List<TeamCompetitor>
 												{
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr J Corbett",
 															Shoots = new List<Shoot>
@@ -1750,7 +1828,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr MI Buchanan",
 															Shoots = new List<Shoot>
@@ -1791,7 +1869,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr PA Collins",
 															Shoots = new List<Shoot>
@@ -1832,7 +1910,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr JP Bailey",
 															Shoots = new List<Shoot>
@@ -1873,7 +1951,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Lt RK Whalen",
 															Shoots = new List<Shoot>
@@ -1914,7 +1992,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr DR Cadden",
 															Shoots = new List<Shoot>
@@ -1955,7 +2033,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr SM Negus",
 															Shoots = new List<Shoot>
@@ -1996,7 +2074,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Miss SL Hayes",
 															Shoots = new List<Shoot>
@@ -2037,7 +2115,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr GE Grosskreutz",
 															Shoots = new List<Shoot>
@@ -2078,7 +2156,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr EI Cartwright",
 															Shoots = new List<Shoot>
@@ -2119,7 +2197,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Mr RA Bale",
 															Shoots = new List<Shoot>
@@ -2160,7 +2238,7 @@ namespace RegisterKeeper.Web.Models
 																		}
 																}
 														},
-													new IndividualRegisterCard
+													new TeamCompetitor
 														{
 															CompetitorName = "Miss JL Bale",
 															Shoots = new List<Shoot>

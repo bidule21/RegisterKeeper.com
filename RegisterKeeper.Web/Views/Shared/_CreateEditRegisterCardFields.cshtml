@@ -1,5 +1,5 @@
 ﻿@using RegisterKeeper.Web.Models
-@model IndividualRegisterCard
+@model RegisterCard
 
 @{
     string formFieldsPrefix = ViewBag.FormFieldsPrefix ?? String.Empty;
@@ -70,7 +70,7 @@
                     var sighter = shoot.Sighters.SingleOrDefault(s => s.ShotNumber == shotNumber);
                     if (sighter != null)
                     {
-                        score = sighter.ScoreHacker;
+                        score = sighter.ScoreText;
                         converted = sighter.Converted;
 
                 @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].Sighters[" + sightingShotIndex + "].Id", sighter.Id)
@@ -81,8 +81,8 @@
                 <input type="hidden" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ShotNumber" 
                                name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ShotNumber" 
                                value="@shotNumber" />
-                <input type="text" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ScoreHacker"
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ScoreHacker"
+                <input type="text" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ScoreText"
+                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ScoreText"
                                placeholder="S@(shotNumber)" class="shot"
                             value="@score" />
                 <input data-val="true" data-val-required="The Converted field is required." 
@@ -107,7 +107,7 @@
                     var shot = shoot.ScoringShots.SingleOrDefault(s => s.ShotNumber == shotNumber);
                     if (shot != null)
                     {
-                        score = shot.ScoreHacker;
+                        score = shot.ScoreText;
 
                 @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].ScoringShots[" + scoringShotIndex + "].Id", shot.Id)
 
@@ -116,8 +116,8 @@
                 <input type="hidden" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ShotNumber" 
                                name="@(formFieldsPrefix)Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ShotNumber" 
                                value="@shotNumber" />
-                <input type="text" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ScoreHacker"
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ScoreHacker"
+                <input type="text" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ScoreText"
+                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ScoreText"
                                placeholder="@(shotNumber)" class="shot"
                             value="@score" />
             }

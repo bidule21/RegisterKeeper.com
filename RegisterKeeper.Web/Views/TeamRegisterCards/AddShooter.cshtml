@@ -1,18 +1,5 @@
-﻿@*@using RegisterKeeper.Web.Models
-@model IndividualRegisterCard
-
-@{
-    ViewBag.Title = "Add shooter";
-
-    ViewBag.FormAction = "AddShooter";
-    ViewBag.SubmitButtonText = "Save";
-}
-
-@Html.Partial("_CreateEditIndividualRegisterCard", Model)*@
-
-
-@using RegisterKeeper.Web.Models
-@model IndividualRegisterCard
+﻿@using RegisterKeeper.Web.Models
+@model CompetitorShootSeries
 
 @using (Html.BeginForm("AddShooter", "TeamRegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -24,7 +11,7 @@
     <fieldset>
         <legend>Add shooter for <i>@ViewBag.CompetitionName</i></legend>
 
-        @Html.Partial("_CreateEditIndividualRegisterCardFields")
+        @Html.Partial("_CreateEditRegisterCardFields")
 
         <div class="form-actions">
             <input type="submit" value="Save" class="btn btn-primary" />

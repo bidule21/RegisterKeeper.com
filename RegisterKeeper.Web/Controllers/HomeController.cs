@@ -36,7 +36,7 @@ namespace RegisterKeeper.Web.Controllers
 
 			//foreach (var individualCompetition in viewModel.CompletedCompetitions.OfType<IndividualCompetition>())
 			//{
-			//	_db.Entry(individualCompetition).Collection(c => c.IndividualRegisterCards).Query().Include(s => s.Shoots.Select(shoot => shoot.ScoringShots)).Load();
+			//	_db.Entry(individualCompetition).Collection(c => c.RegisterCards).Query().Include(s => s.Shoots.Select(shoot => shoot.ScoringShots)).Load();
 			//}
 			
 

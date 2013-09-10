@@ -1,0 +1,46 @@
+﻿@model RegisterKeeper.Web.ViewModels.SighterConversionViewModel
+
+@{
+    ViewBag.Title = "Convert Sighters";
+}
+
+<strong>@Model.CompetitionName</strong>
+<table style="width: 100%">
+    <tr>
+        <td>
+            @Model.CompetitorName
+        </td>
+        <td style="text-align: right; font-style: italic">
+            @Model.Distance.DisplayValue()
+        </td>
+    </tr>
+</table>
+
+<div style="text-align: center; padding-top: 5px;">
+    <strong>Convert Sighters?</strong>
+</div>
+
+<table style="padding: 2px 0; margin-left: auto; margin-right: auto">
+    <tr>
+        @foreach (var sighter in Model.SightingShots)
+        {
+            <td style="padding: 0 15px; width: 80px">
+                <span style="position: absolute; z-index: 1; font-size: 75%; font-weight: bold; width: 80px; text-align: center; padding-top: 14px; padding-bottom: 2px; border-bottom: 1px solid #aaa">S@(sighter.ShotNumber)
+                </span>
+                <input id="ScoreDisplay" type="text" style="font-size: 200%; text-align: center; font-weight: bold; margin-top: 14px" value="@sighter.Score.DisplayValue()" />
+            </td>    
+        }
+    </tr>
+</table>
+
+@if (Model.SightingShots.Count == 2)
+{
+    @Html.ActionLink("Convert Both", "ConvertBoth", new { shootId = Model.ShootId }, new { data_role = "button", data_transition = "slide" })
+    @Html.ActionLink("Convert Second", "ConvertSecondOrOnly", new { shootId = Model.ShootId }, new { data_role = "button", data_transition = "slide" })
+    @Html.ActionLink("Convert None", "Scorer", new { shotId = Model.NextShotId }, new { data_role = "button", data_transition = "slide" })
+}
+else
+{
+    @Html.ActionLink("Convert", "ConvertSecondOrOnly", new { shootId = Model.ShootId }, new { data_role = "button", data_transition = "slide" })
+    @Html.ActionLink("Don't Convert", "Scorer", new { shotId = Model.NextShotId }, new { data_role = "button", data_transition = "slide" })
+}

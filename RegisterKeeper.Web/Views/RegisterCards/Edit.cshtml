@@ -1,0 +1,14 @@
+﻿@model RegisterKeeper.Web.Models.RegisterCard
+
+@{
+    ViewBag.Title = "Edit";
+
+    ViewBag.FormAction = "Edit";
+    ViewBag.SubmitButtonText = "Save";
+}
+
+@Html.Partial("_CreateEdit", Model)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

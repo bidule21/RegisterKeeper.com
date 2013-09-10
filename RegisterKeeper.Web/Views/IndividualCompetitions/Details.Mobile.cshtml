@@ -11,14 +11,14 @@
 
 <h3>Register Cards</h3>
 <ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..">
-    @foreach (var registerCard in Model.IndividualRegisterCards)
+    @foreach (var registerCard in Model.RegisterCards)
     {
         <li>
-            @Html.ActionLink(registerCard.CompetitorName, "Details", "IndividualRegisterCards", new { id = registerCard.Id }, null)
+            @Html.ActionLink(registerCard.CompetitorName, "Details", "RegisterCards", new { id = registerCard.Id }, null)
         </li>
     }
 </ol>
 
-@Html.ActionLink("Add Register Card", "CreateForIndividualCompetition", "IndividualRegisterCards", new { individualCompetitionId = Model.Id },
+@Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id },
 new { data_role = "button", data_inline = "true", data_icon = "plus" })
 @*data_mini = "true", *@

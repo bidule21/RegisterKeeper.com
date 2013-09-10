@@ -28,15 +28,15 @@
         <h4 class="fieldset-sublegend">Shooters</h4>
 
         @{ var i = 0; }
-        @foreach (var individualRegisterCard in Model.IndividualRegisterCards)
+        @foreach (var RegisterCard in Model.RegisterCards)
         {
-            ViewBag.FormFieldsPrefix = "IndividualRegisterCards[" + i + "].";
+            ViewBag.FormFieldsPrefix = "RegisterCards[" + i + "].";
             i += 1;
 
-            @Html.Hidden((string)ViewBag.FormFieldsPrefix + "Id", individualRegisterCard.Id)
+            @Html.Hidden((string)ViewBag.FormFieldsPrefix + "Id", RegisterCard.Id)
             @Html.Hidden((string)ViewBag.FormFieldsPrefix + "TeamRegisterCardId", Model.Id)
 
-            @Html.Partial("_CreateEditIndividualRegisterCardFields", individualRegisterCard)
+            @Html.Partial("_CreateEditRegisterCardFields", RegisterCard)
             <hr />
         }
 

@@ -1,0 +1,103 @@
+﻿@model RegisterKeeper.Web.ViewModels.ScorerViewModel
+
+@{
+    ViewBag.PageId = "Scorer";
+    ViewBag.Title = "Scorer";
+}
+
+<style>
+    .v-five-four-row .ui-btn-inner
+    {
+        font-size: 20px;
+    }
+</style>
+
+<strong>@Model.CompetitionName</strong>
+<table style="width: 100%">
+    <tr>
+        <td>
+            @Model.CompetitorName
+        </td>
+        <td style="text-align: right; font-style: italic">
+            @Model.Distance.DisplayValue()
+        </td>
+    </tr>
+</table>
+
+<table style="width: 100%; padding: 7px 0">
+    <tr>
+        <td>
+            @if (!Model.PreviousShotId.HasValue)
+            {
+                @Html.ActionLink("Back", "Details", "RegisterCards", new { id = Model.RegisterCardId },
+                    new { data_role = "button", data_icon = "arrow-l", data_iconpos = "notext", style = "margin: 0 auto" })
+            }
+            else
+            {
+                @Html.ActionLink("Previous", "Scorer", new { shotId = Model.PreviousShotId.Value },
+                    new { data_role = "button", data_icon = "arrow-l", data_iconpos = "notext", data_transition = "slide", data_direction = "reverse", style = "margin: 0 auto" })
+            }
+        </td>
+        <td style="padding: 0 20px 0 20px; width: 120px">
+            <span style="position: absolute; z-index: 1; font-size: 75%; font-weight: bold; width: 120px; text-align: center; padding-top: 14px; padding-bottom: 2px; border-bottom: 1px solid #aaa">
+                @(Model.Sighter ? "S" : String.Empty)@Model.ShotNumber
+            </span>
+            <input id="ScoreDisplay" type="text" style="font-size: 400%; text-align: center; font-weight: bold; margin-top: 20px; padding: 0" value="@Model.Score.DisplayValue()" />
+        </td>
+        <td>
+            @if (Model.FinalSighter)
+            {
+                @Html.ActionLink("Next", "SighterConversion", new { shootId = Model.ShootId },
+                    new { data_role = "button", data_icon = "arrow-r", data_iconpos = "notext", data_transition = "slide", style = "margin: 0 auto" })
+            }
+            else if (!Model.NextShotId.HasValue)
+            {
+                @Html.ActionLink("Next", "Details", "RegisterCards", new { id = Model.RegisterCardId },
+                    new { data_role = "button", data_icon = "arrow-r", data_iconpos = "notext", style = "margin: 0 auto" })
+            }
+            else
+            {
+                @Html.ActionLink("Next", "Scorer", new { shotId = Model.NextShotId.Value },
+                    new { data_role = "button", data_icon = "arrow-r", data_iconpos = "notext", data_transition = "slide", style = "margin: 0 auto" })
+            }
+        </td>
+    </tr>
+</table>
+
+<div id="ScorerValueButtons">
+    <div class="ui-grid-b v-five-four-row">
+        <div class="ui-block-a">
+            <input type="button" value="V" />
+        </div>
+        <div class="ui-block-b">
+            <input type="button" value="5" />
+        </div>
+        <div class="ui-block-c">
+            <input type="button" value="4" />
+        </div>
+    </div>
+    <div class="ui-grid-c">
+        <div class="ui-block-a">
+            <input type="button" value="3" />
+        </div>
+        <div class="ui-block-b">
+            <input type="button" value="2" />
+        </div>
+        <div class="ui-block-c">
+            <input type="button" value="1" />
+        </div>
+        <div class="ui-block-d">
+            <input type="button" value="0" />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("pagechange", function (event, ui) {
+        if (ui.toPage[0].id === "Scorer") {
+            $("#ScorerValueButtons input", ui.toPage).on("click", function () {
+                $("#ScoreDisplay", ui.toPage).val($(this).val());
+            });
+        }
+    });
+</script>

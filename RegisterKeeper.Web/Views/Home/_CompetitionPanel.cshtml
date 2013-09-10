@@ -27,14 +27,14 @@
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
 
     @{ var individualCompetition = Model as IndividualCompetition; }
-    @if (individualCompetition != null && individualCompetition.IndividualRegisterCards != null && individualCompetition.IndividualRegisterCards.Count > 0)
+    @if (individualCompetition != null && individualCompetition.RegisterCards != null && individualCompetition.RegisterCards.Count > 0)
     {
         <text>
             <div class="summary-results">
                 <table class="table table-condensed">
                 
                     @{ var place = 1; }
-                    @foreach (var registerCard in individualCompetition.IndividualRegisterCards.OrderByDescending(c => c.TotalScore.Points).Take(3))
+                    @foreach (var registerCard in individualCompetition.RegisterCards.OrderByDescending(c => c.TotalScore.Points).Take(3))
                     {
                         <tr>
                             <td>@place</td>

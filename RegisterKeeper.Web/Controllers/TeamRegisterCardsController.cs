@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using RegisterKeeper.Web.Models;
@@ -68,7 +67,7 @@ namespace RegisterKeeper.Web.Controllers
 				return HttpNotFound();
 			}
 			var competition = _db.Competitions.Find(teamregistercard.TeamCompetitionId);
-			IndividualRegisterCardsController.AddCompetitionDetailsToViewBag(competition, ViewBag);
+			RegisterCardsController.AddCompetitionDetailsToViewBag(competition, ViewBag);
 			return View(teamregistercard);
 		}
 
@@ -81,10 +80,10 @@ namespace RegisterKeeper.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				foreach (var individualRegisterCard in teamregistercard.IndividualRegisterCards)
+				foreach (var firer in teamregistercard.Firers)
 				{
 
-					foreach (var shoot in individualRegisterCard.Shoots)
+					foreach (var shoot in firer.Shoots)
 					{
 						foreach (var sightingShot in shoot.Sighters)
 						{
@@ -99,9 +98,9 @@ namespace RegisterKeeper.Web.Controllers
 					}
 
 					// Update entity
-					_db.Entry(individualRegisterCard).State = EntityState.Modified;
+					_db.Entry(firer).State = EntityState.Modified;
 
-					foreach (var shoot in individualRegisterCard.Shoots)
+					foreach (var shoot in firer.Shoots)
 					{
 						_db.Entry(shoot).State = shoot.Id == default(int) ? EntityState.Added : EntityState.Modified;
 					}
@@ -146,20 +145,20 @@ namespace RegisterKeeper.Web.Controllers
 			ViewBag.RouteValues = new { teamRegistercardId };
 			
 			var teamRegisterCard = _db.TeamRegisterCards.Find(teamRegistercardId);
-			IndividualRegisterCardsController.AddCompetitionDetailsToViewBag(teamRegisterCard.TeamCompetition, ViewBag);
+			RegisterCardsController.AddCompetitionDetailsToViewBag(teamRegisterCard.TeamCompetition, ViewBag);
 			ViewBag.TeamRegisterCardId = teamRegistercardId;
 
 			return View();
 		}
 
 		[HttpPost]
-		public ActionResult AddShooter(IndividualRegisterCard individualRegisterCard)
+		public ActionResult AddShooter(TeamCompetitor teamCompetitor)
 		{
 			if (ModelState.IsValid)
 			{
-				_db.IndividualRegisterCards.Add(individualRegisterCard);
+				_db.TeamCompetitors.Add(teamCompetitor);
 				_db.SaveChanges();
-				var teamRegisterCard = _db.TeamRegisterCards.Find(individualRegisterCard.TeamRegisterCardId);
+				var teamRegisterCard = _db.TeamRegisterCards.Find(teamCompetitor.TeamRegisterCardId);
 				return RedirectToAction("Details", "TeamCompetitions", new { id = teamRegisterCard.TeamCompetitionId });
 			}
 

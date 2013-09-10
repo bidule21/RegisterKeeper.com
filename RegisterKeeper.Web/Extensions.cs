@@ -67,9 +67,14 @@ namespace RegisterKeeper.Web
 		//	return score.HasValue ? score.Value.DisplayValue() : String.Empty;
 		//}
 
-		public static string DisplayValue(this Score score)
+		public static string DisplayValue(this Score? score)
 		{
-			switch (score)
+			if (score == null)
+			{
+				return String.Empty;
+			}
+
+			switch (score.Value)
 			{
 				case Score.Zero:
 					return "0";

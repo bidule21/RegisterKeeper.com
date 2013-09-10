@@ -11,14 +11,14 @@ namespace RegisterKeeper.Web.Controllers
 {
     public class IndividualCompetitionsController : Controller
     {
-        private RegisterKeeperDb db = new RegisterKeeperDb();
+        private readonly RegisterKeeperDb _db = new RegisterKeeperDb();
 
         //
         // GET: /IndividualCompetition/
 
         public ActionResult Index()
         {
-            return View(db.IndividualCompetitions.ToList());
+            return View(_db.IndividualCompetitions.ToList());
         }
 
         //
@@ -26,7 +26,7 @@ namespace RegisterKeeper.Web.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            IndividualCompetition individualcompetition = db.IndividualCompetitions.Find(id);
+            IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
             if (individualcompetition == null)
             {
                 return HttpNotFound();
@@ -51,8 +51,8 @@ namespace RegisterKeeper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Competitions.Add(individualcompetition);
-                db.SaveChanges();
+                _db.Competitions.Add(individualcompetition);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -64,7 +64,7 @@ namespace RegisterKeeper.Web.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            IndividualCompetition individualcompetition = db.IndividualCompetitions.Find(id);
+            IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
             if (individualcompetition == null)
             {
                 return HttpNotFound();
@@ -81,8 +81,8 @@ namespace RegisterKeeper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(individualcompetition).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(individualcompetition).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(individualcompetition);
@@ -93,7 +93,7 @@ namespace RegisterKeeper.Web.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            IndividualCompetition individualcompetition = db.IndividualCompetitions.Find(id);
+            IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
             if (individualcompetition == null)
             {
                 return HttpNotFound();
@@ -108,15 +108,15 @@ namespace RegisterKeeper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IndividualCompetition individualcompetition = db.IndividualCompetitions.Find(id);
-            db.Competitions.Remove(individualcompetition);
-            db.SaveChanges();
+            IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
+            _db.Competitions.Remove(individualcompetition);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
     }

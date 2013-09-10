@@ -1,5 +1,5 @@
 ﻿@using RegisterKeeper.Web.Models
-@model IndividualRegisterCard
+@model RegisterCard
 
 @using (Html.BeginForm((string)ViewBag.FormAction, ViewContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -11,11 +11,11 @@
     <fieldset>
         <legend>Add register card for <i>@ViewBag.CompetitionName</i></legend>
 
-        @Html.Partial("_CreateEditIndividualRegisterCardFields")
+        @Html.Partial("_CreateEditRegisterCardFields")
 
         <div class="form-actions">
             <input type="submit" value="@ViewBag.SubmitButtonText" class="btn btn-primary" />
-            @Html.ActionLink("Cancel", "Details", "IndividualCompetition", new { Id = (int)ViewBag.CompetitionId }, new { @class = "btn" })
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { Id = (int)ViewBag.CompetitionId }, new { @class = "btn" })
         </div>
     </fieldset>
 }

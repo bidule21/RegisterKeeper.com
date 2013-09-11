@@ -5,6 +5,8 @@
     ViewBag.Title = "Scorer";
 }
 
+@Html.HiddenFor(m => m.ShotId)
+
 <style>
     .v-five-four-row .ui-btn-inner
     {
@@ -42,7 +44,7 @@
             <span style="position: absolute; z-index: 1; font-size: 75%; font-weight: bold; width: 120px; text-align: center; padding-top: 14px; padding-bottom: 2px; border-bottom: 1px solid #aaa">
                 @(Model.Sighter ? "S" : String.Empty)@Model.ShotNumber
             </span>
-            <input id="ScoreDisplay" type="text" style="font-size: 400%; text-align: center; font-weight: bold; margin-top: 20px; padding: 0" value="@Model.Score.DisplayValue()" />
+            <input class="ScoreDisplay" type="text" style="font-size: 400%; text-align: center; font-weight: bold; margin-top: 20px; padding: 0" value="@Model.Score.DisplayValue()" />
         </td>
         <td>
             @if (Model.FinalSighter)
@@ -64,7 +66,7 @@
     </tr>
 </table>
 
-<div id="ScorerValueButtons">
+<div class="ScorerValueButtons">
     <div class="ui-grid-b v-five-four-row">
         <div class="ui-block-a">
             <input type="button" value="V" />
@@ -93,11 +95,5 @@
 </div>
 
 <script>
-    $(document).on("pagechange", function (event, ui) {
-        if (ui.toPage[0].id === "Scorer") {
-            $("#ScorerValueButtons input", ui.toPage).on("click", function () {
-                $("#ScoreDisplay", ui.toPage).val($(this).val());
-            });
-        }
-    });
+   
 </script>

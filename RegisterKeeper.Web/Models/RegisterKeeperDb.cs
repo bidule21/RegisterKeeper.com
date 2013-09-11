@@ -10,6 +10,20 @@ namespace RegisterKeeper.Web.Models
 			: base("name=DefaultConnection")
 		{ }
 
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			//modelBuilder.Entity<Shoot>().HasOptional(u => u.BillingAddress)
+			//						   .WithRequired();
+
+			//modelBuilder.Entity<Shipment>().HasRequired(u => u.DeliveryAddress)
+			//							   .WithOptional();
+
+			//modelBuilder.Entity<Shoot>().HasKey(e => e.Id);
+			//modelBuilder.Entity<Shot>().HasRequired(e => e.Shoot).WithRequiredDependent();
+
+		}
+
+
 		public DbSet<Competition> Competitions { get; set; }
 		public DbSet<IndividualCompetition> IndividualCompetitions { get; set; }
 		public DbSet<RegisterCard> RegisterCards { get; set; }
@@ -58,7 +72,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x900yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -84,7 +98,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x900yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -110,7 +124,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x900yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -171,7 +185,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -202,7 +216,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -233,7 +247,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -264,7 +278,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -328,7 +342,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.V},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -343,7 +357,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -358,7 +372,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.V},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -383,7 +397,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																	new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -398,7 +412,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.V},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -413,7 +427,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.V},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -438,7 +452,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -453,7 +467,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -468,7 +482,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ShotNumber = 1, Score = Score.V},
 																	new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -506,7 +520,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -537,7 +551,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -568,7 +582,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -623,7 +637,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -649,7 +663,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
@@ -675,7 +689,7 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															ScoringShots = new List<ScoringShot>
+															Shots = new List<Shot>
 																{
 																	new ScoringShot{ ShotNumber = 1, Score = Score.V },
 																	new ScoringShot{ ShotNumber = 2, Score = Score.Five },
@@ -720,16 +734,13 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x300yds,
-															Sighters = new List<SightingShot>
+															Shots = new List<Shot>
 																{
-																	new SightingShot{ ShotNumber = 1 },
-																	new SightingShot{ ShotNumber = 2 }
-																},
-															ScoringShots = new List<ScoringShot>
-																{
-																	new ScoringShot{ ShotNumber = 1 },
-																	new ScoringShot{ ShotNumber = 2 },
-																	new ScoringShot{ ShotNumber = 3 },
+																	new SightingShot{ ShotNumber = 1, Score = Score.Five, Converted = true},
+																	new SightingShot{ ShotNumber = 2, Score = Score.V, Converted = true},
+																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.Four },
 																	new ScoringShot{ ShotNumber = 4 },
 																	new ScoringShot{ ShotNumber = 5 },
 																	new ScoringShot{ ShotNumber = 6 },
@@ -742,13 +753,10 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x500yds,
-															Sighters = new List<SightingShot>
+															Shots = new List<Shot>
 																{
 																	new SightingShot{ ShotNumber = 1 },
-																	new SightingShot{ ShotNumber = 2 }
-																},
-															ScoringShots = new List<ScoringShot>
-																{
+																	new SightingShot{ ShotNumber = 2 },
 																	new ScoringShot{ ShotNumber = 1 },
 																	new ScoringShot{ ShotNumber = 2 },
 																	new ScoringShot{ ShotNumber = 3 },
@@ -764,13 +772,77 @@ namespace RegisterKeeper.Web.Models
 													new Shoot
 														{
 															Distance = Distance.x600yds,
-															Sighters = new List<SightingShot>
+															Shots = new List<Shot>
 																{
 																	new SightingShot{ ShotNumber = 1 },
-																	new SightingShot{ ShotNumber = 2 }
-																},
-															ScoringShots = new List<ScoringShot>
+																	new SightingShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 1 },
+																	new ScoringShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 3 },
+																	new ScoringShot{ ShotNumber = 4 },
+																	new ScoringShot{ ShotNumber = 5 },
+																	new ScoringShot{ ShotNumber = 6 },
+																	new ScoringShot{ ShotNumber = 7 },
+																	new ScoringShot{ ShotNumber = 8 },
+																	new ScoringShot{ ShotNumber = 9 },
+																	new ScoringShot{ ShotNumber = 10 }
+																}
+														}
+												}
+										},
+									new RegisterCard
+										{
+											CompetitorName = "Another Competitor",
+											CompetitorIndexNumber = 456,
+											CompetitorClass = "A",
+											CompetitorClub = "Test Club",
+											Shoots = new List<Shoot>
+												{
+													new Shoot
+														{
+															Distance = Distance.x300yds,
+															Shots = new List<Shot>
 																{
+																	new SightingShot{ ShotNumber = 1, Score = Score.Five, Converted = true},
+																	new SightingShot{ ShotNumber = 2, Score = Score.V, Converted = true},
+																	new ScoringShot{ ShotNumber = 1, Score = Score.Five },
+																	new ScoringShot{ ShotNumber = 2, Score = Score.V },
+																	new ScoringShot{ ShotNumber = 3, Score = Score.Five },
+																	new ScoringShot{ ShotNumber = 4 },
+																	new ScoringShot{ ShotNumber = 5 },
+																	new ScoringShot{ ShotNumber = 6 },
+																	new ScoringShot{ ShotNumber = 7 },
+																	new ScoringShot{ ShotNumber = 8 },
+																	new ScoringShot{ ShotNumber = 9 },
+																	new ScoringShot{ ShotNumber = 10 }
+																}
+														},
+													new Shoot
+														{
+															Distance = Distance.x500yds,
+															Shots = new List<Shot>
+																{
+																	new SightingShot{ ShotNumber = 1 },
+																	new SightingShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 1 },
+																	new ScoringShot{ ShotNumber = 2 },
+																	new ScoringShot{ ShotNumber = 3 },
+																	new ScoringShot{ ShotNumber = 4 },
+																	new ScoringShot{ ShotNumber = 5 },
+																	new ScoringShot{ ShotNumber = 6 },
+																	new ScoringShot{ ShotNumber = 7 },
+																	new ScoringShot{ ShotNumber = 8 },
+																	new ScoringShot{ ShotNumber = 9 },
+																	new ScoringShot{ ShotNumber = 10 }
+																}
+														},
+													new Shoot
+														{
+															Distance = Distance.x600yds,
+															Shots = new List<Shot>
+																{
+																	new SightingShot{ ShotNumber = 1 },
+																	new SightingShot{ ShotNumber = 2 },
 																	new ScoringShot{ ShotNumber = 1 },
 																	new ScoringShot{ ShotNumber = 2 },
 																	new ScoringShot{ ShotNumber = 3 },
@@ -834,7 +906,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.V },
@@ -851,7 +923,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -868,7 +940,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -892,7 +964,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -909,7 +981,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -926,7 +998,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -950,7 +1022,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.V },
@@ -967,7 +1039,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -984,7 +1056,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1008,7 +1080,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1025,7 +1097,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1042,7 +1114,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1066,7 +1138,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1083,7 +1155,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1100,7 +1172,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1124,7 +1196,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.V },
 																					new ScoringShot { ShotNumber = 2, Score = Score.V },
@@ -1141,7 +1213,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1158,7 +1230,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1182,7 +1254,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1199,7 +1271,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1216,7 +1288,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1240,7 +1312,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1257,7 +1329,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1274,7 +1346,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1307,7 +1379,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.V },
@@ -1324,7 +1396,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.V },
@@ -1341,7 +1413,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1365,7 +1437,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1382,7 +1454,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1399,7 +1471,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1423,7 +1495,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1440,7 +1512,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1457,7 +1529,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1481,7 +1553,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1498,7 +1570,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1515,7 +1587,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1539,7 +1611,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1556,7 +1628,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1573,7 +1645,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1597,7 +1669,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1614,7 +1686,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1631,7 +1703,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1655,7 +1727,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1672,7 +1744,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Five },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1689,7 +1761,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1713,7 +1785,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x300yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1730,7 +1802,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x500yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Five },
@@ -1747,7 +1819,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x600yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot { ShotNumber = 1, Score = Score.Four },
 																					new ScoringShot { ShotNumber = 2, Score = Score.Four },
@@ -1795,7 +1867,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1812,7 +1884,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1836,7 +1908,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1853,7 +1925,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1877,7 +1949,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1894,7 +1966,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1918,7 +1990,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.V},
 																					new ScoringShot{ShotNumber = 2, Score = Score.V},
@@ -1935,7 +2007,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1959,7 +2031,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -1976,7 +2048,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2000,7 +2072,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2017,7 +2089,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2041,7 +2113,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2058,7 +2130,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2082,7 +2154,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2099,7 +2171,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2123,7 +2195,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2140,7 +2212,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2164,7 +2236,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2181,7 +2253,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2205,7 +2277,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Five},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Five},
@@ -2222,7 +2294,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2246,7 +2318,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x900yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2263,7 +2335,7 @@ namespace RegisterKeeper.Web.Models
 																	new Shoot
 																		{
 																			Distance = Distance.x1000yds,
-																			ScoringShots = new List<ScoringShot>
+																			Shots = new List<Shot>
 																				{
 																					new ScoringShot{ShotNumber = 1, Score = Score.Four},
 																					new ScoringShot{ShotNumber = 2, Score = Score.Four},
@@ -2285,9 +2357,8 @@ namespace RegisterKeeper.Web.Models
 						}
 				};
 
-
-
 			competitions.ForEach(x => context.Competitions.Add(x));
+			context.SaveChanges();
 		}
 
 		private static DateTime GetDateTimeInCurrentWeek(DayOfWeek dayOfWeek, int hour, int minute, int weekOffset = 0)

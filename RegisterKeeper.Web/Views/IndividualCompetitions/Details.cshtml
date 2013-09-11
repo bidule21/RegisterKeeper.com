@@ -13,9 +13,7 @@
 </style>
 
 <div class="clearfix">
-    @*<div class="pull-right">*@
     @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id }, new { @class = "btn btn-add-register-card" })
-    @*</div>*@
     <h2>@Html.DisplayFor(model => model.Name)</h2>
     @(Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
@@ -23,10 +21,10 @@
 
 <div id="Grid">
     @{ var position = 1;}
-    @foreach (var registerCard in Model.RegisterCards)
+    @foreach (var registerCard in Model.RegisterCards.OrderByDescending(r => r.SortOrder))
     {
-        <div class="mix" data-pointsoff="@(registerCard.SortOrder)">
-            <div class="register-card-container" id="registerCard@(registerCard.Id)">
+        <div class="mix" id="RegisterCardId-@registerCard.Id" data-sortorder="@(registerCard.SortOrder)" >
+            <div class="register-card-container">
 
                 @* On grid sort, position value should fade out, update to new number and fade in? *@
                 <div class="position-wrapper-outer">
@@ -42,7 +40,7 @@
                             @registerCard.CompetitorName
                             <span class="competitor-details">@registerCard.CompetitorClass - @registerCard.CompetitorClub</span>
                         </h4>
-                        
+
                         @* TODO: "Brought forward" and "points off"*@
 
                     </div>
@@ -67,41 +65,20 @@
                                 <td>@distance.DisplayValue()</td>
                                 @foreach (var i in Enumerable.Range(1, Model.NumberOfSightingShots))
                                 {
-                                    <td class="@(i == 1 ? "border-left" : null)">
-                                        @{
-                                    if (shoot != null)
-                                    {
-                                        var shot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
-                                        if (shot != null)
-                                        {
-                                            <text>@shot.Score.DisplayValue()</text>
-                                        }
-                                    }
-                                        }
+                                    var shot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
+                                    <td class="@(i == 1 ? "border-left" : null)" id="shotId-@shot.Id">
+                                        @shot.Score.DisplayValue()
                                     </td>
                                 }
                                 @foreach (var i in Enumerable.Range(1, Model.NumberOfScoringShots))
                                 {
-                                    <td class="@(i == 1 ? "border-left" : null)">
-                                        @{
-                                    if (shoot != null)
-                                    {
-                                        var shot = shoot.ScoringShots.SingleOrDefault(ss => ss.ShotNumber == i);
-                                        if (shot != null)
-                                        {
-                                            <text>@shot.Score.DisplayValue()</text>
-                                        }
-                                    }
-                                        }
+                                    var shot = shoot.ScoringShots.SingleOrDefault(ss => ss.ShotNumber == i);
+                                    <td class="@(i == 1 ? "border-left" : null)" id="shotId-@shot.Id">
+                                        @shot.Score.DisplayValue()
                                     </td>
                                 }
-                                <td class="border-left">
-                                    @{
-                                if (shoot != null)
-                                {
-                                        <text>@shoot.TotalScore.ToString()</text>
-                                }
-                                    }
+                                <td class="border-left" id="ShootId-@shoot.Id-TotalScore">
+                                    @shoot.TotalScore.ToString()
                                 </td>
                             </tr>
                         }
@@ -112,7 +89,7 @@
                     {
                         <div class="register-card-grand-total">
                             Grand Total:
-                            <div class="register-card-grand-total-value">
+                            <div class="register-card-grand-total-value" id="RegisterCardId-@registerCard.Id-TotalScore">
                                 @registerCard.TotalScore
                             </div>
                         </div>    
@@ -137,60 +114,37 @@
 @section scripts
 {
     <script src="~/Scripts/jquery.mixitup.js"></script>
-    @*<script src="~/Scripts/jquery.signalR-1.1.2.js"></script>*@
-    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
-    @*<script src="~/signalr/hubs"></script>*@
+    <script src="~/Scripts/jquery.signalR-1.1.3.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/signalr/hubs"></script>
     <script>
 
-        function PointsOffFromScore(score) {
-            if (score == "V") {
-                return 0;
-            }
-            return 5 - parseInt(score, 10);
-        }
-
         $(function () {
-            //var hub = $.connection.queensFinalHub;
+            var hub = $.connection.registerKeeperHub;
 
-            //hub.client.RegisterShot = function (registerCardId, distance, shotNumber, score, totalPointsOff, x900Total, x1000Total, grandTotal) {
+            hub.client.ScoreUpdate = function (shotId, score) {
+                $("#shotId-" + shotId).html(score);
+                $("#shotId-" + shotId).stop(true, true).effect("highlight", null, 5000);
+            };
 
-            //    // Display shot score
-            //    var cell = $('#registerCard' + registerCardId + distance + 'shot' + shotNumber);
-            //    cell.html(score);
-            //    cell.effect("highlight", null, 5000);
+            hub.client.ShootTotalScoreUpdate = function (shootId, score) {
+                $("#ShootId-" + shootId + "-TotalScore").html(score);
+            };
 
-            //    // Set x900 total display
-            //    cell = $('#registerCard' + registerCardId + 'x900Total');
-            //    cell.html(x900Total);
+            hub.client.RegisterCardTotalScoreUpdate = function (registerCardId, score) {
+                $("#RegisterCardId-" + registerCardId + "-TotalScore").html(score);
+            };
 
-            //    // Set x1000 total display
-            //    cell = $('#registerCard' + registerCardId + 'x1000Total');
-            //    cell.html(x1000Total);
+            hub.client.RegisterCardSortOrderUpdate = function(registerCardId, sortorder) {
+                $('#RegisterCardId-' + registerCardId).attr("data-sortorder", sortorder);
+                $('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
+            };
 
-            //    // Set the Grand Total display
-            //    cell = $('#registerCard' + registerCardId + 'GrandTotal');
-            //    cell.html(grandTotal);
-
-            //    // Set points off display
-            //    var pointsOff = $('#registerCard' + registerCardId + 'PointsOff');
-            //    pointsOff.html(totalPointsOff);
-
-            //    // Set the data-pointsoff attribute
-            //    var pointsOffAttr = $('#registerCard' + registerCardId);
-            //    pointsOffAttr.attr("data-pointsoff", totalPointsOff);
-
-            //    $('#Grid').mixitup('sort', ['data-pointsoff', 'desc']);
-            //};
-
-            //$.connection.hub.start();
+            $.connection.hub.start();
 
             $('#Grid').mixitup();
 
-            $('#Grid').mixitup('sort', ['data-pointsoff', 'desc']);
-
-            //$('#btnSort').click(function () {
-            //    $('#Grid').mixitup('sort', ['data-pointsoff', 'desc']);
-            //});
+            //$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
 
         });
     </script>

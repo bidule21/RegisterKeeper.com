@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -19,6 +15,9 @@ namespace RegisterKeeper.Web
 	{
 		protected void Application_Start()
 		{
+			// Register the default hubs route: ~/signalr
+			RouteTable.Routes.MapHubs();
+
 			AreaRegistration.RegisterAllAreas();
 
 			WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -30,7 +29,7 @@ namespace RegisterKeeper.Web
 			Database.SetInitializer(new RegisterKeeperDbInitialiser());
 
 			ModelBinders.Binders.Add(typeof(Distance), new EnumFlagsModelBinder());
-			
+
 			BundleMobileConfig.RegisterBundles(BundleTable.Bundles);
 		}
 	}

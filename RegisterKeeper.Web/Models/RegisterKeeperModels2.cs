@@ -64,7 +64,7 @@ namespace RegisterKeeper.Web.Models
 		[Display(Name = "Club")]
 		public string CompetitorClub { get; set; }
 
-		public int? IndividualCompetitionId { get; set; }
+		public int IndividualCompetitionId { get; set; }
 		public virtual IndividualCompetition IndividualCompetition { get; set; }
 
 		public int SortOrder
@@ -72,7 +72,9 @@ namespace RegisterKeeper.Web.Models
 			get
 			{
 				// TODO: Implementation for sort order on RegisterCard
-				return 0;
+				//return 0;
+
+				return TotalScore.Points * (int)Math.Pow(10, 3) + TotalScore.VBulls;
 			}
 		}
 	}
@@ -132,9 +134,11 @@ namespace RegisterKeeper.Web.Models
 		public int Id { get; set; }
 		public Distance Distance { get; set; }
 		[ForeignKey("ShootId")]
-		public virtual List<SightingShot> Sighters { get; set; }
-		[ForeignKey("ShootId")]
-		public virtual List<ScoringShot> ScoringShots { get; set; }
+		public virtual List<Shot> Shots { get; set; }
+
+		public IEnumerable<SightingShot> Sighters { get { return Shots.OfType<SightingShot>(); } }
+		public IEnumerable<ScoringShot> ScoringShots { get { return Shots.OfType<ScoringShot>(); } }
+
 
 		public int? RegisterCardId { get; set; }
 		public virtual RegisterCard RegisterCard { get; set; }
@@ -152,7 +156,7 @@ namespace RegisterKeeper.Web.Models
 
 		public SightingShot FirstSighter { get { return Sighters.SingleOrDefault(s => s.ShotNumber == 1); } }
 		public SightingShot SecondSighter { get { return Sighters.SingleOrDefault(s => s.ShotNumber == 2); } }
-		public SightingShot FinalSighter { get { return Sighters.Single(s => s.ShotNumber == Sighters.Count); } }
+		public SightingShot FinalSighter { get { return Sighters.Single(s => s.ShotNumber == Sighters.Count()); } }
 		public ScoringShot FirstToCount { get { return ScoringShots.SingleOrDefault(s => s.ShotNumber == 1); } }
 		public ScoringShot SecondToCount { get { return ScoringShots.SingleOrDefault(s => s.ShotNumber == 2); } }
 
@@ -248,6 +252,8 @@ namespace RegisterKeeper.Web.Models
 			}
 		}
 		public int ShootId { get; set; }
+
+		public virtual Shoot Shoot { get; set; }
 	}
 
 	public class SightingShot : Shot
@@ -296,10 +302,11 @@ namespace RegisterKeeper.Web.Models
 		public int Points { get; set; }
 		public int VBulls { get; set; }
 
-		public TotalScore(List<ScoringShot> scoringShots)
+		public TotalScore(IEnumerable<ScoringShot> scoringShots)
 		{
-			Points = scoringShots.Sum(s => (s.Score == Score.V ? 5 : (int)(s.Score ?? 0)));
-			VBulls = scoringShots.Count(s => s.Score == Score.V);
+			var scoringShotList = scoringShots.ToList();
+			Points = scoringShotList.Sum(s => (s.Score == Score.V ? 5 : (int)(s.Score ?? 0)));
+			VBulls = scoringShotList.Count(s => s.Score == Score.V);
 		}
 
 		public TotalScore(List<TotalScore> totalScores)

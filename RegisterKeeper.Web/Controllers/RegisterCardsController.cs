@@ -54,11 +54,8 @@ namespace RegisterKeeper.Web.Controllers
 				return RedirectToAction("Details", "IndividualCompetitions", new { id = registerCard.IndividualCompetitionId });
 			}
 
-			if (registerCard.IndividualCompetitionId != null)
-			{
-				var competition = _db.Competitions.Find(registerCard.IndividualCompetitionId.Value);
-				AddCompetitionDetailsToViewBag(competition, ViewBag);
-			}
+			var competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
+			AddCompetitionDetailsToViewBag(competition, ViewBag);
 
 			return View();
 		}
@@ -74,11 +71,8 @@ namespace RegisterKeeper.Web.Controllers
 				return HttpNotFound();
 			}
 
-			if (registerCard.IndividualCompetitionId != null)
-			{
-				var competition = _db.Competitions.Find(registerCard.IndividualCompetitionId.Value);
-				AddCompetitionDetailsToViewBag(competition, ViewBag);
-			}
+			var competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
+			AddCompetitionDetailsToViewBag(competition, ViewBag);
 
 			return View(registerCard);
 		}

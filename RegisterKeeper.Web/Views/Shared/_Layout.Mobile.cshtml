@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/Mobile/css", "~/Content/jquery-mobile-css")
     @Scripts.Render("~/bundles/jquery", "~/bundles/jquerymobile")
+
     <script>
         //$(document).ready(function () {
         //    $.mobile.ajaxEnabled = false;
@@ -38,6 +39,31 @@
 
         @Html.Partial("_ViewSwitcher")
     </div>
+    <script src="~/Scripts/jquery.signalR-1.1.3.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        var hub;
+        $(function () {
+            // Reference the auto-generated proxy for the hub.  
+            hub = $.connection.registerKeeperHub;
+
+            // Start the connection.
+            $.connection.hub.start();
+        });
+        
+        $(document).on("pageinit", function(event) {
+            (function(target) {
+                $(".ScorerValueButtons input", target).on("click", function () {
+                    $(".ScoreDisplay", target).val($(this).val());
+
+                    // Call the method on the hub. 
+                    hub.server.saveScore($("#ShotId", target).val(), $(this).val());
+                });
+            }(event.target));
+        });
+        
+    </script>
 
 </body>
 </html>

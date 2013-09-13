@@ -1,0 +1,17 @@
+﻿@model DateTime?
+
+<div class="control-group">
+    @Html.LabelForModel(new { @class = "control-label" })
+    <div class="controls">
+        <div class="input-append date form_datetime">
+            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue)
+            <span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
+        @Html.ValidationMessageFor(model => model)
+    </div>
+</div>
+
+@{
+    Html.AddScriptFile("~/Scripts/bootstrap-datetimepicker.min.js");
+    Html.AddScriptFile("~/Scripts/bootstrap-datetimepicker-initialise.js");
+}

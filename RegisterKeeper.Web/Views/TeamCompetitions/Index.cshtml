@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<RegisterKeeper.Web.Models.TeamCompetition>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Team Competitions";
 }
 
-<h2>Index</h2>
+<h2>Team Competitions</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
 </p>
-<table>
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)

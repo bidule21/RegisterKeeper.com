@@ -9,8 +9,13 @@
     @Styles.Render("~/Content/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/RegisterKeeper.css" rel="stylesheet" />
+
+
+
 </head>
 <body>
+    @* Fork of bootstrap-datetimepicker project - http://www.malot.fr/bootstrap-datetimepicker/ *@
+    <link href="~/Content/datetimepicker.css" rel="stylesheet" />
     <div class="container">
         <div class="navbar">
             <div class="navbar-inner">
@@ -33,10 +38,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Competition <b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li role="presentation">
-                                        @Html.ActionLink("Add Individual Competition", "Create", "IndividualCompetitions", null, new { role = "menuitem", tabindex = "-1"})
+                                        @Html.ActionLink("Add Individual Competition", "Create", "IndividualCompetitions", null, new { role = "menuitem", tabindex = "-1" })
                                     </li>
                                     <li role="presentation">
-                                        @Html.ActionLink("Add Team Competition", "Create", "TeamCompetitions", null, new { role = "menuitem", tabindex = "-1"})
+                                        @Html.ActionLink("Add Team Competition", "Create", "TeamCompetitions", null, new { role = "menuitem", tabindex = "-1" })
                                     </li>
                                 </ul>
                             </li>
@@ -58,5 +63,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Html.RenderScripts()
 </body>
 </html>

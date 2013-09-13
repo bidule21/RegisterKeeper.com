@@ -5,7 +5,7 @@
 }
 
 <style>
-    .btn-add-register-card
+    .competition-controls
     {
         float: right;
         margin-top: 10px;
@@ -13,7 +13,11 @@
 </style>
 
 <div class="clearfix">
-    @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id }, new { @class = "btn btn-add-register-card" })
+    <div class="competition-controls">
+        @Html.ActionLink("Edit Competition", "Edit", "IndividualCompetitions", new { Model.Id }, new { @class = "btn" })
+        @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id }, new { @class = "btn" })
+    </div>
+    
     <h2>@Html.DisplayFor(model => model.Name)</h2>
     @(Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
@@ -65,9 +69,9 @@
                                 <td>@distance.DisplayValue()</td>
                                 @foreach (var i in Enumerable.Range(1, Model.NumberOfSightingShots))
                                 {
-                                    var shot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
-                                    <td class="@(i == 1 ? "border-left" : null)" id="shotId-@shot.Id">
-                                        @shot.Score.DisplayValue()
+                                    var sightingShot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
+                                    <td class="@(i == 1 ? "border-left" : null)" id="shotId-@sightingShot.Id">
+                                        @sightingShot.Score.DisplayValue()
                                     </td>
                                 }
                                 @foreach (var i in Enumerable.Range(1, Model.NumberOfScoringShots))
@@ -119,6 +123,25 @@
     <script src="~/signalr/hubs"></script>
     <script>
 
+        function UpdatePositionLabels() {
+            var registerCards = $("div.mix");
+            registerCards.sort(function (a, b) {
+                //var aPosition = parseInt($(".position", a).text(), 10);
+                //var bPosition = parseInt($(".position", b).text(), 10);
+
+                var aSortOrder = parseInt($(a).attr("data-sortorder"), 10);
+                var bSortOrder = parseInt($(b).attr("data-sortorder"), 10);
+                return bSortOrder - aSortOrder;
+            });
+
+            for (var i = 0; i < registerCards.length; i++) {
+                var registerCard = registerCards[i];
+                if (parseInt($(".position", registerCard).text().trim(), 10) !== i + 1) {
+                    $(".position", registerCard).text(i + 1);
+                }
+            }
+        }
+
         $(function () {
             var hub = $.connection.registerKeeperHub;
 
@@ -135,16 +158,15 @@
                 $("#RegisterCardId-" + registerCardId + "-TotalScore").html(score);
             };
 
-            hub.client.RegisterCardSortOrderUpdate = function(registerCardId, sortorder) {
+            hub.client.RegisterCardSortOrderUpdate = function (registerCardId, sortorder) {
                 $('#RegisterCardId-' + registerCardId).attr("data-sortorder", sortorder);
+                UpdatePositionLabels();
                 $('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
             };
 
             $.connection.hub.start();
 
             $('#Grid').mixitup();
-
-            //$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
 
         });
     </script>

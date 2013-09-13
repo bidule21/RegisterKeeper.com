@@ -1,0 +1,46 @@
+﻿@using MvcEnumFlags
+@model RegisterKeeper.Web.Models.Competition
+
+
+<div class="control-group">
+    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+</div>
+
+@Html.EditorFor(model => model.StartDateTime, "DateTimePicker")
+
+@Html.EditorFor(model => model.EndDateTime, "DateTimePicker")
+
+<div class="control-group">
+    @Html.LabelFor(model => model.Distances, new { @class = "control-label" })
+    <div class="controls">
+        @Html.CheckBoxesForEnumFlagsFor(model => model.Distances)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.Location, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.Location)
+        @Html.ValidationMessageFor(model => model.Location)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.NumberOfSightingShots, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.NumberOfSightingShots)
+        @Html.ValidationMessageFor(model => model.NumberOfSightingShots)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.NumberOfScoringShots, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.NumberOfScoringShots)
+        @Html.ValidationMessageFor(model => model.NumberOfScoringShots)
+    </div>
+</div>

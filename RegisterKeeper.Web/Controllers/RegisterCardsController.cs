@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using RegisterKeeper.Web.Models;
@@ -36,6 +37,25 @@ namespace RegisterKeeper.Web.Controllers
 		public ActionResult Create(int individualCompetitionId)
 		{
 			var competition = _db.Competitions.Find(individualCompetitionId);
+			var registerCard = new RegisterCard
+				{
+					IndividualCompetitionId = individualCompetitionId,
+					Shoots = new List<Shoot>()
+				};
+
+			foreach (var shoot in competition.Distances.ToList().Select(distance => new Shoot { Distance = distance }))
+			{
+				foreach (var sightingShotNumber in Enumerable.Range(1, competition.NumberOfSightingShots))
+				{
+					shoot.Shots.Add(new Shot { ShotNumber = sightingShotNumber });
+				}
+				foreach (var scoringShotNumber in Enumerable.Range(1, competition.NumberOfScoringShots))
+				{
+					shoot.Shots.Add(new Shot { ShotNumber = scoringShotNumber });
+				}
+				registerCard.Shoots.Add(shoot);
+			}
+			
 			AddCompetitionDetailsToViewBag(competition, ViewBag);
 			return View();
 		}

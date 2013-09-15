@@ -1,0 +1,38 @@
+﻿@model RegisterKeeper.Web.Models.Competitor
+
+@*<div class="control-group">
+    @Html.LabelFor(model => model.CompetitorName, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.CompetitorName)
+        @Html.ValidationMessageFor(model => model.CompetitorName)
+    </div>
+</div>*@
+
+@Html.EditorFor(model => model.CompetitorName)
+
+
+@*<div class="control-group">
+    @Html.LabelFor(model => model.CompetitorIndexNumber, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.CompetitorIndexNumber, null, formFieldsPrefix + "CompetitorIndexNumber")
+        @Html.ValidationMessageFor(model => model.CompetitorIndexNumber)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.CompetitorClass, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.CompetitorClass, null, formFieldsPrefix + "CompetitorClass")
+        @Html.ValidationMessageFor(model => model.CompetitorClass)
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(model => model.CompetitorClub, new { @class = "control-label" })
+    <div class="controls">
+        @Html.EditorFor(model => model.CompetitorClub, null, formFieldsPrefix + "CompetitorClub")
+        @Html.ValidationMessageFor(model => model.CompetitorClub)
+    </div>
+</div>*@
+
+@Html.EditorFor(competitor => competitor.Shoots)

@@ -4,11 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Individual Competitions</h2>
+<div class="clearfix">
+    <div class="page-controls">
+        @Html.ActionLink("Create New Individual Competition", "Create", null, new { @class = "btn" })
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
-</p>
+    <h2>Individual Competitions</h2>
+</div>
+
+
 <table class="table">
     <tr>
         <th>
@@ -20,40 +24,39 @@
         <th>
             @Html.DisplayNameFor(model => model.Location)
         </th>
-        <th>
-            Sighters
+        <th>Sighters
         </th>
-        <th>
-            Shots
+        <th>Shots
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDateTime)
-        </td>
-        <td>@Html.DisplayFor(modelItem => item.EndDateTime)</td>
-        <td>@Html.DisplayFor(modelItem => item.Distances)</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfSightingShots)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfScoringShots)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateTime)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.EndDateTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.Distances)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfSightingShots)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfScoringShots)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

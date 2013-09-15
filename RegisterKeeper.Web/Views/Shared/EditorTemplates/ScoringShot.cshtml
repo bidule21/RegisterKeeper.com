@@ -1,0 +1,9 @@
+﻿@using MvcContrib.UI.DerivedTypeModelBinder
+@model RegisterKeeper.Web.Models.ScoringShot
+
+@Html.TypeStamp()
+
+@Html.HiddenFor(shot => shot.Id)
+@Html.HiddenFor(shot => shot.ShootId)
+@Html.HiddenFor(shot => shot.ShotNumber)
+@Html.TextBoxFor(shot => shot.ScoreText, new { @class = "shot", placeholder = Model.ShotNumber })

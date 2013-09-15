@@ -1,4 +1,4 @@
-﻿@using RegisterKeeper.Web.Models
+﻿@*@using RegisterKeeper.Web.Models
 @model RegisterCard
 
 @{
@@ -6,37 +6,6 @@
     string formFieldsIdPrefix = formFieldsPrefix.Replace('[', '_').Replace(']', '_').Replace('.', '_');
 }
 
-<div class="control-group">
-    @Html.LabelFor(model => model.CompetitorName, new { @class = "control-label" })
-    <div class="controls">
-        @Html.EditorFor(model => model.CompetitorName, null, formFieldsPrefix + "CompetitorName")
-        @Html.ValidationMessageFor(model => model.CompetitorName)
-    </div>
-</div>
-
-<div class="control-group">
-    @Html.LabelFor(model => model.CompetitorIndexNumber, new { @class = "control-label" })
-    <div class="controls">
-        @Html.EditorFor(model => model.CompetitorIndexNumber, null, formFieldsPrefix + "CompetitorIndexNumber")
-        @Html.ValidationMessageFor(model => model.CompetitorIndexNumber)
-    </div>
-</div>
-
-<div class="control-group">
-    @Html.LabelFor(model => model.CompetitorClass, new { @class = "control-label" })
-    <div class="controls">
-        @Html.EditorFor(model => model.CompetitorClass, null, formFieldsPrefix + "CompetitorClass")
-        @Html.ValidationMessageFor(model => model.CompetitorClass)
-    </div>
-</div>
-
-<div class="control-group">
-    @Html.LabelFor(model => model.CompetitorClub, new { @class = "control-label" })
-    <div class="controls">
-        @Html.EditorFor(model => model.CompetitorClub, null, formFieldsPrefix + "CompetitorClub")
-        @Html.ValidationMessageFor(model => model.CompetitorClub)
-    </div>
-</div>
 
 @foreach (int distanceIndex in Enumerable.Range(0, ViewBag.Distances.Count))
 {
@@ -53,75 +22,5 @@
 
     @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].Distance", (int)ViewBag.Distances[distanceIndex])
             
-    <div class="control-group shoot-form">
-        <label class="control-label">@(((Distance)ViewBag.Distances[distanceIndex]).DisplayValue())</label>
-        <div class="controls">
-
-            @foreach (int sightingShotIndex in Enumerable.Range(0, ViewBag.NumberOfSightingShots))
-            {
-                var shotNumber = sightingShotIndex + 1;
-                string score = null;
-                var converted = false;
-                if (shoot != null)
-                {
-
-                @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].Sighters[" + sightingShotIndex + "].ShootId", shoot.Id)
-                            
-                    var sighter = shoot.Sighters.SingleOrDefault(s => s.ShotNumber == shotNumber);
-                    if (sighter != null)
-                    {
-                        score = sighter.ScoreText;
-                        converted = sighter.Converted;
-
-                @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].Sighters[" + sightingShotIndex + "].Id", sighter.Id)
-
-                    }
-                }
-
-                <input type="hidden" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ShotNumber" 
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ShotNumber" 
-                               value="@shotNumber" />
-                <input type="text" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__ScoreText"
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].ScoreText"
-                               placeholder="S@(shotNumber)" class="shot"
-                            value="@score" />
-                <input data-val="true" data-val-required="The Converted field is required." 
-                               id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__Sighters_@(sightingShotIndex)__Converted" 
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].Converted" 
-                               type="checkbox" value="true" 
-                            checked="@converted" />
-                <input name="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].Converted" type="hidden" value="false" />
-                <label for="@(formFieldsPrefix)Shoots[@(distanceIndex)].Sighters[@(sightingShotIndex)].Converted">Converted</label>
-                <br />
-            }
-            <br />
-            @foreach (int scoringShotIndex in Enumerable.Range(0, ViewBag.NumberOfScoringShots))
-            {
-                var shotNumber = scoringShotIndex + 1;
-                string score = null;
-                if (shoot != null)
-                {
-
-                @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].ScoringShots[" + scoringShotIndex + "].ShootId", shoot.Id)
-                            
-                    var shot = shoot.ScoringShots.SingleOrDefault(s => s.ShotNumber == shotNumber);
-                    if (shot != null)
-                    {
-                        score = shot.ScoreText;
-
-                @Html.Hidden(formFieldsPrefix + "Shoots[" + distanceIndex + "].ScoringShots[" + scoringShotIndex + "].Id", shot.Id)
-
-                    }
-                }
-                <input type="hidden" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ShotNumber" 
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ShotNumber" 
-                               value="@shotNumber" />
-                <input type="text" id="@(formFieldsIdPrefix)Shoots_@(distanceIndex)__ScoringShots_@(scoringShotIndex)__ScoreText"
-                               name="@(formFieldsPrefix)Shoots[@(distanceIndex)].ScoringShots[@(scoringShotIndex)].ScoreText"
-                               placeholder="@(shotNumber)" class="shot"
-                            value="@score" />
-            }
-
-        </div>
-    </div>
-}
+    
+}*@

@@ -1,3 +1,16 @@
 ﻿@model RegisterKeeper.Web.Models.Shoot
 
-@Html.EditorFor(x => x.Sighters)
+<div class="control-group shoot-form">
+    <label class="control-label">@Model.Distance.DisplayValue()</label>
+    <div class="controls">
+        
+        @Html.HiddenFor(shoot => shoot.Id)
+        @Html.HiddenFor(shoot => shoot.Distance)
+
+        @Html.EditorFor(shoot => shoot.Shots)
+        
+        @Html.HiddenFor(shoot => shoot.RegisterCardId)
+        @Html.HiddenFor(shoot => shoot.TeamCompetitorId)
+
+    </div>
+</div>

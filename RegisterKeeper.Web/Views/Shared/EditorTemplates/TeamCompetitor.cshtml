@@ -1,0 +1,10 @@
+﻿@model RegisterKeeper.Web.Models.TeamCompetitor
+
+@Html.HiddenFor(teamCompetitor => teamCompetitor.Id)
+@Html.HiddenFor(teamCompetitor => teamCompetitor.TeamRegisterCardId)
+
+@Html.EditorFor(teamCompetitor => teamCompetitor.CompetitorName)
+
+@Html.EditorFor(teamCompetitor => teamCompetitor.Shoots)
+
+<hr/>

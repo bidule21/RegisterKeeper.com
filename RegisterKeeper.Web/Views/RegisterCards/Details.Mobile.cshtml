@@ -21,7 +21,7 @@
     </tr>
 </table>
 
-<ul data-role="listview" data-inset="true" data-ajax="false">
+<ul data-role="listview" data-inset="true">
     @foreach (var distance in Model.IndividualCompetition.Distances.ToList())
     {
         var shoot = Model.Shoots.Single(s => s.Distance == distance);

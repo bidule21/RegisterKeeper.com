@@ -2,41 +2,24 @@
 
 @{
     ViewBag.Title = Model.Name;
-    ViewBag.DistanceList = Model.Distances.ToList();
-    ViewBag.NumberOfSightingShots = Model.NumberOfSightingShots;
-    ViewBag.NumberOfScoringShots = Model.NumberOfScoringShots;
 }
 
 
-<h1>@Html.DisplayFor(model => model.Name)</h1>
+<h1>@Html.DisplayFor(teamCompetition => teamCompetition.Name)</h1>
 <p>
     @(Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
 </p>
 
-@Html.ActionLink("Add Register Card", "Create", "TeamRegisterCards", new { teamCompetitionId = Model.Id }, new { @class = "" })
 
+<ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search teams..">
+    @foreach (var registerCard in Model.TeamRegisterCards)
+    {
+        <li>
+            @Html.ActionLink(registerCard.TeamName, "Details", "TeamRegisterCards", new { id = registerCard.Id }, null)
+        </li>
+    }
+</ol>
 
-
-@{ var position = 1;}
-@foreach (var teamRegisterCard in Model.TeamRegisterCards.OrderByDescending(rc => rc.SortOrder))
-{
-    <h2>@position - @teamRegisterCard.TeamName</h2>
-    
-
-    <div class="register-card-detail">
-
-        @Html.Partial("_TeamRegisterCardTable", teamRegisterCard)
-
-    </div>
-    <div class="team-register-card-controls">
-        <div>
-            @Html.ActionLink("Add Shooter", "AddShooter", "TeamRegisterCards", new { teamRegistercardId = teamRegisterCard.Id }, new { @class = "btn" })
-            @Html.ActionLink("Edit", "Edit", "TeamRegisterCards", new { id = teamRegisterCard.Id }, new { @class = "btn" })
-            @Html.ActionLink("Delete", "Delete", null, new { @class = "btn" })
-        </div>
-    </div>
-
-
-    position += 1;
-}
+@Html.ActionLink("Add Register Card", "Create", "TeamRegisterCards", new { teamCompetitionId = Model.Id },
+    new { data_role = "button", data_inline = "true", data_icon = "plus" })

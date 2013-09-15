@@ -1,0 +1,11 @@
+﻿@model RegisterKeeper.Web.Models.TeamCompetitor
+
+@{
+    ViewBag.Title = Model.CompetitorName;
+}
+
+<h1>@Model.CompetitorName</h1>
+
+<ul data-role="listview" data-inset="true">
+    @Html.DisplayFor(teamCompetitor => teamCompetitor.Shoots)
+</ul>

@@ -28,8 +28,22 @@ namespace RegisterKeeper.Web.Hubs
 			if (shoot.RegisterCardId.HasValue)
 			{
 				var registerCard = shoot.RegisterCard;
-				clients.All.RegisterCardTotalScoreUpdate(registerCard.Id, registerCard.TotalScore.ToString());
+				clients.All.CompetitorTotalScoreUpdate(registerCard.Id, registerCard.TotalScore.ToString());
 				clients.All.RegisterCardSortOrderUpdate(registerCard.Id, registerCard.SortOrder);
+			}
+
+			if (shoot.TeamCompetitorId.HasValue)
+			{
+				var teamCompetitor = shoot.TeamCompetitor;
+				clients.All.CompetitorTotalScoreUpdate(teamCompetitor.Id, teamCompetitor.TotalScore.ToString());
+
+				var teamRegisterCard = teamCompetitor.TeamRegisterCard;
+				clients.All.TeamRegisterCardDistanceTotalScoreUpdate(teamRegisterCard.Id, shoot.Distance.DisplayValue(),
+																	 teamRegisterCard.TotalAt(shoot.Distance).ToString());
+
+				clients.All.TeamRegisterCardTotalScoreUpdate(teamRegisterCard.Id, teamRegisterCard.TotalScore.ToString());
+
+				clients.All.TeamRegisterCardSortOrderUpdate(teamRegisterCard.Id, teamRegisterCard.SortOrder);
 			}
 		}
 

@@ -18,9 +18,9 @@ namespace RegisterKeeper.Web
 		class ScriptContext
 		{
 			internal const string ScriptContextItem = "ScriptContext";
-			private readonly HashSet<string> _scriptFiles = new HashSet<string>();
+			private readonly List<string> _scriptFiles = new List<string>();
 
-			public HashSet<string> ScriptFiles
+			public List<string> ScriptFiles
 			{
 				get { return _scriptFiles; }
 			}

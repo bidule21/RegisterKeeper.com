@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MvcContrib.Binders;
 using MvcEnumFlags;
 using RegisterKeeper.Web.Models;
 
@@ -31,6 +32,14 @@ namespace RegisterKeeper.Web
 			ModelBinders.Binders.Add(typeof(Distance), new EnumFlagsModelBinder());
 
 			BundleMobileConfig.RegisterBundles(BundleTable.Bundles);
+
+			DerivedTypeModelBinderCache.RegisterDerivedTypes(
+				typeof(Shot),
+				new[]
+					{
+						typeof(SightingShot), 
+						typeof(ScoringShot)
+					});
 		}
 	}
 }

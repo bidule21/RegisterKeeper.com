@@ -1,0 +1,7 @@
+﻿@model RegisterKeeper.Web.Models.Shoot
+
+@{
+    var firstSighterShotId = Model.Sighters.Single(s => s.ShotNumber == 1).Id;
+}
+
+<li>@Html.ActionLink(Model.Distance.DisplayValue(), "Scorer", "Shots", new { shotId = firstSighterShotId }, null)</li>

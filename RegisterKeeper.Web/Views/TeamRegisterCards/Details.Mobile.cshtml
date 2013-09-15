@@ -1,0 +1,16 @@
+﻿@model RegisterKeeper.Web.Models.TeamRegisterCard
+
+@{
+    ViewBag.Title = Model.TeamName;
+}
+
+<h1>@Model.TeamName</h1>
+
+<ol data-role="listview" data-inset="true">
+    @foreach (var teamCompetitor in Model.Firers)
+    {
+        <li>
+            @Html.ActionLink(teamCompetitor.CompetitorName, "Details", "TeamCompetitors", new { id = teamCompetitor.Id }, null)
+        </li>
+    }
+</ol>

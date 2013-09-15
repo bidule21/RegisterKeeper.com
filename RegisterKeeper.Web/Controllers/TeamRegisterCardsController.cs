@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using RegisterKeeper.Web.Models;
@@ -50,7 +51,7 @@ namespace RegisterKeeper.Web.Controllers
 			{
 				_db.TeamRegisterCards.Add(teamregistercard);
 				_db.SaveChanges();
-				return RedirectToAction("Details", "TeamCompetitions", new { id = teamregistercard.TeamCompetitionId});
+				return RedirectToAction("Details", "TeamCompetitions", new { id = teamregistercard.TeamCompetitionId });
 			}
 
 			return View(teamregistercard);
@@ -61,13 +62,13 @@ namespace RegisterKeeper.Web.Controllers
 
 		public ActionResult Edit(int id = 0)
 		{
-			TeamRegisterCard teamregistercard = _db.TeamRegisterCards.Find(id);
+			var teamregistercard = _db.TeamRegisterCards.Find(id);
 			if (teamregistercard == null)
 			{
 				return HttpNotFound();
 			}
-			var competition = _db.Competitions.Find(teamregistercard.TeamCompetitionId);
-			RegisterCardsController.AddCompetitionDetailsToViewBag(competition, ViewBag);
+			//var competition = _db.Competitions.Find(teamregistercard.TeamCompetitionId);
+			//RegisterCardsController.AddCompetitionDetailsToViewBag(competition, ViewBag);
 			return View(teamregistercard);
 		}
 
@@ -140,19 +141,28 @@ namespace RegisterKeeper.Web.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult AddShooter(int teamRegistercardId)
+		public ActionResult AddCompetitor(int teamRegistercardId)
 		{
-			ViewBag.RouteValues = new { teamRegistercardId };
-			
 			var teamRegisterCard = _db.TeamRegisterCards.Find(teamRegistercardId);
-			RegisterCardsController.AddCompetitionDetailsToViewBag(teamRegisterCard.TeamCompetition, ViewBag);
-			ViewBag.TeamRegisterCardId = teamRegistercardId;
 
-			return View();
+			var teamCompetitor = new TeamCompetitor
+				{
+					TeamRegisterCardId = teamRegistercardId,
+					TeamRegisterCard = teamRegisterCard,
+					Shoots = new List<Shoot>()
+				};
+
+			var competition = teamRegisterCard.TeamCompetition;
+
+			teamCompetitor.InitialiseShoots(competition.Distances.ToList(), competition.NumberOfSightingShots, competition.NumberOfScoringShots);
+
+			
+
+			return View(teamCompetitor);
 		}
 
 		[HttpPost]
-		public ActionResult AddShooter(TeamCompetitor teamCompetitor)
+		public ActionResult AddCompetitor(TeamCompetitor teamCompetitor)
 		{
 			if (ModelState.IsValid)
 			{

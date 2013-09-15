@@ -1,11 +1,8 @@
-﻿@model RegisterKeeper.Web.ViewModels.TeamCompetitionViewModel
+﻿@model RegisterKeeper.Web.Models.TeamCompetition
 
 @{
     ViewBag.Title = "Edit Team Competition";
 }
-
-@* Fork of bootstrap-datetimepicker project - http://www.malot.fr/bootstrap-datetimepicker/ *@
-<link href="~/Content/datetimepicker.css" rel="stylesheet" />
 
 @using (Html.BeginForm("Edit", "TeamCompetitions", FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -15,7 +12,7 @@
     <fieldset>
         <legend>@ViewBag.Title</legend>
 
-        @Html.EditorFor(vm => vm.Competition)
+        @Html.EditorForModel()
 
         <div class="form-actions">
             <input type="submit" value="Save" class="btn btn-primary" />
@@ -27,6 +24,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
-    @Html.Partial("_DateTimePickerJs")
 }

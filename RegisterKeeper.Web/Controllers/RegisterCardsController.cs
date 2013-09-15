@@ -43,18 +43,8 @@ namespace RegisterKeeper.Web.Controllers
 					Shoots = new List<Shoot>()
 				};
 
-			foreach (var shoot in competition.Distances.ToList().Select(distance => new Shoot { Distance = distance }))
-			{
-				foreach (var sightingShotNumber in Enumerable.Range(1, competition.NumberOfSightingShots))
-				{
-					shoot.Shots.Add(new Shot { ShotNumber = sightingShotNumber });
-				}
-				foreach (var scoringShotNumber in Enumerable.Range(1, competition.NumberOfScoringShots))
-				{
-					shoot.Shots.Add(new Shot { ShotNumber = scoringShotNumber });
-				}
-				registerCard.Shoots.Add(shoot);
-			}
+			registerCard.InitialiseShoots(competition.Distances.ToList(), competition.NumberOfSightingShots,
+										  competition.NumberOfScoringShots);
 			
 			AddCompetitionDetailsToViewBag(competition, ViewBag);
 			return View();

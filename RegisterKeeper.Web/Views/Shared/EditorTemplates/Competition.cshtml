@@ -2,13 +2,14 @@
 @model RegisterKeeper.Web.Models.Competition
 
 
-<div class="control-group">
+@*<div class="control-group">
     @Html.LabelFor(model => model.Name, new { @class = "control-label" })
     <div class="controls">
         @Html.EditorFor(model => model.Name)
         @Html.ValidationMessageFor(model => model.Name)
     </div>
-</div>
+</div>*@
+@Html.EditorFor(model => model.Name)
 
 @Html.EditorFor(model => model.StartDateTime, "DateTimePicker")
 
@@ -21,13 +22,14 @@
     </div>
 </div>
 
-<div class="control-group">
+@*<div class="control-group">
     @Html.LabelFor(model => model.Location, new { @class = "control-label" })
     <div class="controls">
         @Html.EditorFor(model => model.Location)
         @Html.ValidationMessageFor(model => model.Location)
     </div>
-</div>
+</div>*@
+@Html.EditorFor(model => model.Location)
 
 <div class="control-group">
     @Html.LabelFor(model => model.NumberOfSightingShots, new { @class = "control-label" })

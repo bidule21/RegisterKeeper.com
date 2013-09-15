@@ -1,7 +1,7 @@
 ﻿@model RegisterKeeper.Web.Models.IndividualCompetition
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Name;
 }
 
 <h1>@Html.DisplayFor(model => model.Name)</h1>
@@ -9,8 +9,7 @@
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
 </p>
 
-<h3>Register Cards</h3>
-<ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..">
+<ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search competitors..">
     @foreach (var registerCard in Model.RegisterCards)
     {
         <li>
@@ -21,4 +20,3 @@
 
 @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id },
 new { data_role = "button", data_inline = "true", data_icon = "plus" })
-@*data_mini = "true", *@

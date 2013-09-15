@@ -29,44 +29,32 @@
         firstDistance = true;
         foreach (Distance distance in ViewBag.DistanceList)
         {
+            var shoot = registerCard.Shoots.SingleOrDefault(s => s.Distance == distance);
         <tr>
             @if (firstDistance)
             {
                 <td class="competitor-name" rowspan="@(ViewBag.DistanceList.Count)">@registerCard.CompetitorName</td>
             }
-            @{ var shoot = registerCard.Shoots.SingleOrDefault(s => s.Distance == distance); }
             <td class="border-left distance">@distance.DisplayValue()</td>
             @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfSightingShots))
             {
-                <td class="@(i == 1 ? "border-left" : null)">
-                    @if (shoot != null)
-                    {
-                        var shot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
-                        if (shot != null)
-                        {
-                        <text>@(shot.Score.DisplayValue())</text>
-                        }
-                    }
+                var sightingShot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
+                <td class="@(i == 1 ? "border-left" : null)" id="ShotId-@sightingShot.Id">
+                    @(sightingShot.Score.DisplayValue())
                 </td>
             }
             @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfScoringShots))
             {
-                <td class="@(i == 1 ? "border-left" : null)">
-                    @if (shoot != null)
-                    {
-                        var shot = shoot.ScoringShots.SingleOrDefault(ss => ss.ShotNumber == i);
-                        if (shot != null)
-                        {
-                        <text>@shot.Score.DisplayValue()</text>
-                        }
-                    }
+                var scoringShot = shoot.ScoringShots.SingleOrDefault(ss => ss.ShotNumber == i);
+                <td class="@(i == 1 ? "border-left" : null)" id="ShotId-@scoringShot.Id">
+                    @scoringShot.Score.DisplayValue()
                 </td>
             }
 
             @{ var totalsFirstDistance = true; }
             @foreach (Distance totalsDistance in ViewBag.DistanceList)
             {
-                <td class="@(totalsFirstDistance ? "border-left" : null)">
+                <td class="@(totalsFirstDistance ? "border-left" : null)" id="@(distance == totalsDistance ? "ShootId-" + shoot.Id + "-TotalScore" : null)">
                     @if (shoot != null && distance == totalsDistance)
                     {
                         <text>@shoot.TotalScore.ToString()</text>
@@ -77,7 +65,9 @@
 
             @if (firstDistance)
             {
-                <td class="border-left total" rowspan="@(ViewBag.DistanceList.Count)">@registerCard.TotalScore</td>
+                <td class="border-left total" rowspan="@(ViewBag.DistanceList.Count)" id="CompetitorId-@registerCard.Id-TotalScore">
+                    @registerCard.TotalScore
+                </td>
             }
         </tr>
             firstDistance = false;
@@ -89,11 +79,13 @@
         @{ var grandTotalsFirstDistance = true; }
         @foreach (Distance distance in ViewBag.DistanceList)
         {
-            <td class="@(grandTotalsFirstDistance ? "border-left" : null)">@(Model.TotalAt(distance))</td>
+            <td class="@(grandTotalsFirstDistance ? "border-left" : null)" id="TeamRegisterCardId-@Model.Id-@distance.DisplayValue()-TotalScore">
+                @(Model.TotalAt(distance))
+            </td>
             grandTotalsFirstDistance = false;
         }
         <td class="border-left total-column register-card-grand-total">
-            <div class="register-card-grand-total-value">@(Model.TotalScore)</div>
+            <div class="register-card-grand-total-value" id="TeamRegisterCardId-@Model.Id-TotalScore">@(Model.TotalScore)</div>
         </td>
     </tr>
 </table>

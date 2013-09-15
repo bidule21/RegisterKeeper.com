@@ -108,13 +108,6 @@
 	Styles for competition details screen
 */
 
-/* Button on top right */
-.btn-add-register-card
-{
-	float: right;
-	margin-top: 10px;
-}
-
 #Grid
 {
 	margin: 20px 0 20px 0;
@@ -242,19 +235,19 @@ table .border-left
 }
 
 /*.register-card-brought-forward
-    {
-        border: 0 solid #c0c0c0;
-        padding: 0 2px 0 2px;
-        display: inline-block;
-        margin-right: 5px;
-    }
+	{
+		border: 0 solid #c0c0c0;
+		padding: 0 2px 0 2px;
+		display: inline-block;
+		margin-right: 5px;
+	}
 
-    .register-card-points-off
-    {
-        border: 1px solid #dddddd;
-        padding: 0 2px 0 2px;
-        font-weight: bold;
-    }*/
+	.register-card-points-off
+	{
+		border: 1px solid #dddddd;
+		padding: 0 2px 0 2px;
+		font-weight: bold;
+	}*/
 
 .register-card-grand-total
 {
@@ -318,4 +311,10 @@ table .border-left
 {
 	width: 1.3em;
 	margin: 5px 5px 0 0;
+}
+
+.page-controls
+{
+	float: right;
+	margin-top: 10px;
 }

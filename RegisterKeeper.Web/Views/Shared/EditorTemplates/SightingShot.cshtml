@@ -1,3 +1,11 @@
-﻿@model RegisterKeeper.Web.Models.SightingShot
+﻿@using MvcContrib.UI.DerivedTypeModelBinder
+@model RegisterKeeper.Web.Models.SightingShot
 
-@Html.TextBoxFor(x => x.Converted)
+@Html.TypeStamp()
+
+@Html.HiddenFor(sighter => sighter.Id)
+@Html.HiddenFor(sighter => sighter.ShootId)
+@Html.HiddenFor(sighter => sighter.ShotNumber)
+@Html.TextBoxFor(sighter => sighter.ScoreText, new { @class = "shot", placeholder = "S" + Model.ShotNumber })
+@Html.CheckBoxFor(sighter => sighter.Converted) @Html.LabelFor(sighter => sighter.Converted)
+<br />

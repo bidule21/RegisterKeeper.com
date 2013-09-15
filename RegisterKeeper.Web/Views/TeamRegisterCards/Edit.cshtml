@@ -1,4 +1,10 @@
-﻿<style type="text/css">
+﻿@model RegisterKeeper.Web.Models.TeamRegisterCard
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style type="text/css">
     .fieldset-sublegend
     {
         border-top: 1px solid #e5e5e5;
@@ -6,11 +12,6 @@
         font-weight: normal;
     }
 </style>
-@model RegisterKeeper.Web.Models.TeamRegisterCard
-
-@{
-    ViewBag.Title = "Edit";
-}
 
 @using (Html.BeginForm("Edit", "TeamRegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -26,8 +27,10 @@
         @Html.Partial("_CreateEditTeamRegisterCardFields")
 
         <h4 class="fieldset-sublegend">Shooters</h4>
+        
+        @Html.EditorFor(teamRegisterCard => teamRegisterCard.Firers)
 
-        @{ var i = 0; }
+        @*@{ var i = 0; }
         @foreach (var RegisterCard in Model.RegisterCards)
         {
             ViewBag.FormFieldsPrefix = "RegisterCards[" + i + "].";
@@ -38,7 +41,7 @@
 
             @Html.Partial("_CreateEditRegisterCardFields", RegisterCard)
             <hr />
-        }
+        }*@
 
         <div class="form-actions">
             <input type="submit" value="Save" class="btn btn-primary" />

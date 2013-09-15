@@ -8,21 +8,20 @@
 }
 
 <div class="clearfix">
-    @Html.ActionLink("Add Register Card", "Create", "TeamRegisterCards", new { teamCompetitionId = Model.Id }, new { @class = "btn btn-add-register-card" })
+    <div class="page-controls">
+        @Html.ActionLink("Add Team Register Card", "Create", "TeamRegisterCards", new { teamCompetitionId = Model.Id }, new { @class = "btn" })
+    </div>
+
     <h2>@Html.DisplayFor(model => model.Name)</h2>
     @(Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
     <i>@Model.NumberOfSightingShots&amp;@Model.NumberOfScoringShots @@ @Html.DisplayFor(Model.Distances), @Model.Location</i>
 </div>
 
-<style>
-
-</style>
-
 <div id="Grid">
     @{ var position = 1;}
-    @foreach (var teamRegisterCard in Model.TeamRegisterCards)
+    @foreach (var teamRegisterCard in Model.TeamRegisterCards.OrderByDescending(r => r.SortOrder))
     {
-        <div class="mix" data-pointsoff="@(teamRegisterCard.SortOrder)">
+        <div class="mix" id="TeamRegisterCardId-@teamRegisterCard.Id" data-sortorder="@(teamRegisterCard.SortOrder)">
             <div class="register-card-container">
 
                 @* TODO: On grid sort, position value should fade out, update to new number and fade in? *@
@@ -35,41 +34,20 @@
                 <div class="register-card-detail">
                     <div class="clearfix">
                         <h4 class="header">
-                            @*<span class="competitor-index-number">@((registerCard.CompetitorIndexNumber ?? 0).ToString("000"))</span>*@
+
                             @teamRegisterCard.TeamName
 
                         </h4>
-                        @*<div class="pull-right">*@
-                        @*<span>Brought Forward:</span>*@
-                        @* <span id="registerCard@(registerCard.Id)BroughtForward" class="register-card-brought-forward">
-                    @(registerCard.BroughtForwardPoints).@(registerCard.BroughtForwardVs)v
-                </span>*@
-                        @*<span>Points Off:</span>*@
-                        @*<span id="registerCard@(registerCard.Id)PointsOff" class="register-card-points-off">
-                    @(registerCard.TotalPointsOff)
-                </span>*@
-                        @*</div>*@
                     </div>
 
                     @* PARTIAL *@
-                    
+
                     @Html.Partial("_TeamRegisterCardTable", teamRegisterCard)
-
-
-                    @*@if (Model.Distances.ToList().Count > 1)
-                    {
-                        <div class="register-card-grand-total">
-                            Grand Total:
-                            <div class="register-card-grand-total-value">
-                                @teamRegisterCard.TotalScore
-                            </div>
-                        </div>    
-                    }*@
 
                 </div>
                 <div class="team-register-card-controls">
                     <div>
-                        @Html.ActionLink("Add Shooter", "AddShooter", "TeamRegisterCards", new { teamRegistercardId = teamRegisterCard.Id}, new { @class = "btn" })
+                        @Html.ActionLink("Add Competitor", "AddCompetitor", "TeamRegisterCards", new { teamRegistercardId = teamRegisterCard.Id }, new { @class = "btn" })
                         @Html.ActionLink("Edit", "Edit", "TeamRegisterCards", new { id = teamRegisterCard.Id }, new { @class = "btn" })
                         @Html.ActionLink("Delete", "Delete", null, new { @class = "btn" })
                     </div>
@@ -78,7 +56,7 @@
             </div>
         </div>
 
-                    position += 1;
+        position += 1;
     }
 
 </div>
@@ -86,61 +64,8 @@
 @section scripts
 {
     <script src="~/Scripts/jquery.mixitup.js"></script>
-    @*<script src="~/Scripts/jquery.signalR-1.1.2.js"></script>*@
-    @*<script src="~/Scripts/jquery-ui-1.8.24.js"></script>*@
-    @*<script src="~/signalr/hubs"></script>*@
-    <script>
-
-        function PointsOffFromScore(score) {
-            if (score == "V") {
-                return 0;
-            }
-            return 5 - parseInt(score, 10);
-        }
-
-        $(function () {
-            //var hub = $.connection.queensFinalHub;
-
-            //hub.client.RegisterShot = function (registerCardId, distance, shotNumber, score, totalPointsOff, x900Total, x1000Total, grandTotal) {
-
-            //    // Display shot score
-            //    var cell = $('#registerCard' + registerCardId + distance + 'shot' + shotNumber);
-            //    cell.html(score);
-            //    cell.effect("highlight", null, 5000);
-
-            //    // Set x900 total display
-            //    cell = $('#registerCard' + registerCardId + 'x900Total');
-            //    cell.html(x900Total);
-
-            //    // Set x1000 total display
-            //    cell = $('#registerCard' + registerCardId + 'x1000Total');
-            //    cell.html(x1000Total);
-
-            //    // Set the Grand Total display
-            //    cell = $('#registerCard' + registerCardId + 'GrandTotal');
-            //    cell.html(grandTotal);
-
-            //    // Set points off display
-            //    var pointsOff = $('#registerCard' + registerCardId + 'PointsOff');
-            //    pointsOff.html(totalPointsOff);
-
-            //    // Set the data-pointsoff attribute
-            //    var pointsOffAttr = $('#registerCard' + registerCardId);
-            //    pointsOffAttr.attr("data-pointsoff", totalPointsOff);
-
-            //    $('#Grid').mixitup('sort', ['data-pointsoff', 'desc']);
-            //};
-
-            //$.connection.hub.start();
-
-            $('#Grid').mixitup();
-
-            $('#Grid').mixitup('sort', ['data-pointsoff', 'desc']);
-
-            //$('#btnSort').click(function () {
-            //    $('#Grid').mixitup('sort', ['data-pointsoff', 'desc']);
-            //});
-
-        });
-    </script>
+    <script src="~/Scripts/jquery.signalR-1.1.3.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/RegisterKeeper-DesktopViewLiveScores.js"></script>
 }

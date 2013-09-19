@@ -1,0 +1,8 @@
+﻿@model Int32?
+
+<div data-role="fieldcontain">
+    @Html.LabelForModel()
+    <input type="number" pattern="[0-9]*" id="@Html.IdForModel()" name="@Html.NameForModel()"
+        value="@ViewData.TemplateInfo.FormattedModelValue" />
+    @Html.ValidationMessageFor(model => model)
+</div>

@@ -1,8 +1,30 @@
-﻿@model RegisterKeeper.Web.ViewModels.ScorerViewModel
+﻿@using RegisterKeeper.Web.ViewModels
+@model ScorerViewModel
 
 @{
-    ViewBag.PageId = "Scorer";
+    //ViewBag.PageId = "Scorer";
     ViewBag.Title = "Scorer";
+    if (Model.RegisterCardId.HasValue)
+    {
+        ViewBag.BackActionLink = new ActionLinkParameters
+            {
+                LinkText = "Back to register card",
+                ControllerName = "RegisterCards",
+                ActionName = "Details",
+                RouteValues = new { id = Model.RegisterCardId.Value }
+            };
+    }
+
+    if (Model.TeamCompetitorId.HasValue)
+    {
+        ViewBag.BackActionLink = new ActionLinkParameters
+        {
+            LinkText = "Back to team competitor",
+            ControllerName = "TeamCompetitors",
+            ActionName = "Details",
+            RouteValues = new { id = Model.TeamCompetitorId.Value }
+        };
+    }
 }
 
 @Html.HiddenFor(m => m.ShotId)
@@ -31,8 +53,33 @@
         <td>
             @if (!Model.PreviousShotId.HasValue)
             {
-                @Html.ActionLink("Back", "Details", "RegisterCards", new { id = Model.RegisterCardId },
-                    new { data_role = "button", data_icon = "arrow-l", data_iconpos = "notext", style = "margin: 0 auto" })
+                if (Model.RegisterCardId.HasValue)
+                {
+                    @Html.ActionLink("Back", "Details", "RegisterCards",
+                        new { id = Model.RegisterCardId.Value },
+                        new
+                            {
+                                data_role = "button", 
+                                data_icon = "arrow-l", 
+                                data_iconpos = "notext", 
+                                style = "margin: 0 auto"
+                            })
+                }
+
+                if (Model.TeamCompetitorId.HasValue)
+                {
+                    @Html.ActionLink("Back", "Details", "TeamCompetitors",
+                        new { id = Model.TeamCompetitorId.Value },
+                        new
+                        {
+                            data_role = "button",
+                            data_icon = "arrow-l",
+                            data_iconpos = "notext",
+                            style = "margin: 0 auto"
+                        })
+                }
+
+
             }
             else
             {
@@ -54,8 +101,32 @@
             }
             else if (!Model.NextShotId.HasValue)
             {
-                @Html.ActionLink("Next", "Details", "RegisterCards", new { id = Model.RegisterCardId },
-                    new { data_role = "button", data_icon = "arrow-r", data_iconpos = "notext", style = "margin: 0 auto" })
+                if (Model.RegisterCardId.HasValue)
+                {
+                    @Html.ActionLink("Next", "Details", "RegisterCards", 
+                        new { id = Model.RegisterCardId.Value },
+                        new
+                            {
+                                data_role = "button", 
+                                data_icon = "arrow-r", 
+                                data_iconpos = "notext", 
+                                style = "margin: 0 auto"
+                            })
+                }
+
+                if (Model.TeamCompetitorId.HasValue)
+                {
+                    @Html.ActionLink("Next", "Details", "TeamCompetitors",
+                        new { id = Model.TeamCompetitorId.Value },
+                        new
+                        {
+                            data_role = "button",
+                            data_icon = "arrow-r",
+                            data_iconpos = "notext",
+                            style = "margin: 0 auto"
+                        })
+                }
+
             }
             else
             {

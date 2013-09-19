@@ -1,7 +1,12 @@
-﻿@model RegisterKeeper.Web.Models.TeamCompetition
+﻿@using RegisterKeeper.Web.ViewModels
+@model RegisterKeeper.Web.Models.TeamCompetition
 
 @{
     ViewBag.Title = Model.Name;
+    ViewBag.BackActionLink = new ActionLinkParameters
+        {
+            LinkText = "Home", ControllerName = "Home", ActionName = "Index"
+        };
 }
 
 
@@ -16,7 +21,12 @@
     @foreach (var registerCard in Model.TeamRegisterCards)
     {
         <li>
-            @Html.ActionLink(registerCard.TeamName, "Details", "TeamRegisterCards", new { id = registerCard.Id }, null)
+            @*@Html.ActionLink(registerCard.TeamName, "Details", "TeamRegisterCards",
+                new { id = registerCard.Id }, null)*@
+            <a href="@Url.Action("Details", "TeamRegisterCards", new { id = registerCard.Id })">
+                @registerCard.TeamName
+                <span class="ui-li-count">@registerCard.TotalScore.ToString()</span>
+            </a>
         </li>
     }
 </ol>

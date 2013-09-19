@@ -41,3 +41,15 @@
         </li>
     }
 </ul>
+
+@{
+    var buttonHtmlAttributes = new
+        {
+            data_role = "button",
+            data_icon = "arrow-r",
+            data_iconpos = "right"
+        };
+}
+
+@Html.ActionLink("Create new individual competition", "Create", "IndividualCompetitions", null, buttonHtmlAttributes)
+@Html.ActionLink("Create new team competition", "Create", "TeamCompetitions", null, buttonHtmlAttributes)

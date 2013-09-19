@@ -1,0 +1,9 @@
+﻿@model RegisterKeeper.Web.Models.RegisterCard
+
+@Html.EditorFor(rc => rc.CompetitorName)
+@Html.EditorFor(rc => rc.CompetitorIndexNumber)
+@Html.EditorFor(rc => rc.CompetitorClass)
+@Html.EditorFor(rc => rc.CompetitorClub)
+
+@*@Html.HiddenFor(rc => rc.Shoots, new { value = Json.Encode(Model.Shoots) })*@
+@*@Html.HiddenFor(rc => rc.Shoots)*@

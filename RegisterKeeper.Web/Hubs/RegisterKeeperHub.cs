@@ -6,6 +6,12 @@ namespace RegisterKeeper.Web.Hubs
 {
 	public class RegisterKeeperHub : Hub
 	{
+
+		private static IHubConnectionContext GetClients()
+		{
+			return GlobalHost.ConnectionManager.GetHubContext<RegisterKeeperHub>().Clients;
+		}
+
 		public void SaveScore(int shotId, string score)
 		{
 			using (var db = new RegisterKeeperDb())
@@ -52,8 +58,12 @@ namespace RegisterKeeper.Web.Hubs
 
 		public static void BroadcastScoreUpdateToClients(Shot shot)
 		{
-			var clients = GlobalHost.ConnectionManager.GetHubContext<RegisterKeeperHub>().Clients;
-			BroadcastScoreUpdateToClients(shot, clients);
+			BroadcastScoreUpdateToClients(shot, GetClients());
+		}
+
+		public static void BroadcastSighterConversionUpdateToClients(SightingShot sighter)
+		{
+			GetClients().All.SighterConversionUpdate(sighter.Id, sighter.Converted);
 		}
 	}
 }

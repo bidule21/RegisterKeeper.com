@@ -1,7 +1,18 @@
-﻿@model RegisterKeeper.Web.ViewModels.SighterConversionViewModel
+﻿@using RegisterKeeper.Web.ViewModels
+@model SighterConversionViewModel
 
 @{
     ViewBag.Title = "Convert Sighters";
+    if (Model.RegisterCardId.HasValue)
+    {
+        ViewBag.BackActionLink = new ActionLinkParameters
+        {
+            LinkText = "Back to register card",
+            ControllerName = "RegisterCards",
+            ActionName = "Details",
+            RouteValues = new { id = Model.RegisterCardId.Value }
+        };
+    }
 }
 
 <strong>@Model.CompetitionName</strong>

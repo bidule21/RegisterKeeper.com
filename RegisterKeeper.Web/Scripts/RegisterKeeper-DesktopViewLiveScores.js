@@ -50,6 +50,14 @@ $(function () {
 		$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
 	};
 
+	hub.client.SighterConversionUpdate = function(sighterId, converted) {
+		if (converted) {
+			$("#ShotId-" + sighterId).addClass("strikethrough");
+		} else {
+			$("#ShotId-" + sighterId).removeClass("strikethrough");
+		}
+	};
+
 	$.connection.hub.start();
 
 	$('#Grid').mixitup();

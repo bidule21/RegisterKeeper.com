@@ -234,6 +234,7 @@
     <Compile Include="Models\RegisterKeeperModels.cs" />
     <Compile Include="Models\RegisterKeeperDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ActionLinkParameters.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Shots\ScorerViewModel.cs" />
     <Compile Include="ViewModels\Shots\SighterConversionViewModel.cs" />
@@ -426,7 +427,7 @@
     <Content Include="Views\RegisterCards\Details.Mobile.cshtml" />
     <Content Include="Views\RegisterCards\Create.Mobile.cshtml" />
     <Content Include="Views\Shots\Scorer.Mobile.cshtml" />
-    <Content Include="Views\Shots\SighterConversion.cshtml" />
+    <Content Include="Views\Shots\SighterConversion.Mobile.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Competition.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTimePicker.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Competitor.cshtml" />
@@ -436,6 +437,12 @@
     <Content Include="Views\TeamRegisterCards\Details.Mobile.cshtml" />
     <Content Include="Views\TeamCompetitors\Details.Mobile.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Shoot.Mobile.cshtml" />
+    <Content Include="Views\IndividualCompetitions\Create.Mobile.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Competition.Mobile.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.Mobile.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.Mobile.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.Mobile.cshtml" />
+    <Content Include="Views\RegisterCards\EditorTemplates\RegisterCard.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

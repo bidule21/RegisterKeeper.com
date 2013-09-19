@@ -1,10 +1,19 @@
-﻿@model RegisterKeeper.Web.Models.TeamCompetitor
+﻿@using RegisterKeeper.Web.ViewModels
+@model RegisterKeeper.Web.Models.TeamCompetitor
 
 @{
     ViewBag.Title = Model.CompetitorName;
+    ViewBag.BackActionLink = new ActionLinkParameters
+        {
+            ControllerName = "TeamRegisterCards",
+            ActionName = "Details",
+            RouteValues = new { id = Model.TeamRegisterCardId }
+        };
 }
 
-<h1>@Model.CompetitorName</h1>
+<h4>@Model.TeamRegisterCard.TeamCompetition.Name > @Model.TeamRegisterCard.TeamName ></h4>
+
+<h2>@Model.CompetitorName</h2>
 
 <ul data-role="listview" data-inset="true">
     @Html.DisplayFor(teamCompetitor => teamCompetitor.Shoots)

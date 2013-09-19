@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 using RegisterKeeper.Web.Models;
 
 namespace RegisterKeeper.Web
 {
 	public static class Extensions
 	{
-		//public static List<T> ToList<T>(this T myEnum) where T : Enum
-		//{
-		//	var valueList = new List<T>();
-		//	foreach (var value in Enum.GetValues(myEnum.GetType()).Cast<T>())
-		//	{
-		//		if (myEnum.)
-		//		{
-
-		//		}
-		//	}
-
-		//	return valueList;
-		//}
-
 		public static List<Distance> ToList(this Distance distances)
 		{
 			return Enum.GetValues(typeof(Distance)).Cast<Distance>().Where(value => distances.HasFlag(value)).ToList();
@@ -62,11 +50,6 @@ namespace RegisterKeeper.Web
 			return distanceString;
 		}
 
-		//public static string DisplayValue(this Score? score)
-		//{
-		//	return score.HasValue ? score.Value.DisplayValue() : String.Empty;
-		//}
-
 		public static string DisplayValue(this Score? score)
 		{
 			if (score == null)
@@ -95,6 +78,21 @@ namespace RegisterKeeper.Web
 			}
 		}
 
+		/// <summary>
+		/// http://stackoverflow.com/questions/5818065/how-to-pass-request-querystring-to-url-action
+		/// </summary>
+		/// <param name="queryString"></param>
+		/// <returns></returns>
+		public static RouteValueDictionary ToRouteValues(this NameValueCollection queryString)
+		{
+			if (queryString == null || queryString.HasKeys() == false)
+				return new RouteValueDictionary();
 
+			var routeValues = new RouteValueDictionary();
+			foreach (var key in queryString.AllKeys)
+				routeValues.Add(key, queryString[key]);
+
+			return routeValues;
+		}
 	}
 }

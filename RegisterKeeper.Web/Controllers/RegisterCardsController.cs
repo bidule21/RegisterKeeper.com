@@ -39,15 +39,17 @@ namespace RegisterKeeper.Web.Controllers
 			var competition = _db.Competitions.Find(individualCompetitionId);
 			var registerCard = new RegisterCard
 				{
-					IndividualCompetitionId = individualCompetitionId,
-					Shoots = new List<Shoot>()
+					IndividualCompetitionId = individualCompetitionId
 				};
 
-			registerCard.InitialiseShoots(competition.Distances.ToList(), competition.NumberOfSightingShots,
-										  competition.NumberOfScoringShots);
-			
+			registerCard.InitialiseShoots(
+				competition.Distances.ToList(),
+				competition.NumberOfSightingShots,
+				competition.NumberOfScoringShots
+			);
+
 			AddCompetitionDetailsToViewBag(competition, ViewBag);
-			return View();
+			return View(registerCard);
 		}
 
 		//
@@ -57,14 +59,27 @@ namespace RegisterKeeper.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(RegisterCard registerCard)
 		{
+			Competition competition;
 			if (ModelState.IsValid)
 			{
+				// Shoots will be null from mobile form
+				if (registerCard.Shoots == null)
+				{
+					competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
+					registerCard.InitialiseShoots(
+						competition.Distances.ToList(),
+						competition.NumberOfSightingShots,
+						competition.NumberOfScoringShots
+					);	
+				}
+				
+
 				_db.RegisterCards.Add(registerCard);
 				_db.SaveChanges();
 				return RedirectToAction("Details", "IndividualCompetitions", new { id = registerCard.IndividualCompetitionId });
 			}
 
-			var competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
+			competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
 			AddCompetitionDetailsToViewBag(competition, ViewBag);
 
 			return View();

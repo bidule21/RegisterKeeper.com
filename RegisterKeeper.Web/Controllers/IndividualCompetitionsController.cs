@@ -53,7 +53,7 @@ namespace RegisterKeeper.Web.Controllers
 			{
 				_db.Competitions.Add(individualcompetition);
 				_db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Details", new { id = individualcompetition.Id });
 			}
 
 			return View(individualcompetition);

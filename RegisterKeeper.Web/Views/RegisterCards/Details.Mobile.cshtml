@@ -1,7 +1,14 @@
-﻿@model RegisterKeeper.Web.Models.RegisterCard
+﻿@using RegisterKeeper.Web.ViewModels
+@model RegisterKeeper.Web.Models.RegisterCard
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.backActionLink = new ActionLinkParameters
+        {
+            ControllerName = "IndividualCompetitions",
+            ActionName = "Details",
+            RouteValues = new { id = Model.IndividualCompetitionId }
+        };
 }
 
 <h1>@Model.CompetitorName</h1>
@@ -22,11 +29,12 @@
 </table>
 
 <ul data-role="listview" data-inset="true">
-    @foreach (var distance in Model.IndividualCompetition.Distances.ToList())
+    @*@foreach (var distance in Model.IndividualCompetition.Distances.ToList())
     {
         var shoot = Model.Shoots.Single(s => s.Distance == distance);
         var firstSighterShotId = shoot.Sighters.Single(s => s.ShotNumber == 1).Id;
 
         <li>@Html.ActionLink(distance.DisplayValue(), "Scorer", "Shots", new { shotId = firstSighterShotId }, null)</li>
-    }
+    }*@
+    @Html.DisplayFor(registerCard => registerCard.Shoots)
 </ul>

@@ -1,0 +1,29 @@
+﻿@using RegisterKeeper.Web.ViewModels
+@model RegisterKeeper.Web.Models.IndividualCompetition
+
+@{
+    ViewBag.Title = "Create new individual competition";
+    ViewBag.BackActionLink = new ActionLinkParameters
+        {
+            LinkText = "Cancel",
+            ControllerName = "Home",
+            ActionName = "Index"
+        };
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.EditorForModel()
+    
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <input type="submit" value="Create" data-theme="b" />
+        </div>
+        <div class="ui-block-b">
+            @Html.ActionLink("Cancel", "Index", "Home", null, new { data_role = "button" })
+        </div>
+    </div>
+}

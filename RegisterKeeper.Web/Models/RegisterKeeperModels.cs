@@ -49,11 +49,24 @@ namespace RegisterKeeper.Web.Models
 
 		public TotalScore TotalScore
 		{
-			get { return new TotalScore(Shoots.Select(s => s.TotalScore).ToList()); }
+			get
+			{
+				return Shoots == null
+					? new TotalScore { Points = 0, VBulls = 0 }
+					: new TotalScore(Shoots.Select(s => s.TotalScore).ToList());
+			}
 		}
 
-		public void InitialiseShoots(List<Distance> distances, int numberOfSighters, int numberOfScoringShots)
+		public void InitialiseShoots(
+			List<Distance> distances, int numberOfSighters, int numberOfScoringShots)
 		{
+			if (Shoots != null)
+			{
+				throw new InvalidOperationException("Shoots property has already been initialised.");
+			}
+
+			Shoots = new List<Shoot>();
+
 			foreach (var shoot in distances.Select(distance => new Shoot { Distance = distance }))
 			{
 				shoot.Shots = new List<Shot>();
@@ -331,6 +344,9 @@ namespace RegisterKeeper.Web.Models
 			Points = totalScores.Sum(s => s.Points);
 			VBulls = totalScores.Sum(s => s.VBulls);
 		}
+
+		public TotalScore()
+		{ }
 
 		public override string ToString()
 		{

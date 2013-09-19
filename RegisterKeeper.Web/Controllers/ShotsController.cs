@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Microsoft.AspNet.SignalR;
 using RegisterKeeper.Web.Hubs;
 using RegisterKeeper.Web.Models;
 using RegisterKeeper.Web.ViewModels;
 
 namespace RegisterKeeper.Web.Controllers
 {
+	[Authorize]
 	public class ShotsController : Controller
 	{
 		readonly RegisterKeeperDb _db = new RegisterKeeperDb();
@@ -28,6 +25,8 @@ namespace RegisterKeeper.Web.Controllers
 			var sighterConversionViewModel = new SighterConversionViewModel
 				{
 					ShootId = shootId,
+					RegisterCardId = shoot.RegisterCardId,
+					TeamCompetitorId = shoot.TeamCompetitorId,
 					CompetitionName = shoot.CompetitionName,
 					CompetitorName = shoot.CompetitorName,
 					Distance = shoot.Distance,
@@ -53,7 +52,8 @@ namespace RegisterKeeper.Web.Controllers
 
 			_db.SaveChanges();
 
-
+			RegisterKeeperHub.BroadcastSighterConversionUpdateToClients(shoot.FirstSighter);
+			RegisterKeeperHub.BroadcastSighterConversionUpdateToClients(shoot.SecondSighter);
 			RegisterKeeperHub.BroadcastScoreUpdateToClients(shoot.FirstToCount);
 			RegisterKeeperHub.BroadcastScoreUpdateToClients(shoot.SecondToCount);
 
@@ -72,6 +72,7 @@ namespace RegisterKeeper.Web.Controllers
 
 			_db.SaveChanges();
 
+			RegisterKeeperHub.BroadcastSighterConversionUpdateToClients(shoot.FinalSighter);
 			RegisterKeeperHub.BroadcastScoreUpdateToClients(shoot.FirstToCount);
 
 			// build view model for second to count
@@ -83,7 +84,6 @@ namespace RegisterKeeper.Web.Controllers
 		private ScorerViewModel BuildViewModel(int shotId)
 		{
 			var shot = _db.Shots.Find(shotId);
-			//var shoot = _db.Shoots.Find(shot.ShootId);
 			var shoot = shot.Shoot;
 
 			var viewModel = new ScorerViewModel

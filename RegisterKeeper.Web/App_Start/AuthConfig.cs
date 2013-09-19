@@ -26,7 +26,7 @@ namespace RegisterKeeper.Web
 			//    appId: "",
 			//    appSecret: "");
 
-			//OAuthWebSecurity.RegisterGoogleClient();
+			OAuthWebSecurity.RegisterGoogleClient();
 		}
 	}
 }

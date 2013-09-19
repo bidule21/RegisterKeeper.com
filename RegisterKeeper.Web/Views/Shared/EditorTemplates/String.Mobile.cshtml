@@ -1,0 +1,7 @@
+﻿@model String
+
+<div data-role="fieldcontain">
+    @Html.LabelForModel()
+    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue)
+    @Html.ValidationMessageFor(model => model)
+</div>

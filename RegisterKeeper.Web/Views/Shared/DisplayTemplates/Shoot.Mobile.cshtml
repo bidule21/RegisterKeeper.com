@@ -4,4 +4,9 @@
     var firstSighterShotId = Model.Sighters.Single(s => s.ShotNumber == 1).Id;
 }
 
-<li>@Html.ActionLink(Model.Distance.DisplayValue(), "Scorer", "Shots", new { shotId = firstSighterShotId }, null)</li>
+<li>
+    <a href="@Url.Action("Scorer", "Shots", new { shotId = firstSighterShotId })" data-ajax="false">
+        @Model.Distance.DisplayValue()
+        <span class="ui-li-count">@Model.TotalScore.ToString()</span>
+    </a>
+</li>

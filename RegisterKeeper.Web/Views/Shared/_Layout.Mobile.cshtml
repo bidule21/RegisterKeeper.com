@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using RegisterKeeper.Web.ViewModels
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +7,9 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/jquery-mobile-css", "~/Content/Mobile/css")
     @Scripts.Render("~/bundles/jquery", "~/bundles/jquerymobile")
+    <script>
+        $.ajaxSetup({ cache: false });
+    </script>
 </head>
 <body>
 
@@ -13,16 +17,28 @@
 
         <div data-role="header">
             @*<h1>@ViewBag.Title</h1>*@
-            <a href="/" data-icon="home">Home</a>
-            <h1>RegisterKeeper.com</h1>
-            <a href="#" data-icon="gear">Login</a>
-            <div data-role="navbar">
+
+            @{ ActionLinkParameters backActionLink; }
+            @if ((backActionLink = ViewBag.BackActionLink) != null)
+            {
+                @Html.ActionLink(
+                    backActionLink.LinkText ?? "Back",
+                    backActionLink.ActionName,
+                    backActionLink.ControllerName,
+                    backActionLink.RouteValues,
+                    new { data_icon = "arrow-l", data_iconpos = "notext" }
+                )
+            }
+
+            <h1>@Html.ActionLink("RegisterKeeper.com", "Index", "Home")</h1>
+            @*<a href="#" data-icon="gear">Login</a>*@
+            @*<div data-role="navbar">
                 <ul>
                     <li><a href="#">Live</a></li>
                     <li><a href="/">Completed</a></li>
                     <li><a href="/">Upcoming</a></li>
                 </ul>
-            </div>
+            </div>*@
 
         </div>
 
@@ -31,7 +47,7 @@
             @RenderBody()
         </div>
 
-        @Html.Partial("_ViewSwitcher")
+        @*@Html.Partial("_ViewSwitcher")*@
     </div>
     <script src="~/Scripts/jquery.signalR-1.1.3.js"></script>
     <script src="~/signalr/hubs"></script>
@@ -45,9 +61,9 @@
             // Start the connection.
             $.connection.hub.start();
         });
-        
-        $(document).on("pageinit", function(event) {
-            (function(target) {
+
+        $(document).on("pageinit", function (event) {
+            (function (target) {
                 $(".ScorerValueButtons input", target).on("click", function () {
                     $(".ScoreDisplay", target).val($(this).val());
 
@@ -56,7 +72,7 @@
                 });
             }(event.target));
         });
-        
+
     </script>
 
 </body>

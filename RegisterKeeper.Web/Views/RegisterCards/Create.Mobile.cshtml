@@ -4,12 +4,15 @@
     ViewBag.Title = "Add register card";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "RegisterCards", Request.QueryString.ToRouteValues(),
+    FormMethod.Post, new Dictionary<string, object> { { "data-ajax", "false" } }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    @Html.EditorForModel()
+
+@*<fieldset>
         <legend>Add register card for <i>@ViewBag.CompetitionName</i></legend>
 
         <div data-role="fieldcontain">
@@ -34,15 +37,15 @@
             @Html.LabelFor(model => model.CompetitorClub)
             @Html.EditorFor(model => model.CompetitorClub)
             @Html.ValidationMessageFor(model => model.CompetitorClub)
-        </div>
+        </div>*@
 
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <input type="submit" value="Add" data-theme="b" />
-            </div>
-            <div class="ui-block-b">
-                @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { id = ViewBag.CompetitionId }, new { data_role = "button" })
-            </div>
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <input type="submit" value="Add" data-theme="b" />
         </div>
-    </fieldset>
+        <div class="ui-block-b">
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { id = ViewBag.CompetitionId }, new { data_role = "button" })
+        </div>
+    </div>
+@*</fieldset>*@
 }

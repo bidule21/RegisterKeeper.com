@@ -1,0 +1,17 @@
+﻿@using RegisterKeeper.Web.External.MvcEnumFlags
+@model RegisterKeeper.Web.Models.Competition
+
+@Html.EditorFor(c => c.Name)
+@Html.EditorFor(c => c.StartDateTime)
+@Html.EditorFor(c => c.EndDateTime)
+
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup">
+        <legend>Distances</legend>
+        @Html.CheckBoxesForEnumFlagsFor(c => c.Distances)
+    </fieldset>
+</div>
+
+@Html.EditorFor(c => c.Location)
+@Html.EditorFor(c => c.NumberOfSightingShots)
+@Html.EditorFor(c => c.NumberOfScoringShots)

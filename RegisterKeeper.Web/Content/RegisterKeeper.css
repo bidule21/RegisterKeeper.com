@@ -85,15 +85,6 @@
 	CheckBoxesForEnumFlagsFor helper to line up on the same 
 	horizontal line */
 
-.controls > input[type="checkbox"] + label
-{
-	display: inline-block;
-	margin-top: 0;
-	padding-top: 0;
-	margin-bottom: 0;
-	padding-bottom: 0;
-}
-
 .controls > input[type="checkbox"]
 {
 	margin-top: 0;
@@ -101,8 +92,23 @@
 	margin-bottom: 0;
 	padding-bottom: 0;
 	position: relative;
-	top: -1px;
+	top: -2px;
 }
+
+	.controls > input[type="checkbox"] + label
+	{
+		display: inline;
+		margin-top: 0;
+		padding-top: 0;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+		.controls > input[type="checkbox"] + label:after
+		{
+			content: "\a";
+			white-space: pre;
+		}
 
 /* 
 	Styles for competition details screen
@@ -318,3 +324,26 @@ table .border-left
 	float: right;
 	margin-top: 10px;
 }
+
+.strikethrough
+{
+	position: relative;
+}
+
+	.strikethrough:before
+	{
+		position: absolute;
+		content: "";
+		/*width: 170%;*/
+		/*left: -35%;*/
+		left: 0;
+		top: 50%;
+		right: 0;
+		border-top: 1px solid #333333;
+		/*border-color: inherit;*/
+		-webkit-transform: rotate(-35deg);
+		-moz-transform: rotate(-35deg);
+		-ms-transform: rotate(-35deg);
+		-o-transform: rotate(-35deg);
+		transform: rotate(-35deg);
+	}

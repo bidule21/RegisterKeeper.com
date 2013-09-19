@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using RegisterKeeper.Web.Models;
 
 namespace RegisterKeeper.Web.ViewModels
@@ -9,6 +6,9 @@ namespace RegisterKeeper.Web.ViewModels
 	public class SighterConversionViewModel
 	{
 		public int ShootId { get; set; }
+
+		public int? RegisterCardId { get; set; }
+		public int? TeamCompetitorId { get; set; }
 
 		public string CompetitionName { get; set; }
 		public string CompetitorName { get; set; }

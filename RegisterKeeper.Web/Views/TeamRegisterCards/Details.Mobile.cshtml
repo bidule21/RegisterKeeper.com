@@ -1,16 +1,34 @@
-﻿@model RegisterKeeper.Web.Models.TeamRegisterCard
+﻿@using RegisterKeeper.Web.ViewModels
+@model RegisterKeeper.Web.Models.TeamRegisterCard
 
 @{
     ViewBag.Title = Model.TeamName;
+    ViewBag.BackActionLink = new ActionLinkParameters
+        {
+            LinkText = "Back to competition",
+            ControllerName = "TeamCompetitions",
+            ActionName = "Details",
+            RouteValues = new {id = Model.TeamCompetitionId}
+        };
 }
 
-<h1>@Model.TeamName</h1>
+<h4>@Model.TeamCompetition.Name ></h4>
+
+<h2>@Model.TeamName</h2>
 
 <ol data-role="listview" data-inset="true">
-    @foreach (var teamCompetitor in Model.Firers)
+    @foreach (var teamCompetitor in Model.Firers
+        .OrderByDescending(x => x.TotalScore.Points)
+        .ThenByDescending(x => x.TotalScore.VBulls))
     {
         <li>
-            @Html.ActionLink(teamCompetitor.CompetitorName, "Details", "TeamCompetitors", new { id = teamCompetitor.Id }, null)
+            @*@Html.ActionLink(teamCompetitor.CompetitorName, "Details", "TeamCompetitors",
+                new { id = teamCompetitor.Id }, null)*@
+            <a href="@Url.Action("Details", "TeamCompetitors",
+                                 new { id = teamCompetitor.Id })">
+                @teamCompetitor.CompetitorName
+                <span class="ui-li-count">@teamCompetitor.TotalScore.ToString()</span>
+            </a>
         </li>
     }
 </ol>

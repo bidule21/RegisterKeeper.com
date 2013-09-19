@@ -62,8 +62,12 @@
                                 @foreach (var i in Enumerable.Range(1, Model.NumberOfSightingShots))
                                 {
                                     var sightingShot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
-                                    <td class="@(i == 1 ? "border-left" : null)" id="ShotId-@sightingShot.Id">
-                                        @sightingShot.Score.DisplayValue()
+                                    <td class="@((i == 1 ? "border-left " : String.Empty) + (sightingShot.Converted ? "strikethrough" : String.Empty))"
+                                        id="ShotId-@sightingShot.Id">
+                                        @*<span id="ShotId-@sightingShot.Id" style="width: 100%"
+                                            class="@(sightingShot.Converted ? "strikethrough" : null)">*@
+                                            @sightingShot.Score.DisplayValue()
+                                        @*</span>*@
                                     </td>
                                 }
                                 @foreach (var i in Enumerable.Range(1, Model.NumberOfScoringShots))

@@ -1,38 +1,73 @@
-﻿.view-switcher {
-	padding: 0.5em; 
+﻿.view-switcher
+{
+	padding: 0.5em;
 	font-weight: normal;
 }
 
 /* styles for validation helpers */
-.field-validation-error {
+.field-validation-error
+{
 	color: #e80c4d;
 	font-weight: bold;
 }
 
-.field-validation-valid {
+.field-validation-valid
+{
 	display: none;
 }
 
 input[type="text"].input-validation-error,
-input[type="password"].input-validation-error {
+input[type="password"].input-validation-error
+{
 	border: solid 1px #e80c4d;
 }
 
-.validation-summary-errors {
+.validation-summary-errors
+{
 	color: #e80c4d;
 	font-weight: bold;
 	font-size: 1.1em;
 }
 
-.validation-summary-valid {
+.validation-summary-valid
+{
 	display: none;
 }
 
 
-.ui-listview-filter {
+.ui-listview-filter
+{
 	margin-top: 16px;
 }
 
-h1 {
-	margin: 16px 0;
+h1
+{
+	margin: 0 0 16px 0;
+}
+
+.ui-header .ui-title
+{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.ui-title a.ui-link
+{
+	color: white;
+	text-decoration: none;
+}
+
+	.ui-title a.ui-link:visited
+	{
+		color: white;
+	}
+
+h2
+{
+	margin: 0 0 16px 0;
+}
+
+h4
+{
+	margin: 0 0 16px 0;
 }

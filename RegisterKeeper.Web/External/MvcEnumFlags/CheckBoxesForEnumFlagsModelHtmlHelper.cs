@@ -19,9 +19,10 @@ namespace RegisterKeeper.Web.External.MvcEnumFlags
 		/// <typeparam name="TEnum"></typeparam>
 		/// <param name="htmlHelper">Html helper.</param>
 		/// <param name="expression"></param>
+		/// <param name="readonly"></param>
 		/// <returns></returns>
 		public static IHtmlString CheckBoxesForEnumFlagsFor<TModel, TEnum>(
-			this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> expression)
+			this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> expression, bool @readonly = false)
 		{
 			var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
 			var enumModelType = metadata.ModelType;
@@ -45,7 +46,7 @@ namespace RegisterKeeper.Web.External.MvcEnumFlags
 				var templateInfo = htmlHelper.ViewData.TemplateInfo;
 				var id = templateInfo.GetFullHtmlFieldId(item.ToString());
 				var name = templateInfo.GetFullHtmlFieldName(metadata.PropertyName);
-				
+
 				var label = new TagBuilder("label");
 				label.Attributes["for"] = id;
 				var field = item.GetType().GetField(item.ToString());
@@ -56,13 +57,32 @@ namespace RegisterKeeper.Web.External.MvcEnumFlags
 				checkbox.Attributes["name"] = name;
 				checkbox.Attributes["type"] = "checkbox";
 				checkbox.Attributes["value"] = item.ToString();
-				
+
 				var model = metadata.Model as Enum;
 				if ((model != null) && (model.HasFlag(item)))
 				{
 					checkbox.Attributes["checked"] = "checked";
 				}
-				sb.AppendLine(checkbox.ToString());
+
+				if (@readonly)
+				{
+					checkbox.Attributes["disabled"] = "disabled";
+					sb.AppendLine(checkbox.ToString());
+
+					if ((model != null) && (model.HasFlag(item)))
+					{
+						var hidden = new TagBuilder("input");
+						hidden.Attributes["type"] = "hidden";
+						hidden.Attributes["name"] = name;
+						hidden.Attributes["value"] = item.ToString();
+						sb.AppendLine(hidden.ToString());
+					}
+				}
+				else
+				{
+					sb.AppendLine(checkbox.ToString());
+				}
+
 
 				// Check to see if DisplayName attribute has been set for item.
 				var displayName = field.GetCustomAttributes(typeof(DisplayNameAttribute), true)
@@ -83,7 +103,7 @@ namespace RegisterKeeper.Web.External.MvcEnumFlags
 
 				// Add line break.
 				//sb.AppendLine("<br />");
-				
+
 				//sb.AppendLine(span.ToString(TagRenderMode.EndTag));
 			}
 

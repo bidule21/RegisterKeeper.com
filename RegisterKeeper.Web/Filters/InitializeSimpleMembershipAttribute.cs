@@ -25,11 +25,11 @@ namespace RegisterKeeper.Web.Filters
 		{
 			public SimpleMembershipInitializer()
 			{
-				Database.SetInitializer<UsersContext>(null);
+				Database.SetInitializer<RegisterKeeperDb>(null);
 
 				try
 				{
-					using (var context = new UsersContext())
+					using (var context = new RegisterKeeperDb())
 					{
 						if (!context.Database.Exists())
 						{

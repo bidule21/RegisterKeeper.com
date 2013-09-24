@@ -1,11 +1,16 @@
-﻿@model RegisterKeeper.Web.Models.Shoot
+﻿@using RegisterKeeper.Web.Models
+@model Shoot
 
 @{
-    var firstSighterShotId = Model.Sighters.Single(s => s.ShotNumber == 1).Id;
+
+    // get the first unscored shot, or default to first sighter
+    var shot = (Model.Sighters.OrderBy(s => s.ShotNumber).FirstOrDefault(s => !s.Score.HasValue) 
+        ?? (Shot) Model.ScoringShots.OrderBy(s => s.ShotNumber).FirstOrDefault(s => !s.Score.HasValue)) 
+        ?? Model.Sighters.Single(s => s.ShotNumber == 1);
 }
 
 <li>
-    <a href="@Url.Action("Scorer", "Shots", new { shotId = firstSighterShotId })" data-ajax="false">
+    <a href="@Url.Action("Scorer", "Shots", new { shotId = shot.Id })" data-ajax="false">
         @Model.Distance.DisplayValue()
         <span class="ui-li-count">@Model.TotalScore.ToString()</span>
     </a>

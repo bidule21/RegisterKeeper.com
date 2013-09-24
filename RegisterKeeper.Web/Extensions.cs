@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using RegisterKeeper.Web.Models;
 
@@ -93,6 +94,13 @@ namespace RegisterKeeper.Web
 				routeValues.Add(key, queryString[key]);
 
 			return routeValues;
+		}
+
+		public static bool In(this WebViewPage page, string path)
+		{
+			var currentPath = "/" + page.ViewContext.RouteData.Values["controller"] + "/" +
+							  page.ViewContext.RouteData.Values["action"];
+			return currentPath.StartsWith(path);
 		}
 	}
 }

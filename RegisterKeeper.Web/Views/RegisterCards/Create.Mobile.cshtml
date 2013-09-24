@@ -1,8 +1,17 @@
-﻿@model RegisterKeeper.Web.Models.RegisterCard
+﻿@using RegisterKeeper.Web.ViewModels
+@model RegisterKeeper.Web.Models.RegisterCard
 
 @{
     ViewBag.Title = "Add register card";
+    ViewBag.backActionLink = new ActionLinkParameters
+    {
+        ControllerName = "IndividualCompetitions",
+        ActionName = "Details",
+        RouteValues = new { id = Model.IndividualCompetitionId }
+    };
 }
+
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Create", "RegisterCards", Request.QueryString.ToRouteValues(),
     FormMethod.Post, new Dictionary<string, object> { { "data-ajax", "false" } }))
@@ -44,7 +53,7 @@
             <input type="submit" value="Add" data-theme="b" />
         </div>
         <div class="ui-block-b">
-            @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { id = ViewBag.CompetitionId }, new { data_role = "button" })
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { id = Model.IndividualCompetitionId }, new { data_role = "button" })
         </div>
     </div>
 @*</fieldset>*@

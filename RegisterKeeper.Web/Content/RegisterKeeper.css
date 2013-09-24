@@ -95,7 +95,7 @@
 	top: -2px;
 }
 
-	.controls > input[type="checkbox"] + label
+	.controls > input[type="checkbox"] ~ label
 	{
 		display: inline;
 		margin-top: 0;
@@ -104,7 +104,7 @@
 		padding-bottom: 0;
 	}
 
-		.controls > input[type="checkbox"] + label:after
+		.controls > input[type="checkbox"] ~ label:after
 		{
 			content: "\a";
 			white-space: pre;
@@ -209,9 +209,14 @@
 .register-card-container td
 {
 	border-top: 1px solid #dddddd;
-	padding: 0 0.5em 0 0.5em;
+	padding: 0 0.5em;
 	text-align: center;
 	min-width: 1em;
+}
+
+.register-card-container td span {
+	display: block;
+	margin: 0 -0.5em;
 }
 
 	.register-card-container td.distance
@@ -232,7 +237,7 @@
 
 .register-card-container .total-column
 {
-	min-width: 5em;
+	min-width: 5em;	
 }
 
 table .border-left
@@ -328,6 +333,7 @@ table .border-left
 .strikethrough
 {
 	position: relative;
+	display: inline-block;
 }
 
 	.strikethrough:before

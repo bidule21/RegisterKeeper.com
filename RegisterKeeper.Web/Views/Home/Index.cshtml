@@ -13,7 +13,7 @@
 {
     <div class="row">
         <div class="span12">
-            <p>Live competitions:</p>
+            <h3>Live competitions</h3>
         </div>
         @foreach (var competition in Model.LiveCompetitions)
         {
@@ -33,7 +33,7 @@
 <div class="row">
     <div class="column-divider"></div>
     <div class="span8">
-        <p>Completed competitions:</p>
+        <h3>Completed competitions</h3>
 
         @foreach (var competition in Model.CompletedCompetitions)
         {
@@ -42,7 +42,7 @@
 
     </div>
     <div class="span4">
-        <p>Upcoming competitions:</p>
+        <h3>Upcoming competitions</h3>
         @foreach (var competition in Model.UpcomingCompetitions)
         {
             <a href="#" class="rounded-corners">

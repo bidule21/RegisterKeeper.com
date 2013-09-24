@@ -36,7 +36,7 @@ namespace RegisterKeeper.Web.Controllers
 
 		//
 		// GET: /IndividualCompetition/Create
-
+		[Authorize]
 		public ActionResult Create()
 		{
 			return View();
@@ -84,7 +84,7 @@ namespace RegisterKeeper.Web.Controllers
 			{
 				_db.Entry(individualcompetition).State = EntityState.Modified;
 				_db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Details", new { id = individualcompetition.Id });
 			}
 			return View(individualcompetition);
 		}

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
@@ -27,23 +24,23 @@ namespace RegisterKeeper.Web.Controllers
 			return View();
 		}
 
-		//
-		// POST: /Account/Login
+		////
+		//// POST: /Account/Login
 
-		[HttpPost]
-		[AllowAnonymous]
-		[ValidateAntiForgeryToken]
-		public ActionResult Login(LoginModel model, string returnUrl)
-		{
-			if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-			{
-				return RedirectToLocal(returnUrl);
-			}
+		//[HttpPost]
+		//[AllowAnonymous]
+		//[ValidateAntiForgeryToken]
+		//public ActionResult Login(LoginModel model, string returnUrl)
+		//{
+		//	if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+		//	{
+		//		return RedirectToLocal(returnUrl);
+		//	}
 
-			// If we got this far, something failed, redisplay form
-			ModelState.AddModelError("", "The user name or password provided is incorrect.");
-			return View(model);
-		}
+		//	// If we got this far, something failed, redisplay form
+		//	ModelState.AddModelError("", "The user name or password provided is incorrect.");
+		//	return View(model);
+		//}
 
 		//
 		// POST: /Account/LogOff
@@ -66,32 +63,32 @@ namespace RegisterKeeper.Web.Controllers
 			return View();
 		}
 
-		//
-		// POST: /Account/Register
+		////
+		//// POST: /Account/Register
 
-		[HttpPost]
-		[AllowAnonymous]
-		[ValidateAntiForgeryToken]
-		public ActionResult Register(RegisterModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				// Attempt to register the user
-				try
-				{
-					WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-					WebSecurity.Login(model.UserName, model.Password);
-					return RedirectToAction("Index", "Home");
-				}
-				catch (MembershipCreateUserException e)
-				{
-					ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-				}
-			}
+		//[HttpPost]
+		//[AllowAnonymous]
+		//[ValidateAntiForgeryToken]
+		//public ActionResult Register(RegisterModel model)
+		//{
+		//	if (ModelState.IsValid)
+		//	{
+		//		// Attempt to register the user
+		//		try
+		//		{
+		//			WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+		//			WebSecurity.Login(model.UserName, model.Password);
+		//			return RedirectToAction("Index", "Home");
+		//		}
+		//		catch (MembershipCreateUserException e)
+		//		{
+		//			ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+		//		}
+		//	}
 
-			// If we got this far, something failed, redisplay form
-			return View(model);
-		}
+		//	// If we got this far, something failed, redisplay form
+		//	return View(model);
+		//}
 
 		//
 		// POST: /Account/Disassociate
@@ -137,68 +134,68 @@ namespace RegisterKeeper.Web.Controllers
 			return View();
 		}
 
-		//
-		// POST: /Account/Manage
+		////
+		//// POST: /Account/Manage
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Manage(LocalPasswordModel model)
-		{
-			bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-			ViewBag.HasLocalPassword = hasLocalAccount;
-			ViewBag.ReturnUrl = Url.Action("Manage");
-			if (hasLocalAccount)
-			{
-				if (ModelState.IsValid)
-				{
-					// ChangePassword will throw an exception rather than return false in certain failure scenarios.
-					bool changePasswordSucceeded;
-					try
-					{
-						changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-					}
-					catch (Exception)
-					{
-						changePasswordSucceeded = false;
-					}
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public ActionResult Manage(LocalPasswordModel model)
+		//{
+		//	bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+		//	ViewBag.HasLocalPassword = hasLocalAccount;
+		//	ViewBag.ReturnUrl = Url.Action("Manage");
+		//	if (hasLocalAccount)
+		//	{
+		//		if (ModelState.IsValid)
+		//		{
+		//			// ChangePassword will throw an exception rather than return false in certain failure scenarios.
+		//			bool changePasswordSucceeded;
+		//			try
+		//			{
+		//				changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+		//			}
+		//			catch (Exception)
+		//			{
+		//				changePasswordSucceeded = false;
+		//			}
 
-					if (changePasswordSucceeded)
-					{
-						return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-					}
-					else
-					{
-						ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-					}
-				}
-			}
-			else
-			{
-				// User does not have a local password so remove any validation errors caused by a missing
-				// OldPassword field
-				ModelState state = ModelState["OldPassword"];
-				if (state != null)
-				{
-					state.Errors.Clear();
-				}
+		//			if (changePasswordSucceeded)
+		//			{
+		//				return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+		//			}
+		//			else
+		//			{
+		//				ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+		//			}
+		//		}
+		//	}
+		//	else
+		//	{
+		//		// User does not have a local password so remove any validation errors caused by a missing
+		//		// OldPassword field
+		//		ModelState state = ModelState["OldPassword"];
+		//		if (state != null)
+		//		{
+		//			state.Errors.Clear();
+		//		}
 
-				if (ModelState.IsValid)
-				{
-					try
-					{
-						WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-						return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-					}
-					catch (Exception)
-					{
-						ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
-					}
-				}
-			}
+		//		if (ModelState.IsValid)
+		//		{
+		//			try
+		//			{
+		//				WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
+		//				return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+		//			}
+		//			catch (Exception)
+		//			{
+		//				ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
+		//			}
+		//		}
+		//	}
 
-			// If we got this far, something failed, redisplay form
-			return View(model);
-		}
+		//	// If we got this far, something failed, redisplay form
+		//	return View(model);
+		//}
 
 		//
 		// POST: /Account/ExternalLogin
@@ -234,14 +231,12 @@ namespace RegisterKeeper.Web.Controllers
 				OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
 				return RedirectToLocal(returnUrl);
 			}
-			else
-			{
-				// User is new, ask for their desired membership name
-				string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-				ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-				ViewBag.ReturnUrl = returnUrl;
-				return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-			}
+			
+			// User is new, ask for their desired membership name
+			var loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+			ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+			ViewBag.ReturnUrl = returnUrl;
+			return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
 		}
 
 		//
@@ -252,8 +247,8 @@ namespace RegisterKeeper.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
 		{
-			string provider = null;
-			string providerUserId = null;
+			string provider;
+			string providerUserId;
 
 			if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
 			{
@@ -263,7 +258,7 @@ namespace RegisterKeeper.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				// Insert a new user into the database
-				using (UsersContext db = new UsersContext())
+				using (var db = new RegisterKeeperDb())
 				{
 					UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
 					// Check if user already exists
@@ -278,10 +273,8 @@ namespace RegisterKeeper.Web.Controllers
 
 						return RedirectToLocal(returnUrl);
 					}
-					else
-					{
-						ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-					}
+					
+					ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
 				}
 			}
 
@@ -311,18 +304,12 @@ namespace RegisterKeeper.Web.Controllers
 		public ActionResult RemoveExternalLogins()
 		{
 			ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-			List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-			foreach (OAuthAccount account in accounts)
-			{
-				AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
-
-				externalLogins.Add(new ExternalLogin
-				{
-					Provider = account.Provider,
-					ProviderDisplayName = clientData.DisplayName,
-					ProviderUserId = account.ProviderUserId,
-				});
-			}
+			var externalLogins = (from account in accounts
+								  let clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider)
+								  select new ExternalLogin
+									  {
+										  Provider = account.Provider, ProviderDisplayName = clientData.DisplayName, ProviderUserId = account.ProviderUserId,
+									  }).ToList();
 
 			ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
 			return PartialView("_RemoveExternalLoginsPartial", externalLogins);
@@ -335,10 +322,8 @@ namespace RegisterKeeper.Web.Controllers
 			{
 				return Redirect(returnUrl);
 			}
-			else
-			{
-				return RedirectToAction("Index", "Home");
-			}
+			
+			return RedirectToAction("Index", "Home");
 		}
 
 		public enum ManageMessageId
@@ -365,43 +350,43 @@ namespace RegisterKeeper.Web.Controllers
 			}
 		}
 
-		private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-		{
-			// See http://go.microsoft.com/fwlink/?LinkID=177550 for
-			// a full list of status codes.
-			switch (createStatus)
-			{
-				case MembershipCreateStatus.DuplicateUserName:
-					return "User name already exists. Please enter a different user name.";
+		//private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+		//{
+		//	// See http://go.microsoft.com/fwlink/?LinkID=177550 for
+		//	// a full list of status codes.
+		//	switch (createStatus)
+		//	{
+		//		case MembershipCreateStatus.DuplicateUserName:
+		//			return "User name already exists. Please enter a different user name.";
 
-				case MembershipCreateStatus.DuplicateEmail:
-					return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+		//		case MembershipCreateStatus.DuplicateEmail:
+		//			return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
 
-				case MembershipCreateStatus.InvalidPassword:
-					return "The password provided is invalid. Please enter a valid password value.";
+		//		case MembershipCreateStatus.InvalidPassword:
+		//			return "The password provided is invalid. Please enter a valid password value.";
 
-				case MembershipCreateStatus.InvalidEmail:
-					return "The e-mail address provided is invalid. Please check the value and try again.";
+		//		case MembershipCreateStatus.InvalidEmail:
+		//			return "The e-mail address provided is invalid. Please check the value and try again.";
 
-				case MembershipCreateStatus.InvalidAnswer:
-					return "The password retrieval answer provided is invalid. Please check the value and try again.";
+		//		case MembershipCreateStatus.InvalidAnswer:
+		//			return "The password retrieval answer provided is invalid. Please check the value and try again.";
 
-				case MembershipCreateStatus.InvalidQuestion:
-					return "The password retrieval question provided is invalid. Please check the value and try again.";
+		//		case MembershipCreateStatus.InvalidQuestion:
+		//			return "The password retrieval question provided is invalid. Please check the value and try again.";
 
-				case MembershipCreateStatus.InvalidUserName:
-					return "The user name provided is invalid. Please check the value and try again.";
+		//		case MembershipCreateStatus.InvalidUserName:
+		//			return "The user name provided is invalid. Please check the value and try again.";
 
-				case MembershipCreateStatus.ProviderError:
-					return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+		//		case MembershipCreateStatus.ProviderError:
+		//			return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
 
-				case MembershipCreateStatus.UserRejected:
-					return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+		//		case MembershipCreateStatus.UserRejected:
+		//			return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
 
-				default:
-					return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-			}
-		}
+		//		default:
+		//			return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+		//	}
+		//}
 		#endregion
 	}
 }

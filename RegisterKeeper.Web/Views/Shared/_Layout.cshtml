@@ -10,51 +10,67 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/RegisterKeeper.css" rel="stylesheet" />
 
-
-
 </head>
 <body>
     @* Fork of bootstrap-datetimepicker project - http://www.malot.fr/bootstrap-datetimepicker/ *@
     <link href="~/Content/datetimepicker.css" rel="stylesheet" />
     <div class="container">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <span class="brand">RegisterKeeper.com</span>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active">
-                                @Html.ActionLink("Home", "Index", "Home")
-                            </li>
-                            <li><a href="#">Live</a></li>
-                            <li><a href="#">Completed</a></li>
-                            <li><a href="#">Upcoming</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Competition <b class="caret"></b></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation">
-                                        @Html.ActionLink("Add Individual Competition", "Create", "IndividualCompetitions", null, new { role = "menuitem", tabindex = "-1" })
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="brand">RegisterKeeper.com</span>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li class="@(this.In("/Home") ? "active" : null)">
+                                    @Html.ActionLink("Home", "Index", "Home")
+                                </li>
+                                <li><a href="#">Live</a></li>
+                                <li><a href="#">Completed</a></li>
+                                <li><a href="#">Upcoming</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Competition <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation">
+                                            @Html.ActionLink("Add Individual Competition", "Create", "IndividualCompetitions", null, new { role = "menuitem", tabindex = "-1" })
+                                        </li>
+                                        <li role="presentation">
+                                            @Html.ActionLink("Add Team Competition", "Create", "TeamCompetitions", null, new { role = "menuitem", tabindex = "-1" })
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav pull-right">
+
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li class="@(this.In("/Account/Manage") ? "active" : null)">
+                                        @Html.ActionLink(User.Identity.Name, "Manage", "Account")
                                     </li>
-                                    <li role="presentation">
-                                        @Html.ActionLink("Add Team Competition", "Create", "TeamCompetitions", null, new { role = "menuitem", tabindex = "-1" })
+                                    <li class="pull-right">
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                                     </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav pull-right">
-                            <li class="pull-right"><a href="#">Login</a></li>
-                        </ul>
+                                }
+                                else
+                                {
+                                    <li class="pull-right">
+                                        @Html.ActionLink("Login", "Login", "Account")
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
                     </div>
-                    <!--/.nav-collapse -->
                 </div>
             </div>
-        </div>
-
+        }
 
         @RenderBody()
 

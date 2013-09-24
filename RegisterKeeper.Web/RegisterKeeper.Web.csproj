@@ -214,7 +214,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndividualCompetitionsController.cs" />
     <Compile Include="Controllers\RegisterCardsController.cs" />
-    <Compile Include="Controllers\ShootsController.cs" />
     <Compile Include="Controllers\ShotsController.cs" />
     <Compile Include="Controllers\SightingShotsController.cs" />
     <Compile Include="Controllers\TeamCompetitionsController.cs" />
@@ -233,6 +232,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RegisterKeeperModels.cs" />
     <Compile Include="Models\RegisterKeeperDb.cs" />
+    <Compile Include="Models\SeedData\IndividualCompetitions.cs" />
+    <Compile Include="Models\SeedData\TeamCompetitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ActionLinkParameters.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
@@ -443,11 +444,11 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.Mobile.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.Mobile.cshtml" />
     <Content Include="Views\RegisterCards\EditorTemplates\RegisterCard.Mobile.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ViewModels\IndividualCompetitions\" />
-    <Folder Include="Views\IndividualCompetitions\EditorTemplates\" />
     <Folder Include="Views\Shoots\" />
   </ItemGroup>
   <ItemGroup>

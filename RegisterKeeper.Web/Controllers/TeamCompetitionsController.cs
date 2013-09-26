@@ -79,7 +79,7 @@ namespace RegisterKeeper.Web.Controllers
 			{
 				_db.Entry(teamcompetition).State = EntityState.Modified;
 				_db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Details", new { id = teamcompetition.Id });
 			}
 			return View(teamcompetition);
 		}

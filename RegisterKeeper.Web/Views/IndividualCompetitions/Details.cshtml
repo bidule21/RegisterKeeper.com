@@ -5,10 +5,13 @@
 }
 
 <div class="clearfix">
-    <div class="page-controls">
-        @Html.ActionLink("Edit Competition", "Edit", "IndividualCompetitions", new { Model.Id }, new { @class = "btn" })
-        @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id }, new { @class = "btn" })
-    </div>
+    @if (Request.IsAuthenticated)
+    {
+        <div class="page-controls">
+            @Html.ActionLink("Edit Competition", "Edit", "IndividualCompetitions", new {Model.Id}, new {@class = "btn"})
+            @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new {individualCompetitionId = Model.Id}, new {@class = "btn btn-primary"})
+        </div>
+    }
 
     <h2>@Html.DisplayFor(model => model.Name)</h2>
     @(Model.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))<br />
@@ -29,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="register-card-detail">
+                <div class="register-card-detail individual-register-card-detail">
                     <div class="clearfix">
                         <h4 class="header">
                             <span class="competitor-index-number">@((registerCard.CompetitorIndexNumber ?? 0).ToString("000"))</span>
@@ -94,13 +97,15 @@
                     }
 
                 </div>
-                <div class="register-card-controls">
-                    <div>
-                        @Html.ActionLink("Edit", "Edit", "RegisterCards", new { id = registerCard.Id }, new { @class = "btn" })
-                        @Html.ActionLink("Delete", "Delete", null, new { @class = "btn" })
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="register-card-controls">
+                        <div>
+                            @Html.ActionLink("Edit", "Edit", "RegisterCards", new {id = registerCard.Id}, new {@class = "btn"})
+                            @Html.ActionLink("Delete", "Delete", null, new {@class = "btn btn-danger"})
+                        </div>
                     </div>
-                </div>
-
+                }
             </div>
         </div>
 

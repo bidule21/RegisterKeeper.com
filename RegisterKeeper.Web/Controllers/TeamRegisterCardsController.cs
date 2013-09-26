@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using RegisterKeeper.Web.Models;
 
 namespace RegisterKeeper.Web.Controllers
 {
+	[Authorize]
 	public class TeamRegisterCardsController : Controller
 	{
 		private readonly RegisterKeeperDb _db = new RegisterKeeperDb();
 
 		//
 		// GET: /TeamRegisterCards/
-
+		[AllowAnonymous]
 		public ActionResult Index()
 		{
 			return View(_db.TeamRegisterCards.ToList());
@@ -20,7 +20,7 @@ namespace RegisterKeeper.Web.Controllers
 
 		//
 		// GET: /TeamRegisterCards/Details/5
-
+		[AllowAnonymous]
 		public ActionResult Details(int id = 0)
 		{
 			TeamRegisterCard teamregistercard = _db.TeamRegisterCards.Find(id);
@@ -81,29 +81,31 @@ namespace RegisterKeeper.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				foreach (var firer in teamregistercard.Firers)
+				if (teamregistercard.TeamCompetitors != null)
 				{
-
-					foreach (var shoot in firer.Shoots)
+					foreach (var firer in teamregistercard.TeamCompetitors)
 					{
-						foreach (var sightingShot in shoot.Sighters)
+						foreach (var shoot in firer.Shoots)
 						{
-							_db.Entry(sightingShot).State = sightingShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
-							_db.SaveChanges();
+							foreach (var sightingShot in shoot.Sighters)
+							{
+								_db.Entry(sightingShot).State = sightingShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
+								_db.SaveChanges();
+							}
+							foreach (var scoringShot in shoot.ScoringShots)
+							{
+								_db.Entry(scoringShot).State = scoringShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
+								_db.SaveChanges();
+							}
 						}
-						foreach (var scoringShot in shoot.ScoringShots)
+
+						// Update entity
+						_db.Entry(firer).State = EntityState.Modified;
+
+						foreach (var shoot in firer.Shoots)
 						{
-							_db.Entry(scoringShot).State = scoringShot.Id == default(int) ? EntityState.Added : EntityState.Modified;
-							_db.SaveChanges();
+							_db.Entry(shoot).State = shoot.Id == default(int) ? EntityState.Added : EntityState.Modified;
 						}
-					}
-
-					// Update entity
-					_db.Entry(firer).State = EntityState.Modified;
-
-					foreach (var shoot in firer.Shoots)
-					{
-						_db.Entry(shoot).State = shoot.Id == default(int) ? EntityState.Added : EntityState.Modified;
 					}
 				}
 
@@ -135,33 +137,29 @@ namespace RegisterKeeper.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			TeamRegisterCard teamregistercard = _db.TeamRegisterCards.Find(id);
+			var teamregistercard = _db.TeamRegisterCards.Find(id);
+			teamregistercard.CascadeDeleteShoots(_db);
 			_db.TeamRegisterCards.Remove(teamregistercard);
 			_db.SaveChanges();
-			return RedirectToAction("Index");
+			return RedirectToAction("Details", "TeamCompetitions", new { id = teamregistercard.TeamCompetitionId });
 		}
 
 		public ActionResult AddCompetitor(int teamRegistercardId)
 		{
 			var teamRegisterCard = _db.TeamRegisterCards.Find(teamRegistercardId);
-
 			var teamCompetitor = new TeamCompetitor
 				{
 					TeamRegisterCardId = teamRegistercardId,
-					TeamRegisterCard = teamRegisterCard,
-					Shoots = new List<Shoot>()
+					TeamRegisterCard = teamRegisterCard
 				};
 
 			var competition = teamRegisterCard.TeamCompetition;
-
 			teamCompetitor.InitialiseShoots(competition.Distances.ToList(), competition.NumberOfSightingShots, competition.NumberOfScoringShots);
-
-			
-
 			return View(teamCompetitor);
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult AddCompetitor(TeamCompetitor teamCompetitor)
 		{
 			if (ModelState.IsValid)

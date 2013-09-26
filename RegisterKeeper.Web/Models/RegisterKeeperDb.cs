@@ -24,6 +24,20 @@ namespace RegisterKeeper.Web.Models
 		public DbSet<SightingShot> SightingShots { get; set; }
 
 		public DbSet<UserProfile> UserProfiles { get; set; }
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			//modelBuilder.Entity<Shoot>().HasOptional(s => s.TeamCompetitor).WithMany(tc => tc.Shoots).WillCascadeOnDelete();
+			//modelBuilder.Entity<TeamCompetitor>()
+			//	.HasMany(tc => tc.Shoots)
+			//	.WithOptional(s => s.TeamCompetitor)
+			//	.WillCascadeOnDelete();
+
+			//modelBuilder.Entity<RegisterCard>()
+			//	.HasMany(rc => rc.Shoots)
+			//	.WithOptional(s => s.RegisterCard)
+			//	.WillCascadeOnDelete();
+		}
 	}
 
 	public class RegisterKeeperDbInitialiser : DropCreateDatabaseAlways<RegisterKeeperDb>

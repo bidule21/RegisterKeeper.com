@@ -17,7 +17,7 @@
 <h2>@Model.TeamName</h2>
 
 <ol data-role="listview" data-inset="true">
-    @foreach (var teamCompetitor in Model.Firers
+    @foreach (var teamCompetitor in Model.TeamCompetitors
         .OrderByDescending(x => x.TotalScore.Points)
         .ThenByDescending(x => x.TotalScore.VBulls))
     {

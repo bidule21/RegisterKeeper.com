@@ -170,7 +170,10 @@
 .register-card-detail
 {
 	display: table-cell;
-	/*padding-right: 1em;*/
+}
+
+.individual-register-card-detail {
+	padding-right: 1em;
 }
 
 	.register-card-detail .header
@@ -274,7 +277,7 @@ table .border-left
 	margin: 5px 0 0 0;
 	padding: 10px;
 	border: 1px solid #EEEEEE;
-	width: 90px;
+	width: 5em;
 }
 
 .register-card-controls
@@ -298,6 +301,10 @@ table .border-left
 	margin-top: 10px;
 	padding-top: 10px;
 	border-top: 1px solid #dddddd;
+}
+
+.team-register-card-controls a {
+	margin-left: 0.5em;
 }
 
 /* Datetime picker override */
@@ -328,6 +335,9 @@ table .border-left
 {
 	float: right;
 	margin-top: 10px;
+}
+.page-controls a {
+	margin-left: 0.5em;
 }
 
 .strikethrough

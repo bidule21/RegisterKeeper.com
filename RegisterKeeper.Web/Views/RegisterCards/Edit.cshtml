@@ -2,12 +2,27 @@
 
 @{
     ViewBag.Title = "Edit";
-
-    ViewBag.FormAction = "Edit";
-    ViewBag.SubmitButtonText = "Save";
 }
 
-@Html.Partial("_CreateEdit", Model)
+@using (Html.BeginForm("Edit", "RegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.IndividualCompetitionId)
+
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="form-actions">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { id = Model.IndividualCompetitionId }, new { @class = "btn" })
+        </div>
+    </fieldset>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

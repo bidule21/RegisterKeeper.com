@@ -21,7 +21,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 							new TeamRegisterCard
 								{
 									TeamName = "Test Team 1",
-									Firers = new List<TeamCompetitor>
+									TeamCompetitors = new List<TeamCompetitor>
 										{
 											new TeamCompetitor
 												{
@@ -54,6 +54,24 @@ namespace RegisterKeeper.Web.Models.SeedData
 																			new ScoringShot {ShotNumber = 9},
 																			new ScoringShot {ShotNumber = 10}
 																		}
+																},
+															new Shoot
+																{
+																	Distance = Distance.x1000yds,
+																	Shots = new List<Shot>
+																		{
+																			new SightingShot { ShotNumber = 1 },
+																			new ScoringShot { ShotNumber = 1 },
+																			new ScoringShot {ShotNumber = 2},
+																			new ScoringShot {ShotNumber = 3},
+																			new ScoringShot {ShotNumber = 4},
+																			new ScoringShot {ShotNumber = 5},
+																			new ScoringShot {ShotNumber = 6},
+																			new ScoringShot {ShotNumber = 7},
+																			new ScoringShot {ShotNumber = 8},
+																			new ScoringShot {ShotNumber = 9},
+																			new ScoringShot {ShotNumber = 10}
+																		}
 																}
 														}
 												}
@@ -62,7 +80,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 						}
 				};
 		}
-		
+
 		public static TeamCompetition TheKolapore()
 		{
 			return new TeamCompetition
@@ -80,7 +98,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 								{
 									TeamName = "Great Britain",
 									TeamCaptain = "Dr JD Warburton",
-									Firers = new List<TeamCompetitor>
+									TeamCompetitors = new List<TeamCompetitor>
 										{
 											new TeamCompetitor
 												{
@@ -577,7 +595,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 								{
 									TeamName = "Australia",
 									TeamCaptain = "Mr GE Grosskreutz",
-									Firers = new List<TeamCompetitor>
+									TeamCompetitors = new List<TeamCompetitor>
 										{
 											new TeamCompetitor
 												{
@@ -1092,7 +1110,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 								{
 									TeamName = "Australia",
 									TeamCaptain = "Mr GE Grosskreutz",
-									Firers = new List<TeamCompetitor>
+									TeamCompetitors = new List<TeamCompetitor>
 										{
 											new TeamCompetitor
 												{
@@ -1104,6 +1122,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.V},
@@ -1121,6 +1140,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1145,6 +1165,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1162,6 +1183,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.V},
@@ -1186,6 +1208,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1203,6 +1226,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1227,6 +1251,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.V},
 																			new ScoringShot {ShotNumber = 2, Score = Score.V},
 																			new ScoringShot {ShotNumber = 3, Score = Score.V},
@@ -1244,6 +1269,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1268,6 +1294,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1285,6 +1312,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1309,6 +1337,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1326,6 +1355,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1350,6 +1380,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1367,6 +1398,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Four},
@@ -1391,6 +1423,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1408,6 +1441,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1432,6 +1466,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1449,6 +1484,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1473,6 +1509,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Four},
@@ -1490,6 +1527,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1514,6 +1552,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Five},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1531,6 +1570,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Four},
@@ -1555,6 +1595,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x900yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Five},
@@ -1572,6 +1613,7 @@ namespace RegisterKeeper.Web.Models.SeedData
 																	Distance = Distance.x1000yds,
 																	Shots = new List<Shot>
 																		{
+																			new SightingShot { ShotNumber = 1 },
 																			new ScoringShot {ShotNumber = 1, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 2, Score = Score.Four},
 																			new ScoringShot {ShotNumber = 3, Score = Score.Four},

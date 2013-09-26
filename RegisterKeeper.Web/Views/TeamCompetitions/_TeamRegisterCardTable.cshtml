@@ -23,7 +23,7 @@
         <th class="border-left total-column">Total</th>
     </tr>
 
-    @foreach (var registerCard in Model.Firers)
+    @foreach (var registerCard in Model.TeamCompetitors)
     {
 
         firstDistance = true;
@@ -39,8 +39,10 @@
             @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfSightingShots))
             {
                 var sightingShot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
-                <td class="@(i == 1 ? "border-left" : null)" id="ShotId-@sightingShot.Id">
-                    @(sightingShot.Score.DisplayValue())
+                <td class="@(i == 1 ? "border-left" : null)">
+                    <span id="ShotId-@sightingShot.Id" class="@(sightingShot.Converted ? "strikethrough" : null)">
+                        @(sightingShot.Score.DisplayValue())
+                    </span>
                 </td>
             }
             @foreach (var i in Enumerable.Range(1, ViewBag.NumberOfScoringShots))

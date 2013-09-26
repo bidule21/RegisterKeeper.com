@@ -14,6 +14,13 @@
 <body>
     @* Fork of bootstrap-datetimepicker project - http://www.malot.fr/bootstrap-datetimepicker/ *@
     <link href="~/Content/datetimepicker.css" rel="stylesheet" />
+
+    @*<div style="position: fixed; width: 200px; right: 30px; bottom: 20px; border: 1px solid orange; padding: 10px; color: orange; background-color: white; z-index: 1">
+        
+    </div>*@
+
+
+
     <div class="container">
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
         {
@@ -26,32 +33,47 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <span class="brand">RegisterKeeper.com</span>
+                        <span class="brand">
+                            @*RegisterKeeper.com*@
+                            @Html.ActionLink("RegisterKeeper.com", "Index", "Home")
+                        </span>
                         <div class="nav-collapse collapse">
                             <ul class="nav">
-                                <li class="@(this.In("/Home") ? "active" : null)">
+                                @*Request.RawUrl.StartsWith("/Home") ? "active" : null*@
+                                <li class="@(this.RouteStartsWith("/Home/Index") ? "active" : null)">
                                     @Html.ActionLink("Home", "Index", "Home")
                                 </li>
-                                <li><a href="#">Live</a></li>
+                                @*<li><a href="#">Live</a></li>
                                 <li><a href="#">Completed</a></li>
-                                <li><a href="#">Upcoming</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Competition <b class="caret"></b></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation">
-                                            @Html.ActionLink("Add Individual Competition", "Create", "IndividualCompetitions", null, new { role = "menuitem", tabindex = "-1" })
-                                        </li>
-                                        <li role="presentation">
-                                            @Html.ActionLink("Add Team Competition", "Create", "TeamCompetitions", null, new { role = "menuitem", tabindex = "-1" })
-                                        </li>
-                                    </ul>
+                                <li><a href="#">Upcoming</a></li>*@
+
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Competition <b class="caret"></b></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation">
+                                                @Html.ActionLink("Add Individual Competition", "Create", "IndividualCompetitions", null, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                            <li role="presentation">
+                                                @Html.ActionLink("Add Team Competition", "Create", "TeamCompetitions", null, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                <li class="@(this.RouteStartsWith("/Home/About") ? "active" : null)">
+                                    @Html.ActionLink("About", "About", "Home")
+                                </li>
+                                <li class="@(this.RouteStartsWith("/Home/Contact") ? "active" : null)">
+                                    @Html.ActionLink("Contact", "Contact", "Home")
                                 </li>
                             </ul>
                             <ul class="nav pull-right">
 
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <li class="@(this.In("/Account/Manage") ? "active" : null)">
+                                    <li class="@(Request.RawUrl.StartsWith("/Account/Manage") ? "active" : null)">
                                         @Html.ActionLink(User.Identity.Name, "Manage", "Account")
                                     </li>
                                     <li class="pull-right">
@@ -60,8 +82,8 @@
                                 }
                                 else
                                 {
-                                    <li class="pull-right">
-                                        @Html.ActionLink("Login", "Login", "Account")
+                                    <li class="pull-right @(this.RouteStartsWith("/Account/Login") ? "active" : null)">
+                                        @Html.ActionLink("Login", "Login", "Account", new { returnUrl = Request.RawUrl }, null)
                                     </li>
                                 }
                             </ul>
@@ -71,6 +93,15 @@
                 </div>
             </div>
         }
+        
+        @if (Request.Cookies["DummyDatasetNoticeDismissed"] == null)
+        {
+            <div class="alert alert-info" id="DummyDatasetNotice">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                @*<strong>Warning!</strong> Best check yo self, you're not looking too good.*@
+                The site is currently using a (partially realistic) dummy dataset for testing purposes.  @Html.ActionLink("Read more", "About", "Home").
+            </div>
+        }
 
         @RenderBody()
 
@@ -78,6 +109,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    
+    <script src="~/Scripts/RegisterKeeper-DismissAlert.js"></script>
+
     @RenderSection("scripts", required: false)
     @Html.RenderScripts()
 </body>

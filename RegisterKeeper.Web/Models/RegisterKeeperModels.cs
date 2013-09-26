@@ -81,6 +81,14 @@ namespace RegisterKeeper.Web.Models
 				Shoots.Add(shoot);
 			}
 		}
+
+		public void CascadeDeleteShoots(RegisterKeeperDb db)
+		{
+			foreach (var shoot in Shoots.ToList())
+			{
+				db.Shoots.Remove(shoot);
+			}
+		}
 	}
 
 	public class RegisterCard : Competitor
@@ -128,7 +136,7 @@ namespace RegisterKeeper.Web.Models
 		public int TeamCompetitionId { get; set; }
 		public virtual TeamCompetition TeamCompetition { get; set; }
 
-		public virtual List<TeamCompetitor> Firers { get; set; }
+		public virtual List<TeamCompetitor> TeamCompetitors { get; set; }
 
 		public int SortOrder
 		{
@@ -141,15 +149,28 @@ namespace RegisterKeeper.Web.Models
 
 		public TotalScore TotalScore
 		{
-			get { return new TotalScore(Firers.Select(x => x.TotalScore).ToList()); }
+			get
+			{
+				return TeamCompetitors == null
+					? new TotalScore { Points = 0, VBulls = 0 }
+					: new TotalScore(TeamCompetitors.Select(x => x.TotalScore).ToList());
+			}
 		}
 
 		public TotalScore TotalAt(Distance distance)
 		{
 			return
-				new TotalScore(Firers
+				new TotalScore(TeamCompetitors
 					.Select(x => x.Shoots.Single(s => s.Distance == distance).TotalScore)
 					.ToList());
+		}
+
+		public void CascadeDeleteShoots(RegisterKeeperDb db)
+		{
+			foreach (var teamCompetitor in TeamCompetitors)
+			{
+				teamCompetitor.CascadeDeleteShoots(db);
+			}
 		}
 	}
 

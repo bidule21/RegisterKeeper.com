@@ -7,5 +7,5 @@
 @Html.HiddenFor(sighter => sighter.ShootId)
 @Html.HiddenFor(sighter => sighter.ShotNumber)
 @Html.TextBoxFor(sighter => sighter.ScoreText, new { @class = "shot", placeholder = "S" + Model.ShotNumber })
-@Html.CheckBoxFor(sighter => sighter.Converted) @Html.LabelFor(sighter => sighter.Converted)
-<br />
+@Html.CheckBoxFor(sighter => sighter.Converted) @Html.LabelFor(sighter => sighter.Converted, "S" + Model.ShotNumber + " Converted")
+@*<br />*@

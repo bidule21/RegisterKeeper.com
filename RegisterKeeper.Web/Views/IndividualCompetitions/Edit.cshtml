@@ -4,9 +4,6 @@
     ViewBag.Title = "Edit Individual Competition";
 }
 
-@* Fork of bootstrap-datetimepicker project - http://www.malot.fr/bootstrap-datetimepicker/ *@
-<link href="~/Content/datetimepicker.css" rel="stylesheet" />
-
 @using (Html.BeginForm("Edit", "IndividualCompetitions", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()

@@ -26,7 +26,7 @@ namespace RegisterKeeper.Web.Controllers
 
 		public ActionResult Details(int id = 0)
 		{
-			IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
+			var individualcompetition = _db.IndividualCompetitions.Find(id);
 			if (individualcompetition == null)
 			{
 				return HttpNotFound();
@@ -45,6 +45,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// POST: /IndividualCompetition/Create
 
+		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(IndividualCompetition individualcompetition)
@@ -61,7 +62,7 @@ namespace RegisterKeeper.Web.Controllers
 
 		//
 		// GET: /IndividualCompetition/Edit/5
-
+		[Authorize]
 		public ActionResult Edit(int id = 0)
 		{
 			var individualcompetition = _db.IndividualCompetitions.Find(id);
@@ -76,6 +77,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// POST: /IndividualCompetition/Edit/5
 
+		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(IndividualCompetition individualcompetition)
@@ -91,7 +93,7 @@ namespace RegisterKeeper.Web.Controllers
 
 		//
 		// GET: /IndividualCompetition/Delete/5
-
+		[Authorize]
 		public ActionResult Delete(int id = 0)
 		{
 			IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
@@ -105,6 +107,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// POST: /IndividualCompetition/Delete/5
 
+		[Authorize]
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)

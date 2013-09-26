@@ -5,6 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using MvcContrib.Binders;
 using MvcEnumFlags;
+using RegisterKeeper.Web.App_Start;
 using RegisterKeeper.Web.Models;
 
 namespace RegisterKeeper.Web

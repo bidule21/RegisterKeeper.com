@@ -25,23 +25,12 @@
         @Html.HiddenFor(model => model.TeamCompetitionId)
 
         @Html.Partial("_CreateEditTeamRegisterCardFields")
-
-        <h4 class="fieldset-sublegend">Shooters</h4>
         
-        @Html.EditorFor(teamRegisterCard => teamRegisterCard.Firers)
-
-        @*@{ var i = 0; }
-        @foreach (var RegisterCard in Model.RegisterCards)
-        {
-            ViewBag.FormFieldsPrefix = "RegisterCards[" + i + "].";
-            i += 1;
-
-            @Html.Hidden((string)ViewBag.FormFieldsPrefix + "Id", RegisterCard.Id)
-            @Html.Hidden((string)ViewBag.FormFieldsPrefix + "TeamRegisterCardId", Model.Id)
-
-            @Html.Partial("_CreateEditRegisterCardFields", RegisterCard)
-            <hr />
-        }*@
+        @*@if (Model.Firers.Count > 0)
+        {*@
+            <h4 class="fieldset-sublegend">Shooters</h4>
+            @Html.EditorFor(teamRegisterCard => teamRegisterCard.TeamCompetitors)
+        @*}*@
 
         <div class="form-actions">
             <input type="submit" value="Save" class="btn btn-primary" />

@@ -33,7 +33,7 @@ namespace RegisterKeeper.Web.Controllers
 
 		//
 		// GET: /RegisterCards/Create
-
+		[Authorize]
 		public ActionResult Create(int individualCompetitionId)
 		{
 			var competition = _db.Competitions.Find(individualCompetitionId);
@@ -55,6 +55,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// POST: /RegisterCards/Create
 
+		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(RegisterCard registerCard)
@@ -88,6 +89,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// GET: /RegisterCards/Edit/5
 
+		[Authorize]
 		public ActionResult Edit(int id = 0)
 		{
 			RegisterCard registerCard = _db.RegisterCards.Find(id);
@@ -105,6 +107,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// POST: /RegisterCards/Edit/5
 
+		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(RegisterCard registerCard)
@@ -143,6 +146,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// GET: /RegisterCards/Delete/5
 
+		[Authorize]
 		public ActionResult Delete(int id = 0)
 		{
 			RegisterCard registerCard = _db.RegisterCards.Find(id);
@@ -156,6 +160,7 @@ namespace RegisterKeeper.Web.Controllers
 		//
 		// POST: /RegisterCards/Delete/5
 
+		[Authorize]
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)

@@ -96,11 +96,11 @@ namespace RegisterKeeper.Web
 			return routeValues;
 		}
 
-		public static bool In(this WebViewPage page, string path)
+		public static bool RouteStartsWith(this WebViewPage page, string testPath)
 		{
-			var currentPath = "/" + page.ViewContext.RouteData.Values["controller"] + "/" +
+			var pagePath = "/" + page.ViewContext.RouteData.Values["controller"] + "/" +
 							  page.ViewContext.RouteData.Values["action"];
-			return currentPath.StartsWith(path);
+			return pagePath.StartsWith(testPath);
 		}
 	}
 }

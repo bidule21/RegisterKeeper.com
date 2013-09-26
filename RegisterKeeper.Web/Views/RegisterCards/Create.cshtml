@@ -3,12 +3,26 @@
 
 @{
     ViewBag.Title = "Add register card";
-
-    ViewBag.FormAction = "Create";
-    ViewBag.SubmitButtonText = "Create";
 }
 
-@Html.Partial("_CreateEdit", Model)
+@using (Html.BeginForm("Create", "RegisterCards", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.Hidden("IndividualCompetitionId", (int)ViewBag.CompetitionId)
+
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="form-actions">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Details", "IndividualCompetitions", new { Id = (int)ViewBag.CompetitionId }, new { @class = "btn" })
+        </div>
+    </fieldset>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

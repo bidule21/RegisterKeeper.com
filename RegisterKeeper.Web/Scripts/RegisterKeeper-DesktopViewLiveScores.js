@@ -14,52 +14,62 @@
 	}
 }
 
+// Module augmentation - http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
+
+var REGISTERKEEPERHUB;
+
 $(function () {
-	var hub = $.connection.registerKeeperHub;
+	REGISTERKEEPERHUB = (function() {
+		var hub = $.connection.registerKeeperHub;
 
-	hub.client.ScoreUpdate = function (shotId, score) {
-		$("#ShotId-" + shotId).html(score);
-		$("#ShotId-" + shotId).stop(true, true).effect("highlight", null, 5000);
-	};
+		hub.client.ScoreUpdate = function(shotId, score) {
+			$("#ShotId-" + shotId).html(score);
+			$("#ShotId-" + shotId).stop(true, true).effect("highlight", null, 5000);
+		};
 
-	hub.client.ShootTotalScoreUpdate = function (shootId, score) {
-		$("#ShootId-" + shootId + "-TotalScore").html(score);
-	};
+		hub.client.ShootTotalScoreUpdate = function(shootId, score) {
+			$("#ShootId-" + shootId + "-TotalScore").html(score);
+		};
 
-	hub.client.CompetitorTotalScoreUpdate = function (competitorId, score) {
-		$("#CompetitorId-" + competitorId + "-TotalScore").html(score);
-	};
+		hub.client.CompetitorTotalScoreUpdate = function(competitorId, score) {
+			$("#CompetitorId-" + competitorId + "-TotalScore").html(score);
+		};
 
-	hub.client.TeamRegisterCardDistanceTotalScoreUpdate = function(teamRegisterCardId, distance, score) {
-		$("#TeamRegisterCardId-" + teamRegisterCardId + "-" + distance + "-TotalScore").html(score);
-	};
+		hub.client.TeamRegisterCardDistanceTotalScoreUpdate = function(teamRegisterCardId, distance, score) {
+			$("#TeamRegisterCardId-" + teamRegisterCardId + "-" + distance + "-TotalScore").html(score);
+		};
 
-	hub.client.TeamRegisterCardTotalScoreUpdate = function (teamRegisterCardId, score) {
-		$("#TeamRegisterCardId-" + teamRegisterCardId + "-TotalScore").html(score);
-	};
+		hub.client.TeamRegisterCardTotalScoreUpdate = function(teamRegisterCardId, score) {
+			$("#TeamRegisterCardId-" + teamRegisterCardId + "-TotalScore").html(score);
+		};
 
-	hub.client.RegisterCardSortOrderUpdate = function (registerCardId, sortorder) {
-		$('#RegisterCardId-' + registerCardId).attr("data-sortorder", sortorder);
-		UpdatePositionLabels();
-		$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
-	};
-	
-	hub.client.TeamRegisterCardSortOrderUpdate = function (registerCardId, sortorder) {
-		$('#TeamRegisterCardId-' + registerCardId).attr("data-sortorder", sortorder);
-		UpdatePositionLabels();
-		$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
-	};
+		hub.client.RegisterCardSortOrderUpdate = function(registerCardId, sortorder) {
+			$('#RegisterCardId-' + registerCardId).attr("data-sortorder", sortorder);
+			$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
+			UpdatePositionLabels();
+		};
 
-	hub.client.SighterConversionUpdate = function(sighterId, converted) {
-		if (converted) {
-			$("#ShotId-" + sighterId).addClass("strikethrough");
-		} else {
-			$("#ShotId-" + sighterId).removeClass("strikethrough");
-		}
-	};
+		hub.client.TeamRegisterCardSortOrderUpdate = function(registerCardId, sortorder) {
+			$('#TeamRegisterCardId-' + registerCardId).attr("data-sortorder", sortorder);
+			$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
+			UpdatePositionLabels();
+		};
 
-	$.connection.hub.start();
+		hub.client.SighterConversionUpdate = function(sighterId, converted) {
+			if (converted) {
+				$("#ShotId-" + sighterId).addClass("strikethrough");
+			} else {
+				$("#ShotId-" + sighterId).removeClass("strikethrough");
+			}
+		};
 
-	$('#Grid').mixitup();
+		$.connection.hub.start();
+
+		$('#Grid').mixitup({
+			effects: ['fade']
+		});
+
+		return hub;
+	}());
 
 });

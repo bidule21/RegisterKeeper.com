@@ -12,15 +12,13 @@
 </p>
 
 <ol data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search competitors..">
-    @foreach (var registerCard in Model.RegisterCards)
+    @foreach (var registerCard in Model.RegisterCards.OrderByDescending(rc => rc.SortOrder))
     {
         <li>
             <a href="@Url.Action("Details", "RegisterCards", new { id = registerCard.Id })">
                 @registerCard.CompetitorName
                 <span class="ui-li-count">@registerCard.TotalScore.ToString()</span>
             </a>
-            @*@Html.ActionLink(, "Details", "RegisterCards", 
-                , null)*@
         </li>
     }
 </ol>

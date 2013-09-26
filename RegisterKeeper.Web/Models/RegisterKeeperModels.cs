@@ -82,7 +82,11 @@ namespace RegisterKeeper.Web.Models
 			}
 		}
 
-		public void CascadeDeleteShoots(RegisterKeeperDb db)
+		/// <summary>
+		/// Can't use cascade delete on database foreign key due to circular dependencies
+		/// </summary>
+		/// <param name="db"></param>
+		internal void CascadeDeleteShoots(RegisterKeeperDb db)
 		{
 			foreach (var shoot in Shoots.ToList())
 			{
@@ -113,6 +117,21 @@ namespace RegisterKeeper.Web.Models
 				//return 0;
 
 				return TotalScore.Points * (int)Math.Pow(10, 3) + TotalScore.VBulls;
+			}
+		}
+
+		public int NumberOfSightingShots
+		{
+			get
+			{
+				return IndividualCompetition == null ? 0 : IndividualCompetition.NumberOfSightingShots;
+			}
+		}
+		public int NumberOfScoringShots
+		{
+			get
+			{
+				return IndividualCompetition == null ? 0 : IndividualCompetition.NumberOfScoringShots;
 			}
 		}
 	}

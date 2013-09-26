@@ -2,6 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using RegisterKeeper.Web.Hubs;
 using RegisterKeeper.Web.Models;
 
 namespace RegisterKeeper.Web.Controllers
@@ -23,12 +24,27 @@ namespace RegisterKeeper.Web.Controllers
 
 		public ActionResult Details(int id = 0)
 		{
-			RegisterCard registerCard = _db.RegisterCards.Find(id);
+			var registerCard = _db.RegisterCards.Find(id);
 			if (registerCard == null)
 			{
 				return HttpNotFound();
 			}
+
 			return View(registerCard);
+		}
+
+		//
+		// GET: /RegisterCards/Partial/5
+
+		public ActionResult Partial(int id = 0)
+		{
+			var registerCard = _db.RegisterCards.Find(id);
+			if (registerCard == null)
+			{
+				return HttpNotFound();
+			}
+
+			return PartialView("_RegisterCard", registerCard);
 		}
 
 		//
@@ -71,12 +87,13 @@ namespace RegisterKeeper.Web.Controllers
 						competition.Distances.ToList(),
 						competition.NumberOfSightingShots,
 						competition.NumberOfScoringShots
-					);	
+					);
 				}
-				
+
 
 				_db.RegisterCards.Add(registerCard);
 				_db.SaveChanges();
+				RegisterKeeperHub.BroadcastNewRegisterCardToClients(registerCard.Id);
 				return RedirectToAction("Details", "IndividualCompetitions", new { id = registerCard.IndividualCompetitionId });
 			}
 
@@ -166,9 +183,11 @@ namespace RegisterKeeper.Web.Controllers
 		public ActionResult DeleteConfirmed(int id)
 		{
 			var registerCard = _db.RegisterCards.Find(id);
+			registerCard.CascadeDeleteShoots(_db);
 			_db.RegisterCards.Remove(registerCard);
 			_db.SaveChanges();
-			return RedirectToAction("Index");
+			RegisterKeeperHub.BroadcastDeletedRegisterCardToClients(registerCard.Id);
+			return RedirectToAction("Details", "IndividualCompetitions", new { id = registerCard.IndividualCompetitionId });
 		}
 
 		internal static void AddCompetitionDetailsToViewBag(Competition competition, dynamic viewBag)

@@ -6,7 +6,6 @@ namespace RegisterKeeper.Web.Hubs
 {
 	public class RegisterKeeperHub : Hub
 	{
-
 		private static IHubConnectionContext GetClients()
 		{
 			return GlobalHost.ConnectionManager.GetHubContext<RegisterKeeperHub>().Clients;
@@ -54,8 +53,10 @@ namespace RegisterKeeper.Web.Hubs
 		}
 
 
-		// static interface for use by MVC controllers
-
+		/// <summary>
+		/// static interface for use by MVC controllers
+		/// </summary>
+		/// <param name="shot"></param>
 		public static void BroadcastScoreUpdateToClients(Shot shot)
 		{
 			BroadcastScoreUpdateToClients(shot, GetClients());
@@ -64,6 +65,16 @@ namespace RegisterKeeper.Web.Hubs
 		public static void BroadcastSighterConversionUpdateToClients(SightingShot sighter)
 		{
 			GetClients().All.SighterConversionUpdate(sighter.Id, sighter.Converted);
+		}
+
+		internal static void BroadcastNewRegisterCardToClients(int registerCardId)
+		{
+			GetClients().All.NewRegisterCard(registerCardId);
+		}
+
+		public static void BroadcastDeletedRegisterCardToClients(int registerCardId)
+		{
+			GetClients().All.DeletedRegisterCard(registerCardId);
 		}
 	}
 }

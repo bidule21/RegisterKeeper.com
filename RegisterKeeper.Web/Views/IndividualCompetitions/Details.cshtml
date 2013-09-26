@@ -8,8 +8,8 @@
     @if (Request.IsAuthenticated)
     {
         <div class="page-controls">
-            @Html.ActionLink("Edit Competition", "Edit", "IndividualCompetitions", new {Model.Id}, new {@class = "btn"})
-            @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new {individualCompetitionId = Model.Id}, new {@class = "btn btn-primary"})
+            @Html.ActionLink("Edit Competition", "Edit", "IndividualCompetitions", new { Model.Id }, new { @class = "btn" })
+            @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id }, new { @class = "btn btn-primary" })
         </div>
     }
 
@@ -19,97 +19,12 @@
 </div>
 
 <div id="Grid">
-    @{ var position = 1;}
+    @{ ViewBag.Position = 1;}
     @foreach (var registerCard in Model.RegisterCards.OrderByDescending(r => r.SortOrder))
     {
-        <div class="mix" id="RegisterCardId-@registerCard.Id" data-sortorder="@(registerCard.SortOrder)" >
-            <div class="register-card-container">
+        @Html.Partial("_RegisterCard", registerCard)
 
-                @* On grid sort, position value should fade out, update to new number and fade in? *@
-                <div class="position-wrapper-outer">
-                    <div class="position-wrapper-inner">
-                        <div class="position">@position</div>
-                    </div>
-                </div>
-
-                <div class="register-card-detail individual-register-card-detail">
-                    <div class="clearfix">
-                        <h4 class="header">
-                            <span class="competitor-index-number">@((registerCard.CompetitorIndexNumber ?? 0).ToString("000"))</span>
-                            @registerCard.CompetitorName
-                            <span class="competitor-details">@registerCard.CompetitorClass - @registerCard.CompetitorClub</span>
-                        </h4>
-
-                        @* TODO: "Brought forward" and "points off"*@
-
-                    </div>
-
-                    <table>
-                        <tr>
-                            <th>@*Distance*@</th>
-                            @foreach (var i in Enumerable.Range(1, Model.NumberOfSightingShots))
-                            {
-                                <th class="@(i == 1 ? "border-left" : null)">S@(i)</th>
-                            }
-                            @foreach (var i in Enumerable.Range(1, Model.NumberOfScoringShots))
-                            {
-                                <th class="@(i == 1 ? "border-left" : null)">@i</th>
-                            }
-                            <th class="border-left total-column">Total</th>
-                        </tr>
-                        @foreach (var distance in Model.Distances.ToList())
-                        {
-                            var shoot = registerCard.Shoots.SingleOrDefault(s => s.Distance == distance);
-                            <tr>
-                                <td>@distance.DisplayValue()</td>
-                                @foreach (var i in Enumerable.Range(1, Model.NumberOfSightingShots))
-                                {
-                                    var sightingShot = shoot.Sighters.SingleOrDefault(ss => ss.ShotNumber == i);
-                                    <td class="@((i == 1 ? "border-left " : String.Empty))">
-                                        <span id="ShotId-@sightingShot.Id" class="@(sightingShot.Converted ? "strikethrough" : null)">
-                                            @sightingShot.Score.DisplayValue()
-                                        </span>
-                                    </td>
-                                }
-                                @foreach (var i in Enumerable.Range(1, Model.NumberOfScoringShots))
-                                {
-                                    var shot = shoot.ScoringShots.SingleOrDefault(ss => ss.ShotNumber == i);
-                                    <td class="@(i == 1 ? "border-left" : null)" id="ShotId-@shot.Id">
-                                        @shot.Score.DisplayValue()
-                                    </td>
-                                }
-                                <td class="border-left" id="ShootId-@shoot.Id-TotalScore">
-                                    @shoot.TotalScore.ToString()
-                                </td>
-                            </tr>
-                        }
-                    </table>
-
-
-                    @if (Model.Distances.ToList().Count > 1)
-                    {
-                        <div class="register-card-grand-total">
-                            Grand Total:
-                            <div class="register-card-grand-total-value" id="CompetitorId-@registerCard.Id-TotalScore">
-                                @registerCard.TotalScore
-                            </div>
-                        </div>    
-                    }
-
-                </div>
-                @if (Request.IsAuthenticated)
-                {
-                    <div class="register-card-controls">
-                        <div>
-                            @Html.ActionLink("Edit", "Edit", "RegisterCards", new {id = registerCard.Id}, new {@class = "btn"})
-                            @Html.ActionLink("Delete", "Delete", null, new {@class = "btn btn-danger"})
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-                    position += 1;
+        ViewBag.Position += 1;
     }
 
 </div>
@@ -121,4 +36,5 @@
     <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
     <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/RegisterKeeper-DesktopViewLiveScores.js"></script>
+    <script src="~/Scripts/RegisterKeeper-DesktopView-IndividualCompetitions.js"></script>
 }

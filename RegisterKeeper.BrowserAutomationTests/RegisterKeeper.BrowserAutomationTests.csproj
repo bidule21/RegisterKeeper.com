@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Demonstration.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="TeamCompetitionTests.cs" />
     <Compile Include="IndividualCompetitionTests.cs" />

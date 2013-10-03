@@ -17,7 +17,7 @@
 }
 
 
-<h2>Completed competitions:</h2>
+<h2>Completed competitions</h2>
 
 <ul data-role="listview" data-inset="true">
 
@@ -28,19 +28,22 @@
 
 </ul>
 
+@if (Model.UpcomingCompetitions.Count > 0)
+{
+    <h2>Upcoming competitions</h2>
 
-<h2>Upcoming competitions:</h2>
+    <ul data-role="listview" data-inset="true">
+        @foreach (var competition in Model.UpcomingCompetitions)
+        {
+            <li>
+                <h4>@competition.Name</h4>
+                <p>@(competition.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))</p>
+                <p><i>@competition.Location</i></p>
+            </li>
+        }
+    </ul>
+}
 
-<ul data-role="listview" data-inset="true">
-    @foreach (var competition in Model.UpcomingCompetitions)
-    {
-        <li>
-            <h4>@competition.Name</h4>
-            <p>@(competition.StartDateTime.ToString("dddd, d MMMM yyyy, h.mmtt"))</p>
-            <p><i>@competition.Location</i></p>
-        </li>
-    }
-</ul>
 
 @{
     var buttonHtmlAttributes = new

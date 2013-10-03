@@ -90,7 +90,6 @@ namespace RegisterKeeper.Web.Controllers
 					);
 				}
 
-
 				_db.RegisterCards.Add(registerCard);
 				_db.SaveChanges();
 				RegisterKeeperHub.BroadcastNewRegisterCardToClients(registerCard.Id);
@@ -100,7 +99,7 @@ namespace RegisterKeeper.Web.Controllers
 			competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
 			AddCompetitionDetailsToViewBag(competition, ViewBag);
 
-			return View();
+			return View(registerCard);
 		}
 
 		//

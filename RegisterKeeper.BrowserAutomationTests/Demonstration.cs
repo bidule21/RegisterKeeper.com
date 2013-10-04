@@ -72,6 +72,7 @@ namespace RegisterKeeper.BrowserAutomationTests
 			competitors.AsParallel().ForAll(competitor =>
 				{
 					var mobile = new BrowserSession(Configuration.SessionConfiguration);
+					mobile.ResizeTo(352, 579);
 
 					mobile.Visit("/ViewSwitcher/SwitchView/?mobile=true&returnUrl=/");
 					mobile.ClickLink("Demo Individual Competition");
@@ -89,11 +90,10 @@ namespace RegisterKeeper.BrowserAutomationTests
 					mobile.FillIn("Class").With(competitor.Class);
 					mobile.FillIn("Club").With(competitor.Club);
 
-					//mobile.FindCss("span", "Add").Click();
-					//mobile.FindCss("div.ui-submit").Click();
-					mobile.ClickButton("Add");
+					// Can't use ClickButton as it finds a div created by jQuery Mobile instead of the actual button
+					mobile.FindCss("input[type=submit]").Click();
 
-					mobile.ClickLink(competitor.CompetitorName);
+					mobile.ClickLink("");
 
 					mobile.Dispose();
 				});

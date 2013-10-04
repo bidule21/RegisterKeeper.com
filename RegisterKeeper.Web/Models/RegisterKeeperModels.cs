@@ -35,6 +35,14 @@ namespace RegisterKeeper.Web.Models
 	public class IndividualCompetition : Competition
 	{
 		public virtual List<RegisterCard> RegisterCards { get; set; }
+
+		public void CascadeDeleteShoots(RegisterKeeperDb db)
+		{
+			foreach (var registerCard in RegisterCards)
+			{
+				registerCard.CascadeDeleteShoots(db);
+			}
+		}
 	}
 
 	public abstract class Competitor

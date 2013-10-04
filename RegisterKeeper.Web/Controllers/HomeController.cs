@@ -31,31 +31,16 @@ namespace RegisterKeeper.Web.Controllers
 						.ToList()
 				};
 
-			//foreach (var individualCompetition in viewModel.CompletedCompetitions.OfType<IndividualCompetition>())
-			//{
-			//	_db.Entry(individualCompetition).Collection(c => c.RegisterCards).Query().Include(s => s.Shoots.Select(shoot => shoot.ScoringShots)).Load();
-			//}
-			
-
-			//var competitions = _db.Competitions.ToList();
-			//var individualCompetitions = _db.IndividualCompetitions.ToList();
-
-			//ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
 			return View(viewModel);
 		}
 
 		public ActionResult About()
 		{
-			ViewBag.Message = "Your app description page.";
-
 			return View();
 		}
 
 		public ActionResult Contact()
 		{
-			ViewBag.Message = "Your contact page.";
-
 			return View();
 		}
 

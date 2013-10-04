@@ -6,8 +6,9 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
+<p>Are you sure you want to delete this competition and all associated register cards?</p>
+
+@*<fieldset>
     <legend>IndividualCompetition</legend>
 
     <div class="display-label">
@@ -44,11 +45,14 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.NumberOfScoringShots)
     </div>
-</fieldset>
+</fieldset>*@
+
+@Html.Partial("_CompetitionPanel", Model)
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
     </p>
 }

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using RegisterKeeper.Web.Hubs;
 using RegisterKeeper.Web.Models;
 
@@ -93,7 +93,10 @@ namespace RegisterKeeper.Web.Controllers
 				_db.RegisterCards.Add(registerCard);
 				_db.SaveChanges();
 				RegisterKeeperHub.BroadcastNewRegisterCardToClients(registerCard.Id);
-				return RedirectToAction("Details", "IndividualCompetitions", new { id = registerCard.IndividualCompetitionId });
+
+				return Request.Browser.IsMobileDevice || HttpContext.GetOverriddenBrowser().IsMobileDevice ? 
+					RedirectToAction("Details", "RegisterCards", new { id = registerCard.Id }) : 
+					RedirectToAction("Details", "IndividualCompetitions", new { id = registerCard.IndividualCompetitionId });
 			}
 
 			competition = _db.Competitions.Find(registerCard.IndividualCompetitionId);
@@ -108,7 +111,7 @@ namespace RegisterKeeper.Web.Controllers
 		[Authorize]
 		public ActionResult Edit(int id = 0)
 		{
-			RegisterCard registerCard = _db.RegisterCards.Find(id);
+			var registerCard = _db.RegisterCards.Find(id);
 			if (registerCard == null)
 			{
 				return HttpNotFound();

@@ -8,8 +8,9 @@
     @if (Request.IsAuthenticated)
     {
         <div class="page-controls">
-            @Html.ActionLink("Edit Competition", "Edit", "IndividualCompetitions", new { Model.Id }, new { @class = "btn" })
             @Html.ActionLink("Add Register Card", "Create", "RegisterCards", new { individualCompetitionId = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Edit Competition", "Edit", new { Model.Id }, new { @class = "btn" })
+            @Html.ActionLink("Delete Competition", "Delete", new { Model.Id }, new { @class = "btn btn-danger"})
         </div>
     }
 

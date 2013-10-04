@@ -93,13 +93,22 @@
                 </div>
             </div>
         }
-        
+
         @if (Request.Cookies["DummyDatasetNoticeDismissed"] == null)
         {
             <div class="alert alert-info" id="DummyDatasetNotice">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 @*<strong>Warning!</strong> Best check yo self, you're not looking too good.*@
-                The site is currently using a (partially realistic) dummy dataset for testing purposes.  @Html.ActionLink("Read more", "About", "Home").
+                <strong>Test Mode!</strong> The site is currently using a (partially realistic) dummy dataset for testing purposes.  
+                @Html.ActionLink(
+                    linkText: "Read more",
+                    actionName: "About",
+                    controllerName: "Home",
+                    protocol: null,
+                    hostName: null,
+                    fragment: "CurrentDataset",
+                    routeValues: null,
+                    htmlAttributes: null).
             </div>
         }
 
@@ -109,7 +118,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    
+
     <script src="~/Scripts/RegisterKeeper-DismissAlert.js"></script>
 
     @RenderSection("scripts", required: false)

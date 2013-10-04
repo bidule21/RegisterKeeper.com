@@ -112,7 +112,8 @@ namespace RegisterKeeper.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			IndividualCompetition individualcompetition = _db.IndividualCompetitions.Find(id);
+			var individualcompetition = _db.IndividualCompetitions.Find(id);
+			individualcompetition.CascadeDeleteShoots(_db);
 			_db.Competitions.Remove(individualcompetition);
 			_db.SaveChanges();
 			return RedirectToAction("Index");

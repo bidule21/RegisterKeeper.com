@@ -10,17 +10,10 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/RegisterKeeper.css" rel="stylesheet" />
 
-</head>
-<body>
     @* Fork of bootstrap-datetimepicker project - http://www.malot.fr/bootstrap-datetimepicker/ *@
     <link href="~/Content/datetimepicker.css" rel="stylesheet" />
-
-    @*<div style="position: fixed; width: 200px; right: 30px; bottom: 20px; border: 1px solid orange; padding: 10px; color: orange; background-color: white; z-index: 1">
-        
-    </div>*@
-
-
-
+</head>
+<body>
     <div class="container">
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
         {
@@ -99,7 +92,7 @@
             <div class="alert alert-info" id="DummyDatasetNotice">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 @*<strong>Warning!</strong> Best check yo self, you're not looking too good.*@
-                <strong>Test Mode!</strong> The site is currently using a (partially realistic) dummy dataset for testing purposes.  
+                <strong>Test Mode:</strong> The site is currently using a (partially realistic) dummy dataset for testing purposes.  
                 @Html.ActionLink(
                     linkText: "Read more",
                     actionName: "About",

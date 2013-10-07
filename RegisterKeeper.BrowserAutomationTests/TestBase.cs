@@ -16,10 +16,15 @@ namespace RegisterKeeper.BrowserAutomationTests
 			Browser.MaximiseWindow();
 		}
 
+		public bool DontDispose { get; set; }
+
 		[TestFixtureTearDown]
 		public void Dispose()
 		{
-			Browser.Dispose();
+			if (!DontDispose)
+			{
+				Browser.Dispose();
+			}
 		}
 
 		#endregion

@@ -9,18 +9,33 @@
 }
 else
 {
-    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { data_ajax = "false" }))
+    using (Html.BeginForm("ExternalLogin", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { data_ajax = "false" }))
     {
-    @Html.AntiForgeryToken()
-    <fieldset id="socialLoginList">
-        <legend>Log in using another service</legend>
+        @Html.AntiForgeryToken()
         <p>
-        @foreach (AuthenticationClientData p in Model)
-        {
-            <button type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" 
-                title="Log in using your @p.DisplayName account">@p.DisplayName</button>
-        }
+            RegisterKeeper.com uses a number of social login providers to simplyfy user registration.
+            The process is described on Wikipedia:
         </p>
-    </fieldset>
+        
+        <blockquote>
+            <p style="font-size: inherit">
+                By selecting the desired social networking service, the user simply uses his or her login for that service to sign on to the web site. 
+                This in turn negates the need for the end user to remember login information for multiple ... other websites while providing site owners with uniform demographic information as provided by the social networking service.
+            </p>
+            <small><a href="http://en.wikipedia.org/wiki/Social_login">Wikipedia</a></small>
+        </blockquote>
+        
+        <p>You will need an existing account on at least one of the below providers to complete registration and log in.</p>
+
+        <fieldset id="socialLoginList">
+            <legend>Please select one of the following social loging providers to log in.</legend>
+            <p>
+            @foreach (var p in Model)
+            {
+                <button type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" 
+                    title="Log in using your @p.DisplayName account">@p.DisplayName</button>
+            }
+            </p>
+        </fieldset>
     }
 }

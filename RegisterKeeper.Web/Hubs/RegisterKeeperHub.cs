@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using RegisterKeeper.Web.Models;
 
@@ -20,6 +21,16 @@ namespace RegisterKeeper.Web.Hubs
 				db.SaveChanges();
 
 				BroadcastScoreUpdateToClients(shot, Clients);
+			}
+		}
+
+		// Used by desktop clients when they've missed a shot between rendering the page and 
+		// setting up signalr connection
+		public string GetScore(int shotId)
+		{
+			using (var db = new RegisterKeeperDb())
+			{
+				return db.Shots.Find(shotId).ScoreText;
 			}
 		}
 

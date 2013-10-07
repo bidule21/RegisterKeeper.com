@@ -55,7 +55,7 @@ namespace RegisterKeeper.Web.Models
 					SeedData.IndividualCompetitions.PrinceOfWales(),
 					SeedData.IndividualCompetitions.QueensFirstStage(),
 					SeedData.IndividualCompetitions.StGeorgesFirstStage(),
-					SeedData.IndividualCompetitions.Times(),
+					//SeedData.IndividualCompetitions.Times(),
 					SeedData.IndividualCompetitions.WimbledonTR(),
 					
 					SeedData.TeamCompetitions.TheKolapore(),
@@ -72,7 +72,7 @@ namespace RegisterKeeper.Web.Models
 
 			competitions.ForEach(x => context.Competitions.Add(x));
 			context.SaveChanges();
-
+			
 			SeedMembership(context);
 		}
 

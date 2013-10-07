@@ -20,12 +20,32 @@
 </div>
 
 <div id="Grid">
-    @{ ViewBag.Position = 1;}
+    @{
+        //ViewBag.Position = 1;
+        var position = 1;
+        var previousRegisterCardSortOrder = 0;
+    }
+   
     @foreach (var registerCard in Model.RegisterCards.OrderByDescending(r => r.SortOrder))
     {
+        if (registerCard.SortOrder == 0)
+        {
+            ViewBag.Position = String.Empty;
+        }
+        else if (registerCard.SortOrder == previousRegisterCardSortOrder)
+        {
+            ViewBag.Position = "=";
+        }
+        else
+        {
+            ViewBag.Position = position;
+        }
+
+        //registerCard.SortOrder
         @Html.Partial("_RegisterCard", registerCard)
 
-        ViewBag.Position += 1;
+        previousRegisterCardSortOrder = registerCard.SortOrder;        
+        position += 1;
     }
 
 </div>

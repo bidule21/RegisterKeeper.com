@@ -58,17 +58,51 @@
             // Reference the auto-generated proxy for the hub.  
             hub = $.connection.registerKeeperHub;
 
+            $.connection.hub.logging = true;
+
+            hub.connection.stateChanged(function (change) {
+                if (change.newState === $.signalR.connectionState.connected) {
+                    //$(".ScorerValueButtons input").attr("disabled", false);
+                    $(".ScorerValueButtons input").button("enable");
+                } else {
+                    $(".ScorerValueButtons input").button("disable");
+                }
+            });
+
             // Start the connection.
             $.connection.hub.start();
+                //.fail(function () {
+                //    alert("Fail");
+                //})
+            
+
+            $.connection.hub.error(function (error) {
+                $(".ScorerValueButtons input").button("disable");
+                alert('SignalR error: ' + error);
+            });
+
         });
 
         $(document).on("pageinit", function (event) {
             (function (target) {
+
+                if (!hub || hub.connection.state !== $.signalR.connectionState.connected) {
+                    //$(".ScorerValueButtons input", target).attr("disabled", true);
+                    $(".ScorerValueButtons input", target).button("disable");
+                }
+
                 $(".ScorerValueButtons input", target).on("click", function () {
+
+                    console.log($(".scorer-shot-number", target).text().trim() + ": " + $(this).val());
+
+                    // Update score display box
                     $(".ScoreDisplay", target).val($(this).val());
 
                     // Call the method on the hub. 
-                    hub.server.saveScore($("#ShotId", target).val(), $(this).val());
+                    hub.server.saveScore($("#ShotId", target).val(), $(this).val())
+                        .fail(function (error) {
+                            alert("Error saving score:\n\n\t" + error + "\n\nPlease reload the page and try again.");
+                        });
                 });
             }(event.target));
         });

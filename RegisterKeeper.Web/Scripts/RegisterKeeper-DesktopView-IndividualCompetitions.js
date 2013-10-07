@@ -4,7 +4,7 @@
 //var REGISTERKEEPERHUB;
 
 $(function () {
-	REGISTERKEEPERHUB = (function(hub) {
+	window.REGISTERKEEPERHUB = (function(hub) {
 		hub.client.NewRegisterCard = function(registerCardId) {
 			//$.ajax({
 			//	type: "GET",
@@ -18,11 +18,11 @@ $(function () {
 
 			$.get(
 				"/RegisterCards/Partial/" + registerCardId,
-				function(registerCard, status) {
+				function(registerCard) {
 					$("#Grid").append($.parseHTML(registerCard));
 					$('#Grid').mixitup('remix', 'all');
 					$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
-					UpdatePositionLabels();
+					//UpdatePositionLabels();
 				}
 			);
 		};
@@ -31,9 +31,9 @@ $(function () {
 			$('#RegisterCardId-' + registerCardId).remove();
 			$('#Grid').mixitup('remix', 'all');
 			$('#Grid').mixitup('sort', ['data-sortorder', 'asc']);
-			UpdatePositionLabels();
+			//UpdatePositionLabels();
 		};
 
 		return hub;
-	}(REGISTERKEEPERHUB));
+	}(window.REGISTERKEEPERHUB));
 });

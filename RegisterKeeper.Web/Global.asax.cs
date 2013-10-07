@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.SignalR;
 using MvcContrib.Binders;
 using MvcEnumFlags;
 using RegisterKeeper.Web.App_Start;
@@ -18,7 +19,7 @@ namespace RegisterKeeper.Web
 		protected void Application_Start()
 		{
 			// Register the default hubs route: ~/signalr
-			RouteTable.Routes.MapHubs();
+			RouteTable.Routes.MapHubs(new HubConfiguration { EnableDetailedErrors = true });
 
 			AreaRegistration.RegisterAllAreas();
 

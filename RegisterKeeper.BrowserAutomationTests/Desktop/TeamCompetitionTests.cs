@@ -2,7 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace RegisterKeeper.BrowserAutomationTests
+namespace RegisterKeeper.BrowserAutomationTests.Desktop
 {
 	[TestFixture]
 	public class TeamCompetitionTests : TestBase
@@ -19,8 +19,8 @@ namespace RegisterKeeper.BrowserAutomationTests
 			var now = DateTime.Now;
 
 			Browser.FillIn("Name").With("Test Team Competition");
-			Browser.FillIn("Start date & time").With(now.ToString(Configuration.DateFormat));
-			Browser.FillIn("End date & time").With(now.AddHours(1).ToString(Configuration.DateFormat));
+			Browser.FillIn("Start date & time").With(now.ToString(Configuration.CompetitionDateFormat));
+			Browser.FillIn("End date & time").With(now.AddHours(1).ToString(Configuration.CompetitionDateFormat));
 			Browser.Check("300yds");
 			Browser.FillIn("Location").With("Century Range, Bisley");
 			Browser.FillIn("Number of Sighting Shots").With("2");
@@ -43,8 +43,8 @@ namespace RegisterKeeper.BrowserAutomationTests
 
 			Browser.FillIn("Name").With("Test Team Competition Edited");
 			var now = DateTime.Now;
-			Browser.FillIn("Start date & time").With(now.ToString(Configuration.DateFormat));
-			Browser.FillIn("End date & time").With(now.AddHours(1).ToString(Configuration.DateFormat));
+			Browser.FillIn("Start date & time").With(now.ToString(Configuration.CompetitionDateFormat));
+			Browser.FillIn("End date & time").With(now.AddHours(1).ToString(Configuration.CompetitionDateFormat));
 			Browser.FillIn("Location").With("Test Location Edited");
 			Browser.ClickButton("Save");
 
